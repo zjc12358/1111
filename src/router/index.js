@@ -7,6 +7,7 @@ import Advertising from "../pages/Advertising";
 import My from "../pages/My";
 import MyDevice from "../pages/MyDevice";
 import WithdrawDeposit from "../pages/WithdrawDeposit";
+import earn from "../pages/earn";
 
 Vue.use(Router)
 
@@ -53,6 +54,12 @@ export default new Router({
       path: '/withdrawDeposit',
       name: 'WithdrawDeposit',
       component: WithdrawDeposit
+    },
+    {
+      // 订单
+      path: '/earn',
+      name: 'earn',
+      component: earn
     }
   ]
 })
