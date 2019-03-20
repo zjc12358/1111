@@ -1,0 +1,359 @@
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+				overflow: hidden;
+				overflow-y: auto;
+			}
+			
+			.shop_img {
+				width: 1.27rem;
+				height: 1.27rem;
+			}
+			
+			.plate-list {
+				/*	height: 2.5rem;*/
+				background-color: #ffffff;
+				box-shadow: 0 0.03rem 0.06rem 0.01rem rgba(0, 0, 0, 0.12);
+				border-radius: 0.1rem;
+				margin: 0.23rem 0.22rem 0 0.22rem;
+				padding: 0.25rem 0.25rem 0 0.25rem;
+				box-sizing: border-box;
+			}
+			
+			.device_photo {
+				position: relative;
+				height: 1.9rem;
+				display: flex;
+				align-items: flex-start;
+			}
+			
+			.breaktext {
+				width: 1.5rem;
+				position: absolute;
+				right: 0.1rem;
+				color: #aaaaaa;
+				font-size: 0.26rem;
+				display: inline-block;
+				color: #959595;
+			}
+			
+			.device_adress {
+				position: relative;
+				top: 0.4rem;
+				width: 5.2rem;
+				height: 0.58rem;
+				line-height: 0.316rem;
+				color: #666666;
+				font-size: 0.28rem;
+				word-break: break-all;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				/** 对象作为伸缩盒子模型显示 **/
+				-webkit-box-orient: vertical;
+				/** 设置或检索伸缩盒对象的子元素的排列方式 **/
+				-webkit-line-clamp: 2;
+				/** 显示的行数 **/
+				overflow: hidden;
+				/** 隐藏超出的内容 **/
+			}
+			
+			p.shop_Title {
+				font-size: 0.18rem;
+				color: #555555;
+				line-height: 0.34rem;
+				margin: 0;
+			}
+			
+			a:link {
+				/*text-decoration: none;*/
+				/* 指正常的未被访问过的链接*/
+			}
+			
+			a:visited {
+				/*text-decoration: none;*/
+				/*指已经访问过的链接*/
+			}
+			
+			a:hover {
+				/*text-decoration: none;*/
+				/*指鼠标在链接*/
+				color: red;
+			}
+			
+			a:active {
+				/*text-decoration: none;*/
+				/* 指正在点的链接*/
+				color: red;
+			}
+			
+			.shop_earn {
+				position: relative;
+				top: 0.4rem;
+				font-size: 0.48rem;
+				color: #333333;
+			}
+			
+			.shop_name {
+				margin-left: 0.18rem;
+			}
+			
+			.shop-time {
+				color: #999999;
+				font-size: 0.24rem;
+				margin-left: 0.32rem;
+			}
+			
+			.createtime {
+				font-size: 0.2rem;
+			}
+			
+			.re_earn {
+				width: 95%;
+				position: relative;
+				top: -1.6rem;
+				left: 0rem;
+				border-top: 1px solid #dfdfdf;
+				margin-left: 2.5%;
+				color: #555555;
+				line-height: 0.48rem;
+			}
+			
+			.re_money {
+				font-size: 0.16rem;
+				color: #fe2d2d;
+			}
+			
+			.re_account {
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 1.1rem;
+				height: 0.3rem;
+				line-height: 0.3rem;
+				text-align: center;
+				font-size: 0.18rem;
+				background-color: #1bbf8e;
+				color: #ffffff;
+				border-radius: 0.1rem;
+				border: 0;
+				display: inline-block;
+			}
+			
+			.price-text {
+				position: absolute;
+				right: 0;
+				bottom: 0.1rem;
+				color: #666666;
+				font-size: 0.18rem;
+			}
+			
+			.ready_account {
+				position: relative;
+				left: 3.4rem;
+				width: 0.86rem;
+				background-color: #ac1717;
+				border-radius: 0.05rem;
+				font-size: 0.26rem;
+				letter-spacing: 0px;
+				color: #ffffff;
+				padding: 0.05rem 0.2rem 0.05rem 0.2rem;
+				border: 0;
+			}
+			
+			.disable_earn {
+				position: relative;
+				left: 3.4rem;
+				width: 0.86rem;
+				background-color: #e1e1e1;
+				border-radius: 0.05rem;
+				font-size: 0.26rem;
+				letter-spacing: 0px;
+				padding: 0.05rem 0.28rem 0.05rem 0.28rem;
+				border: 0;
+			}
+			
+			.advance_earn {
+				height: 1.4rem;
+				position: relative;
+				top: 0.3rem;
+				left: 0.5rem;
+			}
+			
+			.leji_reearn {
+				font-size: 0.28rem;
+				color: #999999;
+			}
+			
+			.fh_money {
+				color: #333333;
+				font-size: 0.36rem;
+			}
+			
+			.all_money {
+				font-size: 0.6rem;
+				font-family: PingFangSC-Thin;
+				color: #333333;
+			}
+			
+			.choice_time {
+				position: absolute;
+				top: 0.4rem;
+				right: 0.8rem;
+				color: #999999;
+				font-size: 0.28rem;
+				background-color: ;
+			}
+			
+			.leijiDiv {
+				background-color: #ffffff;
+				box-shadow: 0px 0.03rem 0.06rem 0.01rem rgba(0, 0, 0, 0.12);
+				border-radius: 0.1rem;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin: 0.23rem 0.22rem 0 0.22rem;
+				box-sizing: border-box;
+			}
+			
+			.leijiDiv .item {
+				width: 49%;
+				height: 0.65rem;
+				line-height: 0.65rem;
+				color: #666666;
+				font-size: 0.18rem;
+			}
+			
+			.leijiDiv .item:first-of-type {
+				padding-left: 0.37rem;
+				box-sizing: border-box;
+				text-align: left;
+			}
+			
+			.leijiDiv .item:last-of-type {
+				padding-right: 0.37rem;
+				box-sizing: border-box;
+				text-align: right;
+			}
+			
+			.leijiDiv .item span {
+				color: #ff0000;
+				margin-left: 0.37rem;
+			}
+			
+			.leijiDiv .line {
+				width: 0.01rem;
+				height: .27rem;
+				background-color: #4f5965;
+			}
+			
+			.switch-box {
+				padding: 0 0.22rem;
+				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+				margin-top: 0.35rem;
+			}
+			
+			.switch-box .switch-button-item {
+				background-color: #ffffff;
+				box-shadow: 0 0.04rem 0.07rem 0.01rem rgba(0, 0, 0, 0.12);
+				border-radius: 0 0.1rem 0.1rem 0;
+				width: 50%;
+				color: #666666;
+				text-align: center;
+				height: 0.8rem;
+				line-height: 0.8rem;
+				font-size: 0.25rem;
+			}
+			
+			.switch-box .switch-button-item:first-of-type {
+				border-radius: 0.1rem 0 0 0.1rem;
+			}
+			
+			.switch-box .switch-button-item.selected {
+				background-color: #1bbf8e;
+				box-shadow: 0 0.04rem 0.07rem 0.01rem rgba(27, 191, 142, 0.34);
+				color: #FFF;
+			}
+			
+			.item-bottom-box {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				height: 0.51rem;
+				border-top: 0.01rem solid #999999;
+				font-size: 0.18rem;
+				color: #666666;
+			}
+			
+			.findButton {
+				width: 0.8rem;
+				height: 0.4rem;
+				font-size: 0.2rem;
+				text-align: center;
+				line-height: 0.4rem;
+				background-color: #1bbf8e;
+				box-shadow: 0 0.04rem 0.03rem 0.01rem rgba(27, 191, 142, 0.25);
+				border-radius: 0.1rem;
+				padding: 0;
+				color: #ffffff;
+				margin-right: 0.2rem;
+			}
+			
+			.search-box {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-top: 0.4rem;
+				padding: 0 0.22rem;
+				box-sizing: border-box;
+			}
+			
+			.search-box-left {
+				display: flex;
+				align-items: center;
+			}
+			
+			.search-box-left input {
+				margin: 0;
+				box-shadow: 0px 0.025rem 0.01rem 0px rgba(0, 0, 0, 0.09);
+				border-radius: 0.1rem;
+				width: 2.3rem;
+				height: 0.4rem;
+				line-height: 0.4rem;
+				padding: 0;
+				font-size: 0.18rem;
+			}
+			
+			.search-box-left span {
+				font-size: 0.2rem;
+				color: #666;
+				margin: 0 0.2rem;
+			}
+			
+			.top-box {
+				margin-top: 0.2rem;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: 0 0.22rem;
+				box-sizing: border-box;
+			}
+			
+			.top-box .top-box-item {
+				color: #999999;
+				font-size: 0.28rem;
+				padding-bottom: 0.15rem;
+				border-bottom: 0.04rem solid transparent;
+				width: 18%;
+				text-align: center;
+			}
+			
+			.top-box .top-box-item.selected {
+				border-bottom: 0.04rem solid #1bbf8e;
+				color: #1bbf8e;
+			}
