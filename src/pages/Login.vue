@@ -12,7 +12,7 @@
       <div style="margin-top: 8vw" class="input_group">
         <div class="icon"><img src="../assets/icon/lock.svg" alt=""></div>
         <input :placeholder="loginWayControl==2 ? '请输入验证码' : '请输入密码'" :type="loginWayControl==2 ? 'text':'password'">
-        <mt-button v-if="loginWayControl==2" type="primary" class="getNum">获取验证码</mt-button>
+        <mt-button @click="getNum(sendTime)" v-if="loginWayControl==2" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
       </div>
       <div v-if="loginWayControl==1" class="rememberPwd">
         <input type="checkbox" id="checkbox">
@@ -24,7 +24,7 @@
         <div @click="moblieWay(1)">账号密码登录</div>
       </div>
       <div class="subBtn">
-        <mt-button style="width:100%;height: 10vw; font-size: 4.2vw" type="primary">完成</mt-button>
+        <mt-button @click="sub()" style="width:100%;height: 10vw; font-size: 4.2vw" type="primary">完成</mt-button>
       </div>
       <div class="rememberPwd">
         <input type="checkbox" id="checkbox2">
@@ -37,6 +37,7 @@
 
 <script>
   import '../untils/fn'
+  import {Toast} from "mint-ui";
   export default {
     name: "Login",
     data () {
@@ -44,7 +45,10 @@
         value: [],
         username: '',
         password: '',
-        loginWayControl: 1
+        loginWayControl: 1,
+        sendTime: 60,
+        getNumMsg: '获取验证码',
+        getNumBtnDis: false
       }
     },
     created () {
@@ -54,6 +58,28 @@
       //手机登录
       moblieWay(n){
         this.loginWayControl = n
+      },
+      //获取验证码计时
+      getNum(i){
+        if (i == 0) {
+          this.getNumBtnDis = false
+          this.sendTime = 60
+          this.getNumMsg = '获取验证码'
+        } else {
+          this.getNumBtnDis = true
+          this.sendTime -= 1
+          this.getNumMsg = this.sendTime + 'S后重新发送'
+          setTimeout(()=>{
+            this.getNum(this.sendTime)
+          },1000)
+        }
+      },
+      //完成提交
+      sub() {
+        Toast({
+          message: '操作成功',
+          iconClass: 'mintui mintui-success'
+        });
       }
     },
     watch: {
@@ -93,6 +119,7 @@
     font-size: 3.7vw;
     height: 9vw;
     border-bottom: 1px solid rgba(255,255,255,0.6);
+    position: relative;
   }
   .input_group .icon{
     width: 10vw;
@@ -132,8 +159,12 @@
   }
   .getNum{
     font-size: 3.2vw;
+    min-width: 100px;
     width: 30vw;
     height: 10vw;
     border-radius: 2vw;
+    position: absolute;
+    right: 0;
+    top: -1vw;
   }
 </style>
