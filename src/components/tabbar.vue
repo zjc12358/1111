@@ -96,6 +96,7 @@
             this.$router.push('/my');
 
             break;
+  
 
         }
 
