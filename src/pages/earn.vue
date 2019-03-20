@@ -2,7 +2,7 @@
 	<div>
 		<div class="top-box">
 			<div class="top-box-item selected"  id="check1">今日</div>
-			<div class="top-box-item" id="check2">昨日</div>
+			<div class="top-box-item" id="check2" >昨日</div>
 			<div class="top-box-item"  id="check3">本月</div>
 			<div class="top-box-item" id="check4">上月</div>
 			<div class="top-box-item" id="check4">自定义</div>
@@ -68,6 +68,7 @@
     export default {
         name: "earn"
     }
+
 </script>
 
 <style>

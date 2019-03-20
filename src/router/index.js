@@ -9,6 +9,7 @@ import MyDevice from "../pages/MyDevice";
 import WithdrawDeposit from "../pages/WithdrawDeposit";
 import earn from "../pages/earn";
 import earnTime from "../pages/earnTime";
+import agency from "../pages/agency";
 
 Vue.use(Router)
 
@@ -16,7 +17,7 @@ export default new Router({
   routes: [
     {
       // 首页
-      path: '/',
+      path: '/Home',
       name: 'Home',
       component: Home
     },
@@ -67,6 +68,13 @@ export default new Router({
       path: '/earnTime',
       name: 'earnTime',
       component: earnTime
+    }
+    ,
+    {
+      // 添加代理商
+      path: '/agency',
+      name: 'agency',
+      component: agency
     }
   ]
 })

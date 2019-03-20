@@ -1,0 +1,25 @@
+.switch-box {
+  padding: 0 0.22rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  margin-top: 0.35rem;
+}
+
+.switch-box .switch-button-item {
+  background-color: #ffffff;
+  box-shadow: 0 0.04rem 0.07rem 0.01rem rgba(0, 0, 0, 0.12);
+  border-radius: 0 0.1rem 0.1rem 0;
+  width: 50%;
+  color: #666666;
+  text-align: center;
+  height: 0.8rem;
+  line-height: 0.8rem;
+  font-size: 0.25rem;
+}
+
+.switch-box .switch-button-item.selected {
+  background-color: #1bbf8e;
+  box-shadow: 0 0.04rem 0.07rem 0.01rem rgba(27, 191, 142, 0.34);
+  color: #FFF;
+}

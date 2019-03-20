@@ -7,8 +7,8 @@
             <img src="../assets/loginimg.png" class="userImg">
           </div>
           <div>
-            <p style="font-size: 5.3vw" class="username">测试代理商</p>
-            <p style="font-size: 3.7vw">
+            <p style="font-size: 5.3vw ;color: #FFFFFF;" class="username">测试代理商</p>
+            <p style="font-size: 3.7vw;	color: #ffffff;">
               <label class="message">资讯</label>
               <span class="message-text">您喜欢的，这里都有······</span>
             </p>
@@ -22,7 +22,7 @@
         <!--<a class="tixian" href="../phoneOrder/statistics.do"> 提现</a>-->
         <a class="tixian" href="javascript:void(0);"> 提现</a>
       </div>
-      <div class="mui-content" id="mui-content-part2">
+<!--      <div class="mui-content" id="mui-content-part2">
         <div class="mui-row">
           <div class="mui-table-view-cell" style="margin-right: 0.3rem;">
             <img src="" class="earn_img">
@@ -36,7 +36,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
       <div class="mui-content" id="mui-content-part3">
         <div class="mui-row">
           <div class="content_top">
@@ -75,6 +75,7 @@
 
 <script>
     import tabbar from "../components/tabbar";
+    import '../assets/css/mui.min.css';
 
     export default {
       name: "My",
@@ -139,10 +140,12 @@
     flex-direction: column;
     justify-content: space-between;
   }
+
   .userImg{
     width: 13.3vw;
     height: 13.3vw;
     border-radius: 50%;
+    margin: 6vw 0 1vw 1vw;
   }
   .yu_money{
     position: relative;
@@ -158,13 +161,24 @@
   .yue-num{
     font-size: 7vw;
   }
+.order_title{
+  font-size: 2vw;
+}
+
   .tixian{
     width: 21vw;
     height: 80%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
-    color: #007aff;
+    color: #333333;
+    font-size: 4vw;
   }
   .yue-title{
     width: 21vw;
@@ -282,4 +296,5 @@
   #mui-row-part4>li:nth-last-child(1):after{
     opacity: 0;
   }
+
 </style>
