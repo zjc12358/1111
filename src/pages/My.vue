@@ -75,7 +75,7 @@
 
 <script>
     import tabbar from "../components/tabbar";
-    import '../assets/css/mui.min.css';
+
 
     export default {
       name: "My",
@@ -115,6 +115,7 @@
 </script>
 
 <style scoped>
+  @import '../assets/css/mui.min.css';
   .my-container{
     background: #efeff4;
     height: 100vh;
