@@ -8,6 +8,7 @@ import My from "../pages/My";
 import MyDevice from "../pages/MyDevice";
 import WithdrawDeposit from "../pages/WithdrawDeposit";
 import earn from "../pages/earn";
+import earnTime from "../pages/earnTime";
 
 Vue.use(Router)
 
@@ -60,6 +61,12 @@ export default new Router({
       path: '/earn',
       name: 'earn',
       component: earn
+    },
+    {
+      // 订单时间
+      path: '/earnTime',
+      name: 'earnTime',
+      component: earnTime
     }
   ]
 })
