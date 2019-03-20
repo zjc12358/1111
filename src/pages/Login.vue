@@ -4,8 +4,33 @@
     <div>
       <div>登录</div>
       <div>欢迎回到管理系统</div>
-      <mt-field style="background: transparent" label="用户名" placeholder="请输入用户名" v-model="username"></mt-field>
-      <mt-field style="background: transparent" label="邮箱" placeholder="请输入邮箱" type="email" v-model="email"></mt-field>
+
+      <div style="margin-top: 12.5vw" class="input_group">
+        <div class="icon"><img src="../assets/icon/people.svg" alt=""></div>
+        <input :placeholder="loginWayControl==2 ? '请输入手机号' : '请输入用户名'" type="text">
+      </div>
+      <div style="margin-top: 8vw" class="input_group">
+        <div class="icon"><img src="../assets/icon/lock.svg" alt=""></div>
+        <input :placeholder="loginWayControl==2 ? '请输入验证码' : '请输入密码'" :type="loginWayControl==2 ? 'text':'password'">
+        <mt-button v-if="loginWayControl==2" type="primary" class="getNum">获取验证码</mt-button>
+      </div>
+      <div v-if="loginWayControl==1" class="rememberPwd">
+        <input type="checkbox" id="checkbox">
+        <label for="checkbox">记住账号和密码</label>
+        <div style="flex: 1"></div>
+        <div @click="moblieWay(2)">手机验证码登录</div>
+      </div>
+      <div v-if="loginWayControl==2" class="rememberPwd">
+        <div @click="moblieWay(1)">账号密码登录</div>
+      </div>
+      <div class="subBtn">
+        <mt-button style="width:100%;height: 10vw; font-size: 4.2vw" type="primary">完成</mt-button>
+      </div>
+      <div class="rememberPwd">
+        <input type="checkbox" id="checkbox2">
+        <label for="checkbox2">登录即表示同意</label>
+        <div style="color: blue;">《用户使用条款及服务协议》</div>
+      </div>
     </div>
   </div>
 </template>
@@ -18,13 +43,20 @@
       return {
         value: [],
         username: '',
-        password: ''
+        password: '',
+        loginWayControl: 1
       }
     },
     created () {
       this.option1 = ['保存账号密码']
     },
     methods: {
+      //手机登录
+      moblieWay(n){
+        this.loginWayControl = n
+      }
+    },
+    watch: {
 
     }
   }
@@ -36,7 +68,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background: url("../assets/login-bg.png") no-repeat;
+    background: url("../assets/login-bg.png");
     background-size: 100vw 100vh;
   }
   .login-container>div:nth-child(2){
@@ -44,6 +76,7 @@
     padding-top: 18vw;
     color: white;
     padding-left: 8.3vw;
+    padding-right: 8.3vw;
   }
   .login-container>div:nth-child(2)>div:nth-child(1){
     font-size: 8.3vw;
@@ -53,5 +86,54 @@
     margin-top: 3.7vw;
     font-size: 7vw;
     letter-spacing: 1vw;
+  }
+  .input_group{
+    display: flex;
+    align-items: center;
+    font-size: 3.7vw;
+    height: 9vw;
+    border-bottom: 1px solid rgba(255,255,255,0.6);
+  }
+  .input_group .icon{
+    width: 10vw;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.3);
+    margin-right: 2vw;
+  }
+  .input_group .icon img{
+    width: 4.8vw;
+    height: 4.8vw;
+  }
+  .input_group input{
+    background: transparent;
+    color: white;
+    border: 0;
+    outline:none;
+    font-size: 3.2vw;
+  }
+  .rememberPwd{
+    font-size: 3.2vw;
+    display: flex;
+    align-items: center;
+    height: 10vw;
+    margin-top: 5vw;
+  }
+  .rememberPwd input{
+    width: 3.7vw;
+    height: 3.7vw;
+    margin-right: 2vw;
+    margin-left: 2vw;
+  }
+  .rememberPwd label{
+    font-size: 3.2vw;
+  }
+  .subBtn .mint-button--primary{
+    background: #4cbdf9;
+  }
+  .getNum{
+    font-size: 3.2vw;
+    width: 30vw;
+    height: 10vw;
+    border-radius: 2vw;
   }
 </style>

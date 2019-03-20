@@ -26,7 +26,7 @@
         <div class="mui-row">
           <div class="mui-table-view-cell" style="margin-right: 0.3rem;">
             <img src="" class="earn_img">
-            <span class="zfb_text">我的收益</span>
+            <span style="font-size: 4.7vw" class="zfb_text">我的收益</span>
           </div>
           <div style="height: 1px;margin: 0 4vw;background: #dadadd"></div>
           <div class="content_top">
@@ -165,6 +165,7 @@
     align-items: center;
     justify-content: center;
     color: #007aff;
+    font-size: 3.7vw;
   }
   .yue-title{
     width: 21vw;
@@ -184,7 +185,6 @@
   .mui-table-view-cell{
     position: relative;
     overflow: hidden;
-    padding: 2.9vw 4vw;
   }
   .content_top{
     display: flex;

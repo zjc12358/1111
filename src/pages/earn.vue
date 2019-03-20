@@ -64,12 +64,11 @@
 
 <script>
 	import '../untils/rem.js'
-		import '../assets/css/new_earnorder.css'
-    export default {
-        name: "earn"
-    }
+  export default {
+      name: "earn"
+  }
 </script>
 
-<style>
-
+<style scoped>
+  @import '../assets/css/new_earnorder.css';
 </style>
