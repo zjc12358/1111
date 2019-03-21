@@ -14,6 +14,7 @@
 					<input type="date" value=""  class="endtime" />
 				</div>
 				<button class="findButton" onclick="getfdTime();">查询</button>
+        <input type="file" accept="image/*"/>
 			</div>
 		<div class="switch-box">
 				<div class="switch-button-item selected">支付宝订单</div>

@@ -13,6 +13,7 @@ import agency from "../pages/agency";
 
 Vue.use(Router)
 
+
 export default new Router({
   routes: [
     {
@@ -76,5 +77,6 @@ export default new Router({
       name: 'agency',
       component: agency
     }
+
   ]
 })
