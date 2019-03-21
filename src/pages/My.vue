@@ -140,7 +140,7 @@
 </script>
 
 <style scoped>
-  /*@import '../assets/css/mui.min.css';*/
+  @import '../assets/css/mui.min.css';
   .my-container{
     background: #efeff4;
     height: 100vh;
