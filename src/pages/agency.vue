@@ -1,10 +1,11 @@
 <template>
   <div class="agency-container">
-    <mt-header style="color: black;background: white;height: 10.6vw;font-size: 3.7vw" title="开设账户">
+    <mt-header fixed style="color: black;background: white;height: 10.6vw;font-size: 3.7vw" title="开设账户">
       <router-link to="/" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
     </mt-header>
+    <div style="height: 10.6vw;"></div>
     <div>
       <div class="switch-box">
         <div @click="changeModuleV(1)" :class="'switch-button-item ' + (changeModule == 1 ? 'selected' : '')">代理</div>
@@ -31,8 +32,8 @@
       <div v-if="changeModule == 2">
         <shop />
       </div>
-      <div style="text-align: center;margin-top: 0.7rem;">
-        <mt-button @click="" type="primary" style="background: #1bbf8d;width: 80%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
+      <div style="text-align: center;margin-top: 0.4rem;">
+        <mt-button @click="" type="primary" style="background: #1bbf8d;width: 90%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
       </div>
     </div>
   </div>
