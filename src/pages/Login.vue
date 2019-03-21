@@ -134,7 +134,6 @@
   }
   .input_group input{
     background: transparent;
-    transition: background-color 50000s ease-in-out 0s;
     color: white;
     border: 0;
     outline:none;
