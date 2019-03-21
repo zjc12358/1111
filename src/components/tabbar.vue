@@ -10,21 +10,21 @@
 
     </mt-tab-item>
 
-    <mt-tab-item id="ShoppingList">
+    <!--<mt-tab-item id="ShoppingList">-->
 
-      <img slot="icon" v-bind:src="message==this.atabs[1].id ? this.atabs[1].src[1] : this.atabs[1].src[0]">
+      <!--<img slot="icon" v-bind:src="message==this.atabs[1].id ? this.atabs[1].src[1] : this.atabs[1].src[0]">-->
 
-      统计
+      <!--统计-->
 
-    </mt-tab-item>
+    <!--</mt-tab-item>-->
 
-    <mt-tab-item id="GroupList">
+    <!--<mt-tab-item id="GroupList">-->
 
-      <img slot="icon" v-bind:src="message==this.atabs[2].id ? this.atabs[2].src[1] : this.atabs[2].src[0]">
+      <!--<img slot="icon" v-bind:src="message==this.atabs[2].id ? this.atabs[2].src[1] : this.atabs[2].src[0]">-->
 
-      广告
+      <!--广告-->
 
-    </mt-tab-item>
+    <!--</mt-tab-item>-->
 
     <mt-tab-item id="UserCenter">
 
