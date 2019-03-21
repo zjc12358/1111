@@ -2,21 +2,23 @@
   <div>
     <!--Advertising-->
     <!--{{ selected }}-->
-    <div>
+    <div @click.stop="fn">djsafkldsjfalsd</div>
+    <div v-if="modalShow== true">
       <div class="modal_mask">
       </div>
-      <div class="modal_container">
-        <div class="modal_title">选择分类</div>
+      <div @click="modalClose()" class="modal_box">
+        <div @click.stop="fnn" class="modal_container">
+          <div class="modal_title">选择分类</div>
+        </div>
       </div>
     </div>
-    <mt-button @click="fn" size="large">点击上拉 action sheet</mt-button>
     <tabbar :selected="selected" :tabs='tabs'></tabbar>
   </div>
 </template>
 
 <script>
     import tabbar from "../components/tabbar";
-
+    import modal from "../components/modal"
     export default {
       name: "Advertising",
       components: {
@@ -37,7 +39,13 @@
       },
       methods: {
         fn(){
-          this.modalShow = !this.modalShow
+          this.modalShow = true
+        },
+        fnn(){
+
+        },
+        modalClose() {
+          this.modalShow = false
         }
       }
     }
@@ -54,15 +62,25 @@
     background: black;
     opacity: 0.6;
   }
+  .modal_box{
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .modal_container{
     background: white;
-    position: relative;
-    z-index: 10000;
-    border-radius: 10px;
+    width: 90%;
+    border-radius: 5px;
     font-size: 4.2vw;
-    min-height: 100px;
+    min-height: 300px;
   }
   .modal_title{
-
+    font-weight: bold;
+    padding: 3vw;
   }
 </style>
