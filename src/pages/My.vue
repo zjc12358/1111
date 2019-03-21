@@ -40,7 +40,7 @@
       <div class="mui-content" id="mui-content-part3">
         <div class="mui-row">
           <div class="content_top">
-            <div class="funBtn" v-for="item in myFunBtns">
+            <div class="funBtn" v-for="item in myFunBtns" @click="goTo(item.linkTo)">
               <p><img :src="item.img" class="orderImg"></p>
               <p class="order_title">{{ item.title }}</p>
             </div>
@@ -93,7 +93,7 @@
             {title: '上月预估(元)',num: 2}
           ],
           myFunBtns: [
-            { img: require("../assets/myorder.png"),title: '交易订单' },
+            { img: require("../assets/myorder.png"),title: '交易订单',linkTo: '/earn' },
             { img: require("../assets/team.png"),title: '我的团队' },
             { img: require("../assets/report.png"),title: '收入报表' },
             { img: require("../assets/updatepsw.png"),title: '修改密码' }
@@ -109,6 +109,9 @@
       methods:{
         fn(n){
           console.log(n)
+        },
+        goTo(path){
+          this.$router.push(path)
         }
       }
     }

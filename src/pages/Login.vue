@@ -76,8 +76,9 @@
       },
       //完成提交
       sub() {
+        this.$router.push('/')
         Toast({
-          message: '操作成功',
+          message: '登录成功',
           iconClass: 'mintui mintui-success'
         });
       }
