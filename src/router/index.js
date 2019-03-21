@@ -14,6 +14,7 @@ import devicePave from "../pages/devicePave";
 import deviceManager from "../pages/deviceManager";
 import bindDevice from "../pages/bindDevice";
 import claimDevice from "../pages/claimDevice";
+import MyTeam from "../pages/MyTeam";
 
 Vue.use(Router)
 
@@ -105,6 +106,12 @@ export default new Router({
       path: '/claimDevice',
       name: 'claimDevice',
       component: claimDevice
+    },
+    {
+      // 认领设备
+      path: '/MyTeam',
+      name: 'MyTeam',
+      component: MyTeam
     }
   ]
 })

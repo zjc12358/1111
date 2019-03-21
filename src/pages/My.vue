@@ -44,7 +44,7 @@
         <div class="mui-row">
           <div class="content_top">
             <div>
-              <div class="funBtn"  @click="goTo('/earn')">
+              <div class="funBtn"  @click="goTo('/earnTime')">
                 <p><img src="../assets/myorder.png" class="orderImg"></p>
                 <p class="order_title">交易订单</p>
               </div>
@@ -57,7 +57,7 @@
               <div @click="goTo('/agency')" class="openAccount">开设账户</div>
             </div>
             <div>
-              <div class="funBtn"  @click="goTo('/earn')">
+              <div class="funBtn"  @click="goTo('/MyTeam')">
                 <p><img src="../assets/team.png" class="orderImg"></p>
                 <p class="order_title">我的团队</p>
               </div>

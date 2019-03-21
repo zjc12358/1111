@@ -6,7 +6,7 @@
       <div class="top-box-item" id="check3">已结算</div>
       <div class="top-box-item" id="check4">失效订单</div>
     </div>
-    <div class="choice_text">
+    <div class="choice_text" >
       选择时间  <span>></span>
     </div>
 
@@ -79,8 +79,7 @@
   .choice_text {
     color: #666666;
     font-size: 0.2rem;
-    position: relative;
-    left: 6.1rem;
+    margin-left: 6.1rem;
     line-height: 0.01rem;
   }
 </style>
