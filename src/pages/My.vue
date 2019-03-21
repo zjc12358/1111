@@ -49,8 +49,8 @@
                 <p class="order_title">交易订单</p>
               </div>
               <div class="funBtn"  @click="goTo('/earn')">
-                <p><img src="../assets/myorder.png" class="orderImg"></p>
-                <p class="order_title">交易订单</p>
+                <p><img src="../assets/updatepsw.png" class="orderImg"></p>
+                <p class="order_title">修改密码</p>
               </div>
             </div>
             <div style="display: flex;align-items: center">
@@ -58,12 +58,12 @@
             </div>
             <div>
               <div class="funBtn"  @click="goTo('/earn')">
-                <p><img src="../assets/myorder.png" class="orderImg"></p>
-                <p class="order_title">交易订单</p>
+                <p><img src="../assets/team.png" class="orderImg"></p>
+                <p class="order_title">我的团队</p>
               </div>
               <div class="funBtn"  @click="goTo('/earn')">
                 <p><img src="../assets/myorder.png" class="orderImg"></p>
-                <p class="order_title">交易订单</p>
+                <p class="order_title">收入报表</p>
               </div>
             </div>
           </div>
