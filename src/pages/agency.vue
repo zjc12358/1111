@@ -7,17 +7,16 @@
     </mt-header>
     <div>
       <div class="switch-box">
-        <div class="switch-button-item selected">代理</div>
-        <div class="switch-button-item">店铺</div>
+        <div @click="changeModuleV(1)" :class="'switch-button-item ' + (changeModule == 1 ? 'selected' : '')">代理</div>
+        <div @click="changeModuleV(2)" :class="'switch-button-item ' + (changeModule == 2 ? 'selected' : '')">店铺</div>
       </div>
-      <div class="centerDiv">
-
+      <div v-if="changeModule == 1" class="centerDiv">
         <div style="font-size: 0.3rem;display: flex;align-items: center">
           <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
           <label style="margin-left: 2vw">手机号码</label>
         </div>
         <div>
-          <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" v-model="phone" />
+          <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
         </div>
         <div>
           <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
@@ -25,11 +24,13 @@
         </div>
 
         <div style="position: relative;">
-          <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;width: 50vw;" label="" placeholder="请输入验证码" type="text" v-model="num" />
+          <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;width: 50vw;" label="" placeholder="请输入验证码" type="text" />
           <mt-button @click="getNum(sendTime)" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
         </div>
       </div>
-
+      <div v-if="changeModule == 2">
+        <shop />
+      </div>
       <div style="text-align: center;margin-top: 0.7rem;">
         <mt-button @click="" type="primary" style="background: #1bbf8d;width: 80%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
       </div>
@@ -39,13 +40,18 @@
 
 <script>
   import '../untils/rem.js'
+  import shop from "./shop";
   export default {
     name: "agency",
+    components: {
+      shop
+    },
     data(){
       return {
         getNumBtnDis: false,
         sendTime: 60,
-        getNumMsg: '获取验证码'
+        getNumMsg: '获取验证码',
+        changeModule: 1, // 1 代理, 2 店家
       }
     },
     methods: {
@@ -63,6 +69,9 @@
           },1000)
         }
       },
+      changeModuleV(i){
+        this.changeModule = i;
+      }
     }
   }
 
