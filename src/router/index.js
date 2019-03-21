@@ -10,6 +10,10 @@ import WithdrawDeposit from "../pages/WithdrawDeposit";
 import earn from "../pages/earn";
 import earnTime from "../pages/earnTime";
 import agency from "../pages/agency";
+import devicePave from "../pages/devicePave";
+import deviceManager from "../pages/deviceManager";
+import bindDevice from "../pages/bindDevice";
+import claimDevice from "../pages/claimDevice";
 
 Vue.use(Router)
 
@@ -77,6 +81,30 @@ export default new Router({
       name: 'agency',
       component: agency
     }
-
+    ,
+    {
+      // 添加设备铺设
+      path: '/devicePave',
+      name: 'devicePave',
+      component: devicePave
+    } ,
+    {
+      // 设备管理
+      path: '/deviceManager',
+      name: 'deviceManager',
+      component: deviceManager
+    },
+    {
+      // 绑定设备
+      path: '/bindDevice',
+      name: 'bindDevice',
+      component: bindDevice
+    },
+    {
+      // 认领设备
+      path: '/claimDevice',
+      name: 'claimDevice',
+      component: claimDevice
+    }
   ]
 })

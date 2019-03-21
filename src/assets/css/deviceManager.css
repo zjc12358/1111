@@ -1,0 +1,51 @@
+		.tabImg {
+				width: 1.62rem;
+			}
+			
+			.listgn_title {
+				font-size: 0.28rem;
+				color: #333333;
+				margin-top: -0.1rem;
+			}
+			
+			.mui-tab-icon {
+				display: flex;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				position: absolute;
+				bottom: 1.5rem;
+			}
+			
+			.tab_list {
+				text-align: center;
+				width: 2.3rem;
+			}
+			
+			#closePage {
+				font-size: 0.7rem;
+				line-height: 1.1rem;
+			}
+			
+			.breakdown_num {
+				width:0.4rem;
+				height: 0.4rem;
+				position: absolute;
+				top: 2.4rem;
+				left: 6.6rem;
+				background-color: #ffffff;
+				letter-spacing: -0.01rem;
+				font-size: 0.26rem;
+				color: #ff5252;
+				border-radius: 0.4rem;
+				line-height: 0.4rem;
+			}
+    footer.footer {
+      height: 1.1rem;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
+      background: rgba(255, 252, 252, 0.98);
+      /* z-index: 9; */
+      z-index: 0;
+    }
