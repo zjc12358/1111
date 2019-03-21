@@ -59,13 +59,14 @@
 
 <script>
 	import '../untils/rem.js'
-		import '../assets/css/new_earnorder.css'
+
     export default {
         name: "earnTime"
     }
 </script>
 
 <style scoped>
+  @import '../assets/css/new_earnorder.css';
   .top-box{
     margin-top: 0.2rem;
     display: flex;
