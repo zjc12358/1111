@@ -27,7 +27,7 @@
         <mt-button @click="sub()" style="width:100%;height: 10vw; font-size: 4.2vw" type="primary">完成</mt-button>
       </div>
       <div class="rememberPwd">
-        <input type="checkbox" id="checkbox2">
+        <input checked="checked" type="checkbox" id="checkbox2">
         <label for="checkbox2">登录即表示同意</label>
         <div style="color: blue;">《用户使用条款及服务协议》</div>
       </div>

@@ -54,7 +54,7 @@
               </div>
             </div>
             <div style="display: flex;align-items: center">
-              <div class="openAccount">开设账户</div>
+              <div @click="goTo('/agency')" class="openAccount">开设账户</div>
             </div>
             <div>
               <div class="funBtn"  @click="goTo('/earn')">
