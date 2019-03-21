@@ -5,17 +5,6 @@
       <div class="switch-button-item">店铺</div>
     </div>
     <div class="inputMsg">
-      <div class="funBox">
-        <div class="funItem" v-for="item in funList">
-          <img :src="item.img" alt="" class="phoneImg">
-          <label style="margin-top: 0.2rem;">{{ item.title }}</label>
-          <div>
-            <input style="border:0;border-bottom: 1px solid #333333;line-height: 0.4rem;" class="input_phone" placeholder="请输入用户名"   v-model="username"/>
-          </div>
-        </div>
-
-
-      </div>
 
     </div>
 
@@ -28,23 +17,13 @@
 
   export default {
     name: "agency",
-    data() {
-      return {
-        selected: "AgencyPage",
-        tabs: this.$store.state.tabs,
-        funList: [
-          {img: require('../assets/myteamImg.png'), title: '手机号'},
-          {img: require('../assets/call.png'), title: '验证码'},
-        ]
-      }
-    },
-
   }
 
 </script>
 
 <style scoped>
   .inputMsg {
+    height: 5rem;
     background: #FFFFFF;
     border-radius: 0.1rem;
     margin: 2.23rem 0.22rem 0 0.22rem;
