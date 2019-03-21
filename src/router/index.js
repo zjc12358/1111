@@ -10,7 +10,6 @@ import WithdrawDeposit from "../pages/WithdrawDeposit";
 import earn from "../pages/earn";
 import earnTime from "../pages/earnTime";
 import agency from "../pages/agency";
-import adver from "../pages/adver";
 
 Vue.use(Router)
 
@@ -78,12 +77,6 @@ export default new Router({
       name: 'agency',
       component: agency
     }
-    ,
-    {
-      //
-      path: '/adver',
-      name: 'adver',
-      component: adver
-    }
+
   ]
 })
