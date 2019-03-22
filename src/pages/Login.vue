@@ -36,7 +36,7 @@
 </template>
 
 <script>
-  import '../untils/fn'
+  import '../untils/publicFn'
   import {Toast} from "mint-ui";
   export default {
     name: "Login",

@@ -61,6 +61,8 @@
       },
       created() {
         console.log('我是店铺')
+        this.sendMsg()
+        this.sendMsg2()
       },
       methods:{
         getNum(i){
@@ -86,73 +88,5 @@
 </script>
 
 <style scoped>
-  .getNum{
-    background: #1bbf8d;
-    font-size: 3.2vw;
-    min-width: 100px;
-    width: 30vw;
-    height: 10vw;
-    border-radius: 2vw;
-    position: absolute;
-    right: 0;
-    top: 0vw;
-  }
-  .input_group{
-    height: 10vw;
-    font-size: 3.2vw;
-    display: block;
-    border: 0;
-    outline: none;
-    height: 11vw;
-    width: 100%;
-  }
-  .inputTitle>div>{
-    display: flex;
-    align-items: center;
-    height: 10vw;
-  }
-  .inputTitle>div>img{
-    width: 3.7vw;
-    height: 3.7vw;
-    margin-right: 2vw;
-  }
-  .centerDiv{
-    margin-top: 30vw;
-    padding-top: 10vw;
-    padding-bottom: 10vw;
-    position: relative;
-  }
-  .fileUpload{
-    width: 20vw;
-    height: 20vw;
-    background: red;
-    opacity: 0;
-  }
-  .fileUploadBox{
-    display: flex;
-  }
-  .fileUploadBox>div{
-    display: flex;
-    width: 20vw;
-    height: 20vw;
-    background: url("../assets/fileUpload.png");
-    background-size: 20vw 20vw;
-  }
-  .fileUploadBox>div:nth-child(1){
-    margin-right: 2vw;
-  }
-  .progressbarWrap{
-    position: absolute;
-    top: -20vw;
-    width: 93vw;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-  }
-  .progress1{
-    width: 100%;
-  }
-  /deep/ .progressbar .mt-progress-runway{
-    background: white!important;
-  }
+  @import "../assets/css/shop.css";
 </style>

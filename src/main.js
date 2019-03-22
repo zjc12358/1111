@@ -10,12 +10,13 @@ import 'mint-ui/lib/style.css';
 import 'element-ui/lib/theme-chalk/index.css';
 import store from './store/index'
 import axios from 'axios'
+import publicFn from './untils/publicFn'
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 Vue.use(Vuex);
-
-Vue.use(MINT)
+Vue.use(MINT);
+Vue.use(publicFn);
 
 /* eslint-disable no-new */
 new Vue({
