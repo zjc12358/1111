@@ -79,7 +79,6 @@
 </script>
 
 <style scoped>
-  /*@import '../assets/css/mui.min.css';*/
   @import '../assets/css/agency.css';
   .getNum{
     background: #1bbf8d;

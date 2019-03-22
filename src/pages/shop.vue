@@ -23,7 +23,7 @@
     </div>
     <div style="position: relative;">
       <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;width: 50vw;" label="" placeholder="请输入验证码" type="text" />
-      <mt-button @click="getNum(sendTime)" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
+      <mt-button @click="sendMsg(sendTime)" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
     </div>
     <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
       <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
@@ -60,25 +60,9 @@
         }
       },
       created() {
-        console.log('我是店铺')
-        this.sendMsg()
-        this.sendMsg2()
+
       },
       methods:{
-        getNum(i){
-          if (i == 0) {
-            this.getNumBtnDis = false
-            this.sendTime = 60
-            this.getNumMsg = '获取验证码'
-          } else {
-            this.getNumBtnDis = true
-            this.sendTime -= 1
-            this.getNumMsg = this.sendTime + 'S后重新发送'
-            setTimeout(()=>{
-              this.getNum(this.sendTime)
-            },1000)
-          }
-        },
         //下一步
         nextPro(){
           this.progressStatus = 2
