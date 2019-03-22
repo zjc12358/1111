@@ -138,6 +138,7 @@
     border: 0;
     outline:none;
     font-size: 3.2vw;
+    transition: background-color 50000s ease-in-out 0s;
   }
   .rememberPwd{
     font-size: 3.2vw;
