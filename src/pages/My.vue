@@ -44,24 +44,24 @@
         <div class="mui-row">
           <div class="content_top">
             <div>
-              <div class="funBtn"  @click="goTo('/earnTime')">
+              <div class="funBtn"  @click="linkTo('/earnTime')">
                 <p><img src="../assets/myorder.png" class="orderImg"></p>
                 <p class="order_title">交易订单</p>
               </div>
-              <div class="funBtn"  @click="goTo('/earn')">
+              <div class="funBtn"  @click="linkTo('/earn')">
                 <p><img src="../assets/updatepsw.png" class="orderImg"></p>
                 <p class="order_title">修改密码</p>
               </div>
             </div>
             <div style="display: flex;align-items: center">
-              <div @click="goTo('/agency')" class="openAccount">开设账户</div>
+              <div @click="linkTo('/agency')" class="openAccount">开设账户</div>
             </div>
             <div>
-              <div class="funBtn"  @click="goTo('/MyTeam')">
+              <div class="funBtn"  @click="linkTo('/MyTeam')">
                 <p><img src="../assets/team.png" class="orderImg"></p>
                 <p class="order_title">我的团队</p>
               </div>
-              <div class="funBtn"  @click="goTo('/earn')">
+              <div class="funBtn"  @click="linkTo('/earn')">
                 <p><img src="../assets/myorder.png" class="orderImg"></p>
                 <p class="order_title">收入报表</p>
               </div>
@@ -150,12 +150,7 @@
         }
       },
       methods:{
-        fn(n){
-          console.log(n)
-        },
-        goTo(path){
-          this.$router.push(path)
-        }
+
       }
     }
 </script>

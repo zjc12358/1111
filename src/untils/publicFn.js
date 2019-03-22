@@ -7,5 +7,8 @@ export default {
     Vue.prototype.sendMsg2 = function () {
       console.log('我是公共方法2')
     }
+    Vue.prototype.linkTo = function (path) {
+      this.$router.push(path)
+    }
   }
 }
