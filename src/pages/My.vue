@@ -47,12 +47,12 @@
           <div class="content_top">
             <div>
               <div class="funBtn"  @click="goTo('/earnTime')">
-                <p><img src="../assets/myorder.png" class="orderImg"></p>
-                <p class="order_title">交易订单</p>
+                <div><img src="../assets/myorder.png" class="orderImg"></div>
+                <div class="order_title">交易订单</div>
               </div>
               <div class="funBtn"  @click="goTo('/earn')">
-                <p><img src="../assets/updatepsw.png" class="orderImg"></p>
-                <p class="order_title">修改密码</p>
+                <div><img src="../assets/updatepsw.png" class="orderImg"></div>
+                <div class="order_title">修改密码</div>
               </div>
             </div>
             <div style="display: flex;align-items: center">
@@ -60,12 +60,12 @@
             </div>
             <div>
               <div class="funBtn"  @click="goTo('/MyTeam')">
-                <p><img src="../assets/team.png" class="orderImg"></p>
-                <p class="order_title">我的团队</p>
+                <div><img src="../assets/team.png" class="orderImg"></div>
+                <div class="order_title">我的团队</div>
               </div>
               <div class="funBtn"  @click="goTo('/earn')">
-                <p><img src="../assets/myorder.png" class="orderImg"></p>
-                <p class="order_title">收入报表</p>
+                <div><img src="../assets/myorder.png" class="orderImg"></div>
+                <div class="order_title">收入报表</div>
               </div>
             </div>
           </div>
@@ -372,5 +372,9 @@
   }
   .earn_title{
     font-size: 2vw;
+  }
+  .order_title{
+    color: #4f5965;
+    font-size: 0.16rem;
   }
 </style>
