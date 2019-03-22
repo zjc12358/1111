@@ -1,11 +1,80 @@
 <template>
-    
+  <div class="centerDiv">
+    <div class="progressbarWrap">
+      <img class="progress1" src="../assets/progress2.png" alt="">
+    </div>
+    <div style="font-size: 0.3rem;display: flex;align-items: center">
+      <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
+      <label style="margin-left: 2vw">姓名</label>
+    </div>
+    <div>
+      <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
+    </div>
+    <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
+      <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
+      <label style="margin-left: 2vw">手机号码</label>
+    </div>
+    <div>
+      <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
+    </div>
+    <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
+      <img class="shop_img" src="../assets/call.png" style="width: 3.7vw;height: 3.7vw;">
+      <label style="font-size: 0.3rem;margin-left: 2vw">验证码</label>
+    </div>
+    <div style="position: relative;">
+      <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;width: 50vw;" label="" placeholder="请输入验证码" type="text" />
+      <mt-button @click="sendMsg(sendTime)" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
+    </div>
+    <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
+      <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
+      <label style="margin-left: 2vw">邮箱号</label>
+    </div>
+    <div>
+      <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
+    </div>
+    <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
+      <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
+      <label style="margin-left: 2vw">上传身份证正反面</label>
+      <div style="flex: 1"></div>
+      <div class="fileUploadBox">
+        <div>
+          <input class="fileUpload" type="file">
+        </div>
+        <div>
+          <input class="fileUpload" type="file">
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center;margin-top: 0.4rem;">
+      <mt-button @click="nextPro" type="primary" style="background: #1bbf8d;width: 90%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "StepTwo"
+  export default {
+    name: "stepTwo",
+    data(){
+      return {
+        getNumBtnDis: false,
+        sendTime: 60,
+        getNumMsg: '获取验证码',
+      }
+    },
+    created() {
+
+    },
+    mounted () {
+
+    },
+    methods:{
+      //下一步
+      nextPro(){
+        // this.progressStatus = 2
+        // this.$emit('ee',0)
+      }
     }
+  }
 </script>
 
 <style scoped>

@@ -1,7 +1,8 @@
 <template>
   <div class="centerDiv">
     <div class="progressbarWrap">
-      <img class="progress1" src="../assets/progress1.png" alt="">
+      <img v-if="progressStatus == 1" class="progress1" src="../assets/progress1.png" alt="">
+      <img v-if="progressStatus == 2" class="progress1" src="../assets/progress2.png" alt="">
     </div>
     <div style="font-size: 0.3rem;display: flex;align-items: center">
       <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
@@ -45,6 +46,9 @@
         </div>
       </div>
     </div>
+    <div style="text-align: center;margin-top: 0.4rem;">
+      <mt-button @click="nextPro" type="primary" style="background: #1bbf8d;width: 90%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
+    </div>
   </div>
 </template>
 
@@ -62,10 +66,14 @@
       created() {
 
       },
+      mounted () {
+
+      },
       methods:{
         //下一步
         nextPro(){
           this.progressStatus = 2
+          this.$emit('ee',0)
         }
       }
     }

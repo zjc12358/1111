@@ -1,5 +1,5 @@
 <template>
-  <div class="agency-container">
+  <div ref="agencyBox" class="agency-container">
     <mt-header fixed style="color: black;background: white;height: 10.6vw;font-size: 3.7vw" title="开设账户">
       <router-link to="/" slot="left">
         <mt-button icon="back"></mt-button>
@@ -29,11 +29,11 @@
           <mt-button @click="getNum(sendTime)" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
         </div>
       </div>
-      <div v-if="changeModule == 2">
-        <shop />
+      <div v-if="changeModule === 2 && step === 1">
+        <shop @ee="cc" />
       </div>
-      <div style="text-align: center;margin-top: 0.4rem;">
-        <mt-button @click="" type="primary" style="background: #1bbf8d;width: 90%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
+      <div v-if="step === 2">
+        <StepTwo />
       </div>
     </div>
   </div>
@@ -42,10 +42,12 @@
 <script>
   import '../untils/rem.js'
   import shop from "./shop";
+  import StepTwo from "./StepTwo";
   export default {
     name: "agency",
     components: {
-      shop
+      shop,
+      StepTwo
     },
     data(){
       return {
@@ -53,9 +55,14 @@
         sendTime: 60,
         getNumMsg: '获取验证码',
         changeModule: 1, // 1 代理, 2 店家
+        step: 1,
       }
     },
     methods: {
+      cc (){
+        this.$refs.agencyBox.scrollTop = 0
+        this.step = 2
+      },
       getNum(i){
         if (i == 0) {
           this.getNumBtnDis = false

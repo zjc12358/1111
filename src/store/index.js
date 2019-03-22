@@ -9,6 +9,7 @@ const store = new Vuex.Store({
     testMsg: '原始文本',
     isLogin: false,
     selectedTab: '',
+    token: null,
     tabs:[
       {
         id:'MainPage',
@@ -43,6 +44,9 @@ const store = new Vuex.Store({
   mutations: {
     changeTestMsg(state,str){
       state.testMsg = str;
+    },
+    saveToken(state,token) {
+      state.token = token;
     }
   }
 })

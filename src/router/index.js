@@ -25,12 +25,18 @@ export default new Router({
       // 首页
       path: '/',
       name: 'Home',
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+      },
       component: Home
     },
     {
       // 统计
       path:'/statistics',
       name: 'Statistics',
+      meta: {
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+      },
       component: Statistics
     },
     {

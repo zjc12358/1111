@@ -7,12 +7,14 @@
 
       <div style="margin-top: 12.5vw" class="input_group">
         <div class="icon"><img src="../assets/icon/people.svg" alt=""></div>
-        <input :placeholder="loginWayControl==2 ? '请输入手机号' : '请输入用户名'" type="text">
+        <input v-if="loginWayControl==1" v-model="username" placeholder="请输入用户名" type="text">
+        <input @blur="" v-if="loginWayControl==2" v-model="moblieNumber" placeholder="请输入手机号" type="text">
       </div>
       <div style="margin-top: 8vw" class="input_group">
         <div class="icon"><img src="../assets/icon/lock.svg" alt=""></div>
-        <input :placeholder="loginWayControl==2 ? '请输入验证码' : '请输入密码'" :type="loginWayControl==2 ? 'text':'password'">
-        <mt-button @click="getNum(sendTime)" v-if="loginWayControl==2" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
+        <input v-model="password" v-if="loginWayControl==1" placeholder="请输入密码" type="password">
+        <input v-model="codeNumber" @blur="" v-if="loginWayControl==2" placeholder="请输入验证码" type="text">
+        <mt-button @click="getCode(sendTime)" v-if="loginWayControl==2" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
       </div>
       <div v-if="loginWayControl==1" class="rememberPwd">
         <input type="checkbox" id="checkbox">
@@ -44,23 +46,51 @@
       return {
         value: [],
         username: '',
+        moblieNumber: '',
+        codeNumber: '',
         password: '',
         loginWayControl: 1,
         sendTime: 60,
         getNumMsg: '获取验证码',
-        getNumBtnDis: false
+        getNumBtnDis: true
       }
     },
     created () {
       this.option1 = ['保存账号密码']
+      console.log(12121)
     },
     methods: {
+      //判断手机号是否存在
+      // checkMoblieReq(phone){
+      //   this.$axios.get('/api/login/verifyPhone.lxkj',{params:{phone: phone}})
+      //     .then((res)=>{
+      //       console.log(res.data.code)
+      //       if (res.data.code=== '200') {
+      //         this.getNumBtnDis = false
+      //       } else{
+      //         // this.getNumBtnDis = true
+      //       }
+      //     }).catch((res)=>{
+      //       console.log(res)
+      //   })
+      // },
       //手机登录
       moblieWay(n){
         this.loginWayControl = n
       },
       //获取验证码计时
+      getCode(i){
+        this.getSmsCodeReq()
+        this.getNum(i)
+      },
       getNum(i){
+        // if (this.moblieBlur() === false) return
+        if( this.isnull(this.moblieNumber) || !this.isMoblie(this.moblieNumber) ){
+          this.getNumBtnDis = true
+          this.sendTime = 60
+          this.getNumMsg = '获取验证码'
+          return
+        }
         if (i == 0) {
           this.getNumBtnDis = false
           this.sendTime = 60
@@ -76,15 +106,92 @@
       },
       //完成提交
       sub() {
-        this.$router.push('/')
-        Toast({
-          message: '登录成功',
-          iconClass: 'mintui mintui-success'
-        });
-      }
+        console.log(12)
+        switch (this.loginWayControl) {
+          case 1:
+            console.log('qingqiu')
+            this.loginReq()
+            break;
+          case 2:
+            // if (this.checkCode().status && this.checkMobile().status) {
+            //
+            // }else{
+            //   Toast('请输入正确的手机号验证码')
+            // }
+            this.verifyCodeReq();
+            break;
+        }
+        // this.$router.push('/')
+        // Toast({
+        //   message: '登录成功',
+        //   iconClass: 'mintui mintui-success'
+        // });
+      },
+      loginReq(){
+        let data = new FormData();
+        data.append('username',this.username);
+        data.append('password',this.password);
+        this.$axios.post('/api/login/getToken.lxkj',data)
+          .then(res => {
+            console.log(res.data.data)
+            this.$store.commit('saveToken',res.data.data)
+          }).catch(res=>{
+            console.log(res)
+        })
+      },
+      verifyCodeReq(){
+        let data = new FormData();
+        data.append('username',this.moblieNumber);
+        data.append('code',this.codeNumber);
+        this.$axios.post('/api/login/verifyCode.lxkj',data)
+          .then(res => {
+            console.log(res)
+          }).catch(res=>{
+          console.log(res)
+        })
+      },
+      getSmsCodeReq(){
+        // let data = new FormData();
+        // data.append('phone',this.moblieNumber);
+        // let data = {phone: JSON.stringify(this.moblieNumber)}
+        this.$axios.get('/api/login/getSmsCode.lxkj?phone='+this.moblieNumber)
+          .then(res => {
+            console.log(res)
+          }).catch(res=>{
+          console.log(res)
+        })
+      },
+      // 验证表单是否为空
+      isnull(val) {
+        var str = val.replace(/(^\s*)|(\s*$)/g, '');//去除空格;
+        if (str == '' || str == undefined || str == null) {
+          return true;
+          console.log('空')
+        } else {
+          return false;
+          console.log('非空');
+        }
+      },
+      // 验证表单是否为手机号
+      isMoblie(val){
+        var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+        if (!myreg.test(val)) {
+          return false;
+        } else {
+          return true;
+        }
+      },
+
     },
     watch: {
-
+      moblieNumber: function (val,oldVal) {
+        // console.log(this.isMoblie(val))
+        if (this.isnull(val) || !this.isMoblie(val)) {
+          this.getNumBtnDis = true
+        }else{
+          this.getNumBtnDis = false
+        }
+      }
     }
   }
 

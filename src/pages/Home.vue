@@ -81,7 +81,18 @@
     },
     created() {
       //  网络请求.
-
+      this.$axios.get('/api/index/initPage.lxkj',
+        {
+          headers: {
+            'Authorization': this.$store.state.token
+          }
+        }
+      )
+        .then(res => {
+          console.log(res)
+        }).catch(res=>{
+        console.log(res)
+      })
     },
     mounted() {
 
