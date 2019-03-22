@@ -79,7 +79,7 @@
           <!--</div>-->
         <!--</a>-->
       <!--</div>-->
-      <div class="mui-content" id="mui-content-part4">
+  <!--    <div class="mui-content" id="mui-content-part4">
         <div class="mui-row" id="mui-row-part4">
           <li class="mui-table-view-cell2" v-for="item in myOperatingOptions">
             <a class="mui-navigate-right" href="javascript:void(0)">
@@ -88,7 +88,28 @@
             </a>
           </li>
         </div>
+      </div>-->
+      <div class="mui-content" id="mui-content-part4" >
+        <div>
+          <img src="../assets/zf_ewm.png" style="width: 0.5rem">
+          <div class="down_text">修改二维码</div>
+        </div>
+        <div>
+          <img src="../assets/zf_ewm.png" style="width: 0.5rem">
+          <div class="down_text">常见问题</div>
+        </div>
+        <div>
+          <img src="../assets/zf_ewm.png" style="width: 0.5rem">
+          <div class="down_text">收入报表</div>
+        </div>
+        <div>
+          <img src="../assets/zf_ewm.png" style="width: 0.5rem">
+          <div class="down_text">素材下载</div>
+        </div>
+
       </div>
+
+
       <div style="height: 55px;"></div>
     </div>
     <tabbar :selected="selected" :tabs='tabs'></tabbar>
@@ -120,12 +141,12 @@
             { img: require("../assets/report.png"),title: '收入报表' },
             { img: require("../assets/updatepsw.png"),title: '修改密码' }
           ],
-          myOperatingOptions: [
+        /*  myOperatingOptions: [
             { img: require("../assets/zf_ewm.png"), title: '修改支付二维码' },
             { img: require("../assets/problem.png"), title: '常见问题' },
             { img: require("../assets/call.png"), title: '联系我们' },
             { img: require("../assets/uploadImg.png"), title: '素材下载' },
-          ]
+          ]*/
         }
       },
       methods:{
@@ -288,6 +309,11 @@
   #mui-content-part4{
     top: 3vw;
     margin-bottom: 5vw;
+    font-size: 2vw;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 5vw 3vw;
   }
   .mui-table-view-cell2{
     height: 11.7vw;
@@ -338,4 +364,10 @@
     align-items: center;
     justify-content: center;
   }
+  .down_text{
+    margin-top: 0.1rem;
+  }
+.earn_title{
+  font-size: 2vw;
+}
 </style>
