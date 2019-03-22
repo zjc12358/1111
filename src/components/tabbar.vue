@@ -61,8 +61,7 @@
 
       selected: String,
 
-      tabs:Array,
-
+      tabs:Array
     },
 
     watch: {
