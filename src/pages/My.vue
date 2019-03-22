@@ -92,23 +92,10 @@
             </div>
           </div>-->
       <div class="mui-content" id="mui-content-part4" >
-        <div>
-          <img src="../assets/zf_ewm.png" style="width: 0.5rem">
-          <div class="down_text">修改二维码</div>
+        <div v-for="item in myOperatingOptions">
+          <img :src="item.img"  style="width: 0.5rem;height: 0.5rem;">
+          <div class="down_text">{{ item.title }}</div>
         </div>
-        <div>
-          <img src="../assets/zf_ewm.png" style="width: 0.5rem">
-          <div class="down_text">常见问题</div>
-        </div>
-        <div>
-          <img src="../assets/zf_ewm.png" style="width: 0.5rem">
-          <div class="down_text">收入报表</div>
-        </div>
-        <div>
-          <img src="../assets/zf_ewm.png" style="width: 0.5rem">
-          <div class="down_text">素材下载</div>
-        </div>
-
       </div>
 
 
@@ -143,12 +130,12 @@
           { img: require("../assets/report.png"),title: '收入报表' },
           { img: require("../assets/updatepsw.png"),title: '修改密码' }
         ],
-        /*  myOperatingOptions: [
+        myOperatingOptions: [
             { img: require("../assets/zf_ewm.png"), title: '修改支付二维码' },
             { img: require("../assets/problem.png"), title: '常见问题' },
             { img: require("../assets/call.png"), title: '联系我们' },
             { img: require("../assets/uploadImg.png"), title: '素材下载' },
-          ]*/
+          ]
       }
     },
     methods:{
