@@ -1,26 +1,28 @@
 <template>
   <div>
     <div class="my-container">
-      <div class="banner_topImg">
         <div class="head_all">
           <div style="margin-right: 2.6vw;">
             <img src="../assets/loginimg.png" class="userImg">
           </div>
           <div>
-            <p style="font-size: 5.3vw ;color: #FFFFFF;" class="username">测试代理商</p>
+            <p style="font-size: 5.3vw ;color: #FFFFFF;" class="username">super</p>
             <p style="font-size: 3.7vw;	color: #ffffff;">
               <label class="message">资讯</label>
               <span class="message-text">您喜欢的，这里都有······</span>
             </p>
           </div>
         </div>
-      </div>
+
       <div class="yu_money">
         <label class="yue-title">余&nbsp;额&nbsp;(元)</label>
         <div style="height: 6vw;width: 1px;background: white"></div>
         <label class="yue-num">8.00</label>
         <div style="flex: 1"></div>
-        <img class="jiantou" src="../assets/jiant1.png" alt="">
+        <div class="tixian">
+          提现
+        </div>
+
         <!--<div style="flex: 1;height: 80%;border-right: 1px solid #d1a86b"></div>-->
         <!--<a class="tixian" href="../phoneOrder/statistics.do"> 提现</a>-->
         <!--<a class="tixian" href="javascript:void(0);"> 提现</a>-->
@@ -44,69 +46,56 @@
         <div class="mui-row">
           <div class="content_top">
             <div>
-              <div class="funBtn"  @click="linkTo('/earnTime')">
-                <p><img src="../assets/myorder.png" class="orderImg"></p>
-                <p class="order_title">交易订单</p>
+              <div class="funBtn"  @click="goTo('/earnTime')">
+                <div><img src="../assets/myorder.png" class="orderImg"></div>
+                <div class="order_title">交易订单</div>
               </div>
-              <div class="funBtn"  @click="linkTo('/earn')">
-                <p><img src="../assets/updatepsw.png" class="orderImg"></p>
-                <p class="order_title">修改密码</p>
+              <div class="funBtn"  @click="goTo('/earn')">
+                <div><img src="../assets/updatepsw.png" class="orderImg"></div>
+                <div class="order_title">修改密码</div>
               </div>
             </div>
             <div style="display: flex;align-items: center">
-              <div @click="linkTo('/agency')" class="openAccount">开设账户</div>
+              <div @click="goTo('/agency')" class="openAccount">开设账户</div>
             </div>
             <div>
-              <div class="funBtn"  @click="linkTo('/MyTeam')">
-                <p><img src="../assets/team.png" class="orderImg"></p>
-                <p class="order_title">我的团队</p>
+              <div class="funBtn"  @click="goTo('/MyTeam')">
+                <div><img src="../assets/team.png" class="orderImg"></div>
+                <div class="order_title">我的团队</div>
               </div>
-              <div class="funBtn"  @click="linkTo('/earn')">
-                <p><img src="../assets/myorder.png" class="orderImg"></p>
-                <p class="order_title">收入报表</p>
+              <div class="funBtn"  @click="goTo('/earn')">
+                <div><img src="../assets/myorder.png" class="orderImg"></div>
+                <div class="order_title">收入报表</div>
               </div>
             </div>
           </div>
         </div>
       </div>
       <!--<div class="addDiv">-->
-        <!--<a href="javascript:void(0);">-->
-          <!--<img style="width: 89.6vw;" src="../assets/adduser.png" class="adduser">-->
-          <!--<div>-->
-            <!--<span class="add_account" @click="fn(1)">开设账户</span>-->
-            <!--<div style="flex: 1;"></div>-->
-            <!--<img src="../assets/jiant1.png" class="jiantou">-->
-          <!--</div>-->
-        <!--</a>-->
+      <!--<a href="javascript:void(0);">-->
+      <!--<img style="width: 89.6vw;" src="../assets/adduser.png" class="adduser">-->
+      <!--<div>-->
+      <!--<span class="add_account" @click="fn(1)">开设账户</span>-->
+      <!--<div style="flex: 1;"></div>-->
+      <!--<img src="../assets/jiant1.png" class="jiantou">-->
       <!--</div>-->
-  <!--    <div class="mui-content" id="mui-content-part4">
-        <div class="mui-row" id="mui-row-part4">
-          <li class="mui-table-view-cell2" v-for="item in myOperatingOptions">
-            <a class="mui-navigate-right" href="javascript:void(0)">
-              <img :src="item.img" class="left_img">
-              <span class="down_text">{{ item.title }}</span>
-            </a>
-          </li>
-        </div>
-      </div>-->
+      <!--</a>-->
+      <!--</div>-->
+      <!--    <div class="mui-content" id="mui-content-part4">
+            <div class="mui-row" id="mui-row-part4">
+              <li class="mui-table-view-cell2" v-for="item in myOperatingOptions">
+                <a class="mui-navigate-right" href="javascript:void(0)">
+                  <img :src="item.img" class="left_img">
+                  <span class="down_text">{{ item.title }}</span>
+                </a>
+              </li>
+            </div>
+          </div>-->
       <div class="mui-content" id="mui-content-part4" >
-        <div>
-          <img src="../assets/zf_ewm.png" style="width: 0.5rem">
-          <div class="down_text">修改二维码</div>
+        <div v-for="item in myOperatingOptions">
+          <img :src="item.img"  style="width: 0.5rem;height: 0.5rem;">
+          <div class="down_text">{{ item.title }}</div>
         </div>
-        <div>
-          <img src="../assets/zf_ewm.png" style="width: 0.5rem">
-          <div class="down_text">常见问题</div>
-        </div>
-        <div>
-          <img src="../assets/zf_ewm.png" style="width: 0.5rem">
-          <div class="down_text">收入报表</div>
-        </div>
-        <div>
-          <img src="../assets/zf_ewm.png" style="width: 0.5rem">
-          <div class="down_text">素材下载</div>
-        </div>
-
       </div>
 
 
@@ -117,42 +106,47 @@
 </template>
 
 <script>
-    import tabbar from "../components/tabbar";
+  import tabbar from "../components/tabbar";
 
 
-    export default {
-      name: "My",
-      components: {
-        tabbar
-      },
-      data(){
-        return {
-          selected: "UserCenter",
-          tabs: this.$store.state.tabs,
-          earnings: [
-            {title: '今日预估(元)',num: 0},
-            {title: '昨日预估(元)',num: 0},
-            {title: '本月预估(元)',num: 1.6},
-            {title: '上月预估(元)',num: 2}
-          ],
-          myFunBtns: [
-            { img: require("../assets/myorder.png"),title: '交易订单',linkTo: '/earn' },
-            { img: require("../assets/team.png"),title: '我的团队' },
-            { img: require("../assets/report.png"),title: '收入报表' },
-            { img: require("../assets/updatepsw.png"),title: '修改密码' }
-          ],
-        /*  myOperatingOptions: [
+  export default {
+    name: "My",
+    components: {
+      tabbar
+    },
+    data(){
+      return {
+        selected: "UserCenter",
+        tabs: this.$store.state.tabs,
+        earnings: [
+          {title: '今日预估(元)',num: 0},
+          {title: '昨日预估(元)',num: 0},
+          {title: '本月预估(元)',num: 1.6},
+          {title: '上月预估(元)',num: 2}
+        ],
+        myFunBtns: [
+          { img: require("../assets/myorder.png"),title: '交易订单',linkTo: '/earn' },
+          { img: require("../assets/team.png"),title: '我的团队' },
+          { img: require("../assets/report.png"),title: '收入报表' },
+          { img: require("../assets/updatepsw.png"),title: '修改密码' }
+        ],
+        myOperatingOptions: [
             { img: require("../assets/zf_ewm.png"), title: '修改支付二维码' },
             { img: require("../assets/problem.png"), title: '常见问题' },
             { img: require("../assets/call.png"), title: '联系我们' },
             { img: require("../assets/uploadImg.png"), title: '素材下载' },
-          ]*/
-        }
+          ]
+      }
+    },
+    methods:{
+      fn(n){
+        console.log(n)
       },
-      methods:{
-
+      goTo(path){
+        this.$router.push(path)
       }
     }
+  }
 </script>
 
 <style scoped>
@@ -161,14 +155,12 @@
     background: #efeff4;
     height: 100vh;
     overflow: auto;
+    background: url("../assets/img/my-Bg.png") center no-repeat;
+    background-size: 100vw 100vh;
+    padding-top: 0.5rem;
+
   }
-  .banner_topImg{
-    width: 100%;
-    height: 35.2vw;
-    background-image: linear-gradient(-77deg, #86de45 0%, #48bd5b 43%, #0a9b70 100%), linear-gradient( #6446e3, #6446e3);
-    background-blend-mode: normal, normal;
-    color: white;
-  }
+
   .head_all{
     height: 13.8vw;
     padding-top: 5vw;
@@ -192,24 +184,27 @@
     margin: 6vw 0 1vw 1vw;
   }
   .yu_money{
-    position: relative;
-    top: -6.6vw;
-    left: 2.5vw;
-    width: 95vw;
     height: 13.3vw;
     background-color: #83e0cb;
     border-radius: 1vw;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     color: white;
+    margin: 1rem 0.55rem 0 0.55rem;
+    border-radius: 0.1rem;
+    opacity: 0.9;
   }
   .yue-num{
     margin-left: 2vw;
     font-size: 6vw;
   }
-.order_title{
-  font-size: 2vw;
-}
+  .order_title{
+    font-size: 2vw;
+  }
 
   .tixian{
     width: 21vw;
@@ -223,7 +218,7 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    color: #333333;
+    color: #ffffff;
     font-size: 4vw;
   }
   .yue-title{
@@ -233,12 +228,12 @@
   }
   .mui-content{
     position: relative;
-    top: -4vw;
+    top: 5vw;
     background: #FFFFFF;
     left: 0;
     right: 0;
     margin: 0 auto;
-    width: 95%;
+    width: 86%;
     border-radius: 2vw;
   }
   .shouyi{
@@ -259,7 +254,7 @@
     margin-top: 2vw;
   }
   #mui-content-part3{
-    top: -1vw;
+    top: 9vw;
   }
   .funBtn{
     width: 13.8vw;
@@ -302,7 +297,7 @@
     margin-right: 5vw;
   }
   #mui-content-part4{
-    top: 3vw;
+    top: 13vw;
     margin-bottom: 5vw;
     font-size: 2vw;
     display: flex;
@@ -354,7 +349,7 @@
     background: #3fcf9c;
     color: white;
     border-radius: 50%;
-    font-size: 4.2vw;
+    font-size: 4vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -362,7 +357,11 @@
   .down_text{
     margin-top: 0.1rem;
   }
-.earn_title{
-  font-size: 2vw;
-}
+  .earn_title{
+    font-size: 2vw;
+  }
+  .order_title{
+    color: #4f5965;
+    font-size: 0.16rem;
+  }
 </style>
