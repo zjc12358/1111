@@ -24,6 +24,45 @@
       </div>
     </div>
 
+    <div class="stepInputGroup">
+      <div>
+        <img style="width: 0.3rem;height: 0.3rem;margin-right: 0.1rem" src="../assets/call.png" alt="">
+        <div style="letter-spacing: 1px">主营业务</div>
+        <span style="color: red;">*</span>
+      </div>
+      <div style="flex: 1"></div>
+      <div>
+        <span @click="modalOpen">
+          {{  }}
+          请选择您的主营业务
+        </span>
+      </div>
+    </div>
+
+    <div class="stepInputGroup">
+      <div>
+        <img style="width: 0.3rem;height: 0.3rem;margin-right: 0.1rem" src="../assets/call.png" alt="">
+        <div style="letter-spacing: 1px">所在省份地区</div>
+        <span style="color: red;">*</span>
+      </div>
+      <div style="flex: 1"></div>
+      <div>
+        <span @click="modal2Open">请选择省份地区</span>
+      </div>
+    </div>
+
+    <div class="stepInputGroup">
+      <div>
+        <img style="width: 0.3rem;height: 0.3rem;margin-right: 0.1rem" src="../assets/call.png" alt="">
+        <div style="letter-spacing: 1px">详细地址</div>
+        <span style="color: red;">*</span>
+      </div>
+      <div style="flex: 1"></div>
+      <div>
+        <input type="text" placeholder="请输入您的店铺详细地址">
+      </div>
+    </div>
+
     <!--可抽离成组件-->
     <div class="stepInputGroup stepFileInputGroup">
       <div>
@@ -71,18 +110,49 @@
         </div>
       </div>
     </div>
-
     <div style="text-align: center;margin-top: 0.4rem;">
       <mt-button @click="nextPro" type="primary" style="background: #1bbf8d;width: 90%;font-size: 4.2vw;height: 10vw;">提交</mt-button>
     </div>
+    <div class="agreeGroup">
+      <input checked="checked" type="checkbox" id="agree">
+      <label for="agree">我已阅读并同意</label>
+      <div style="color: blue;">《用户注册协议》</div>
+    </div>
+    <div @click="modalOpen()" style="font-size: 3.7vw">选择分类</div>
+    <modal ref="modal">
+      <div class="mainBusiness">
+        <div v-for="(item,key) in [1,2,3,4,5,6,7,8,9]">
+          <div @click="changeTypeSelected(key)" :class=" typeSelected === key ? 'typeSelected' : null">餐饮</div>
+        </div>
+      </div>
+      <div style="display: flex;justify-content: center">
+        <mt-button @click="makeSure(1)" style="width: 40vw;height: 10vw;background: #1bbf8d;font-size: 3.2vw" type="primary">确&nbsp;认</mt-button>
+      </div>
+    </modal>
+    <modal ref="modal2">
+      <div>
+        <mt-picker style="font-size: 3.2vw" ref="picker" :slots="slots" value-key="name" @change="onValuesChange"></mt-picker>
+      </div>
+      <div style="display: flex;justify-content: center;margin-top: 5vw">
+        <mt-button @click="makeSure(2)" style="width: 40vw;height: 10vw;background: #1bbf8d;font-size: 3.2vw" type="primary">确&nbsp;认</mt-button>
+      </div>
+    </modal>
+    <input @change="upload($event)" type="file">
   </div>
 </template>
 
 <script>
+  import modal from "../components/modal";
+  const address = require('../../city');
   export default {
     name: "stepTwo",
+    components:{
+      modal
+    },
     data(){
       return {
+        provinces: '',
+        typeSelected: null,
         shopHead: '',//店铺头像
         license: '', //营业执照
         agreement: '', //协议
@@ -94,9 +164,37 @@
         stepTwoInputList: [
           {img: require('../assets/call.png'), name: '店铺名称',placeholder: '请输入您的店铺名称'},
           {img: require('../assets/call.png'), name: '店铺电话',placeholder: '请输入您的店铺电话号'},
-          {img: require('../assets/call.png'), name: '主营业务',placeholder: '请输入您的主营业务'},
-          {img: require('../assets/call.png'), name: '所在省份地区',placeholder: '请输入您的店铺所在地区'},
-          {img: require('../assets/call.png'), name: '详细地址',placeholder: '请输入您的店铺详细地址'},
+          // {img: require('../assets/call.png'), name: '详细地址',placeholder: '请输入您的店铺详细地址'},
+        ],
+        myAdress:null,
+        slots: [
+          {
+            flex: 1,
+            values: address,
+            defaultIndex:10,
+            className: 'slot1',
+            textAlign: 'center'
+          }, {
+            divider: true,
+            content: '-',
+            className: 'slot2'
+          }, {
+            flex: 1,
+            values: address[0].childs,
+            defaultIndex:0,
+            className: 'slot3',
+            textAlign: 'center'
+          }, {
+            divider: true,
+            content: '-',
+            className: 'slot4'
+          }, {
+            flex: 1,
+            values: address[0].childs[0].childs,
+            defaultIndex:0,
+            className: 'slot5',
+            textAlign: 'center'
+          }
         ]
       }
     },
@@ -107,20 +205,49 @@
 
     },
     methods:{
+      changeTypeSelected(n){
+        this.typeSelected = n
+      },
+      modalOpen(){
+        this.$refs.modal.$emit('modalOpen')
+      },
+      modal2Open(){
+        this.$refs.modal2.$emit('modalOpen')
+      },
       //下一步
       nextPro(){
         // this.progressStatus = 2
         // this.$emit('ee',0)
       },
+      upload(e){
+        let file = e.target.files[0];
+        let data = new FormData();
+        data.append('base64Img',file)
+        data.append('fileName','png')
+        let config = {
+          headers: {
+            'Authorization': this.$store.state.token
+          }
+        }
+        this.$axios.post('/api/index/uploadImage.lxkj',
+          data,config
+        )
+          .then(res => {
+            console.log(res)
+          }).catch(res=>{
+          console.log(res)
+        })
+      },
 
       imgUpload(e,type){
-        let file = e.target.files[0]
+        let file = e.target.files[0];
         if(file.type.indexOf("image") == 0) {
           let reader = new FileReader();
           reader.readAsDataURL(file);
           reader.onload = (e) => {
             // 图片base64化
             let newUrl = e.target.result;
+
             console.log(newUrl)
             switch (type) {
               case 1:
@@ -141,6 +268,43 @@
             }
           }
         }
+      },
+
+      onValuesChange(picker, values) {
+        if(!values[0]){
+          this.$nextTick(()=>{
+            if(this.myAdress){
+              // 赋默认值
+            }else{
+              picker.setValues([address[0],address[0].childs[0],address[0].childs[0].childs[0]])
+            }
+          });
+        }else{
+          picker.setSlotValues(1, values[0].childs);
+          let town = [];
+          if(values[1]){
+            town = values[1].childs;
+          }
+          picker.setSlotValues(2,town);
+        }
+      },
+
+      // 选择确认
+      makeSure(type){
+        switch (type) {
+          case 1:
+            this.$refs.modal.$emit('modalClose')
+            break;
+          case 2:
+            console.log(this.$refs.picker.getValues())
+            let str = ''
+            this.$refs.picker.getValues().map = ( (item,key) => {
+              str += item.name
+            })
+            this.$refs.modal2.$emit('modalClose')
+            // console.log()
+            break;
+        }
       }
 
     }
@@ -151,6 +315,7 @@
   @import "../assets/css/shop.css";
   .centerDiv{
     padding-top: 10vw;
+    padding-bottom: 0;
     margin-top: 40vw;
   }
   .progressbarWrap{
@@ -242,5 +407,42 @@
     position: absolute;
     width: 20vw;
     z-index: 1;
+  }
+  .agreeGroup{
+    font-size: 3.2vw;
+    display: flex;
+    align-items: center;
+    width: 75vw;
+    height: 15vw;
+    margin: 0 auto;
+  }
+  .mainBusiness{
+    display: flex;
+    flex-flow: wrap;
+    justify-content: flex-start;
+  }
+  .mainBusiness>div{
+    width: 28vw;
+    height: 10vw;
+    display: flex;
+    margin-bottom: 5vw;
+    justify-content: center;
+  }
+  .mainBusiness>div>div{
+    width: 20vw;
+    height: 10vw;
+    background: #c5c5c5;
+    border-radius: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.2vw;
+  }
+  .typeSelected{
+    background: #1bbf8d!important;
+    color: white;
+  }
+  /deep/ .picker-item{
+    font-size: 3.4vw;
   }
 </style>

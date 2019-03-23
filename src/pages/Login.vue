@@ -134,7 +134,18 @@
         this.$axios.post('/api/login/getToken.lxkj',data)
           .then(res => {
             console.log(res.data.data)
-            this.$store.commit('saveToken',res.data.data)
+            if (res.data.code === '200') {
+              if (res.data.data.code === '400') {
+                this.$router.push('/login')
+              } else {
+                this.$store.commit('saveToken',res.data.data)
+                Toast({
+                  message: '操作成功',
+                  iconClass: 'mintui mintui-success'
+                });
+                this.$router.push('/')
+              }
+            }
           }).catch(res=>{
             console.log(res)
         })

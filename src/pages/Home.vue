@@ -5,7 +5,7 @@
         <div style="display: flex">
           <div style="margin-left: 6vw;margin-top: 5vw">
             <div style="font-size: 3.7vw">可提现收益</div>
-            <div style="font-size: 6.6vw;margin-top: 2vw">2.0</div>
+            <div style="font-size: 6.6vw;margin-top: 2vw">{{ takeMoney }}</div>
           </div>
           <div style="flex: 1;"></div>
           <div style="display: flex;align-items: center;margin-right: 10vw;">
@@ -15,15 +15,15 @@
         <div class="money-tablist">
           <div>
             <div>累计收入</div>
-            <div>37.6</div>
+            <div>{{ accumulatedIncome }}</div>
           </div>
           <div>
             <div>月收益</div>
-            <div>1.6</div>
+            <div>{{ monthlyIncome }}</div>
           </div>
           <div>
             <div>余额</div>
-            <div>8.00</div>
+            <div>{{ balance }}</div>
           </div>
         </div>
       </div>
@@ -64,6 +64,10 @@
       return {
         selected: "MainPage",
         tabs: this.$store.state.tabs,
+        accumulatedIncome: 0, //总收益
+        balance: 0, // 余额
+        monthlyIncome: 0, //月收益
+        takeMoney: 0, // 可提现收益
         funList: [
           { img: require('../assets/myteamImg.png'), title: '我的商户' },
           { img: require('../assets/myteamImg.png'), title: '代理商' },
@@ -89,6 +93,13 @@
         }
       )
         .then(res => {
+          if ( res.data.code === '200' ){
+            this.accumulatedIncome = res.data.data.accumulatedIncome
+            this.balance = res.data.data.balance
+            this.monthlyIncome = res.data.data.monthlyIncome
+            this.takeMoney = res.data.data.takeMoney
+            console.log(this.tabs)
+          }
           console.log(res)
         }).catch(res=>{
         console.log(res)
