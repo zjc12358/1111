@@ -1,0 +1,37 @@
+.versions{
+  font-size: 0.3rem;
+}
+.userName {
+  font-size: 0.36rem;
+  color: #333333;
+}
+
+body {
+  background-color: #FFFFFF;
+}
+
+.deleteSave {
+  font-size: 0.2rem;
+  background-color: #3e453d;
+  box-shadow: 0 0.01rem 0.02rem 0 rgba(0, 0, 0, 0.25);
+  border-radius: 0.48rem;
+  color: #FFFFFF;
+  margin-top: -0.1rem;
+}
+.mui-table-view-list{
+  background: #FFFFFF;
+  padding-right: 0.4rem;
+}
+.Outlogin{
+  width: 6rem;
+  height: 1rem;
+  background-color: #1cb969;
+  border-radius: 0.51rem;
+  font-size: 0.4rem;
+  color: #FFFFFF;
+  border: 0;
+}
+.left_title{
+  font-size: 0.32rem;
+  color: #333333;
+}
