@@ -15,27 +15,30 @@
         <div class="switch-button-item">店铺</div>
       </div>
 
-      <div class="plate-list">
+      <div class="plate-list"  v-for="item in funList">
         <div>
           <div class="people_photo">
-            <img class="head_img" src="img/1.jpg">
+            <img class="head_img" :src="item.img">
           </div>
           <div class="shop_detailall">
             <div class="shop_list">
-              <div class="shop-dj">店铺</div>
-              <div class="shop_name">沙县小吃</div>
-              <div class="shopUser">叶子</div>
-              <div class="contact-phone">18845555555</div>
+              <div class="shop-dj">{{item.shop}}</div>
+              <div class="shop_name">{{item.shop_name}}</div>
+              <div class="shopUser">{{item.shopUser}}</div>
+              <div class="contact-phone">{{item.contact}}</div>
             </div>
-
           </div>
           <div style="padding-top: 0.2rem;">
-            <span class="nopass">未通过</span>
-            <span class="update_shop">修改</span>
+            <!--<span class="nopass">未通过</span>
+            <span class="update_shop">修改</span>-->
+            <span class="nopass" v-if="item.status==3">审核中</span>
+            <span class="nopass" v-if="item.status==2">未通过</span>
+            <span class="nopass" v-if="item.status==1">通过</span>
+            <span class="update_shop" v-if="item.status==1||item.status==2">修改</span>
           </div>
         </div>
       </div>
-      <div class="plate-list">
+    <!--  <div class="plate-list">
         <div>
           <div class="people_photo">
             <img class="head_img" src="img/1.jpg">
@@ -54,9 +57,9 @@
             <span class="update_shop">修改</span>
           </div>
         </div>
-      </div>
+      </div>-->
 
-      <div class="plate-list">
+ <!--     <div class="plate-list">
         <div>
           <div class="people_photo">
             <img class="head_img" src="img/1.jpg">
@@ -68,13 +71,12 @@
               <div class="shopUser">叶子</div>
               <div class="contact-phone">18845555555</div>
             </div>
-
           </div>
           <div style="padding-top: 0.2rem;">
             <span class="nopass">审核中</span>
           </div>
         </div>
-      </div>
+      </div>-->
 
     </div>
 </template>
@@ -82,7 +84,18 @@
 <script>
     export default {
         name: "MyTeam",
-
+      data () {
+        return {
+          selected: "MainPage",
+          tabs: this.$store.state.tabs,
+          funList: [
+            { img: require('../assets/myteamImg.png'), shop: '代理' ,shop_name:'沙县小吃',shopUser:'叶子',contact:'18845555555',status:'2'},
+            { img: require('../assets/myteamImg.png'), shop: '店铺' ,shop_name:'沙县小吃',shopUser:'叶子',contact:'18845555555',status:'2'},
+            { img: require('../assets/myteamImg.png'), shop: '店铺' ,shop_name:'沙县小吃',shopUser:'叶子',contact:'18845555555',status:'3'},
+            { img: require('../assets/myteamImg.png'), shop: '店铺' ,shop_name:'沙县小吃',shopUser:'叶子',contact:'18845555555',status:'1'},
+          ]
+        }
+      },
     }
 </script>
 
