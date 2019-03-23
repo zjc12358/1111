@@ -1,5 +1,6 @@
 <template>
     <div>
+      <div class="app-container">
       <div style="position: relative;">
         <div class="yuan"></div>
         <div class="firstlogin_t">
@@ -37,8 +38,79 @@
         </div>
 
       </div>
+        <div id="goodsList" class="mui-tab-icon">
+          <div class="tab_list">
+            <img src="../assets/img/33.png" class="checkImg" />
+            <div style="text-align: center;">
+              <img src="login/zjj.png" class="deviceImg" />
+            </div>
+            <div class="device_detail">
+              <label class="listgn_title">挂式纸巾机</label>
+              <label class="listgn_num">No.A021533659874216</label>
+            </div>
+          </div>
+          <div class="tab_list">
+            <img src="../assets/img/33.png" class="checkImg" />
+            <div style="text-align: center;">
+              <img src="login/zjj.png" class="deviceImg" id="deviceImg" />
 
-   <footer class="footer">
+            </div>
+            <div class="device_detail">
+              <label class="listgn_title">挂式纸巾机</label>
+              <label class="listgn_num">No.A021533659874216</label>
+            </div>
+          </div>
+
+        </div>
+        <div id="goodsList" class="mui-tab-icon">
+          <div class="tab_list">
+            <img src="../assets/img/33.png" class="checkImg" />
+            <div style="text-align: center;">
+              <img src="login/zjj.png" class="deviceImg" />
+            </div>
+            <div class="device_detail">
+              <label class="listgn_title">挂式纸巾机</label>
+              <label class="listgn_num">No.A021533659874216</label>
+            </div>
+          </div>
+          <div class="tab_list">
+            <img src="../assets/img/33.png" class="checkImg" />
+            <div style="text-align: center;">
+              <img src="login/zjj.png" class="deviceImg" id="deviceImg" />
+
+            </div>
+            <div class="device_detail">
+              <label class="listgn_title">挂式纸巾机</label>
+              <label class="listgn_num">No.A021533659874216</label>
+            </div>
+          </div>
+
+        </div>
+        <div id="goodsList" class="mui-tab-icon">
+          <div class="tab_list">
+            <img src="../assets/img/33.png" class="checkImg" />
+            <div style="text-align: center;">
+              <img src="login/zjj.png" class="deviceImg" />
+            </div>
+            <div class="device_detail">
+              <label class="listgn_title">挂式纸巾机</label>
+              <label class="listgn_num">No.A021533659874216</label>
+            </div>
+          </div>
+          <div class="tab_list">
+            <img src="../assets/img/33.png" class="checkImg" />
+            <div style="text-align: center;">
+              <img src="login/zjj.png" class="deviceImg" id="deviceImg" />
+
+            </div>
+            <div class="device_detail">
+              <label class="listgn_title">挂式纸巾机</label>
+              <label class="listgn_num">No.A021533659874216</label>
+            </div>
+          </div>
+
+        </div>
+ <footer class="footer">
         <div style="text-align: center;">
           <div id="claimPage" onclick="unbindDv();" style="margin-top: -0.2rem;">
             <img src="../assets/img/unbind.png" class="claimclickImg" />
@@ -46,6 +118,7 @@
           </div>
         </div>
       </footer>
+    </div>
     </div>
 </template>
 
@@ -58,4 +131,10 @@
 <style scoped>
   @import '../assets/css/mui.min.css';
   @import '../assets/css/bindDevice.css';
+
+  .app-container{
+
+    height: 100vh;
+    overflow: auto;
+  }
 </style>
