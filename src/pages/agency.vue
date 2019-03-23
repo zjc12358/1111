@@ -23,17 +23,21 @@
           <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
           <label style="font-size: 0.3rem;">验证码</label>
         </div>
-
         <div style="position: relative;">
           <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;width: 50vw;" label="" placeholder="请输入验证码" type="text" />
           <mt-button @click="getNum(sendTime)" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
         </div>
+        <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 0.5rem">
+          <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
+          <label style="margin-left: 2vw">分成比例</label>
+        </div>
+        <div>
+          <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入分成比例" type="text" />
+        </div>
       </div>
-      <div v-if="changeModule === 2 && step === 1">
-        <shop @ee="cc" />
-      </div>
-      <div v-if="step === 2">
-        <StepTwo />
+      <div v-if="changeModule === 2">
+        <shop v-if="step===1" @ee="cc" />
+        <StepTwo v-if="step===2" />
       </div>
     </div>
   </div>

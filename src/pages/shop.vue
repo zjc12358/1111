@@ -39,10 +39,12 @@
       <div style="flex: 1"></div>
       <div class="fileUploadBox">
         <div>
-          <input class="fileUpload" type="file">
+          <input @change="imgUpload($event,1)" class="fileUpload" type="file">
+          <img class="readImages" :src="front" alt="">
         </div>
         <div>
-          <input class="fileUpload" type="file">
+          <input @change="imgUpload($event,2)" class="fileUpload" type="file">
+          <img class="readImages" :src="reverse" alt="">
         </div>
       </div>
     </div>
@@ -61,6 +63,8 @@
           sendTime: 60,
           getNumMsg: '获取验证码',
           progressStatus: 1,
+          front: null,
+          reverse: null
         }
       },
       created() {
@@ -74,6 +78,26 @@
         nextPro(){
           this.progressStatus = 2
           this.$emit('ee',0)
+        },
+        imgUpload(e,type){
+          let file = e.target.files[0]
+          if(file.type.indexOf("image") == 0) {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (e) => {
+              // 图片base64化
+              let newUrl = e.target.result;
+              console.log(newUrl)
+              switch (type) {
+                case 1:
+                  this.front = newUrl;
+                  break;
+                case 2:
+                  this.reverse = newUrl;
+                  break;
+              }
+            }
+          }
         }
       }
     }
@@ -81,4 +105,14 @@
 
 <style scoped>
   @import "../assets/css/shop.css";
+  .readImages{
+    /*width: ;*/
+    position: absolute;
+    width: 20vw;
+    overflow: hidden;
+  }
+  .fileUploadBox>div{
+    overflow: hidden;
+    position: relative;
+  }
 </style>
