@@ -15,6 +15,9 @@ import deviceManager from "../pages/deviceManager";
 import bindDevice from "../pages/bindDevice";
 import claimDevice from "../pages/claimDevice";
 import MyTeam from "../pages/MyTeam";
+import wxCode from "../pages/wxCode";
+import unbind from "../pages/unbind";
+import peopleSet from "../pages/peopleSet";
 
 Vue.use(Router)
 
@@ -118,6 +121,24 @@ export default new Router({
       path: '/MyTeam',
       name: 'MyTeam',
       component: MyTeam
+    },
+    {
+      //
+      path: '/wxCode',
+      name: 'wxCode',
+      component: wxCode
+    },
+    {
+      //解绑设备
+      path: '/unbind',
+      name: 'unbind',
+      component: unbind
+    },
+    {
+      //peopleSet个人设置
+      path: '/peopleSet',
+      name: 'peopleSet',
+      component: peopleSet
     }
   ]
 })
