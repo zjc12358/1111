@@ -31,11 +31,12 @@
         <span style="color: red;">*</span>
       </div>
       <div style="flex: 1"></div>
-      <div>
+      <div style="position: relative;">
         <span @click="modalOpen">
-          {{  }}
-          请选择您的主营业务
+          {{ typeSelected === null ? '请选择您的主营业务' : mainBusiness[typeSelected] }}
         </span>
+        <div style="flex: 1"></div>
+        <i class="mint-cell-allow-right"></i>
       </div>
     </div>
 
@@ -46,8 +47,10 @@
         <span style="color: red;">*</span>
       </div>
       <div style="flex: 1"></div>
-      <div>
-        <span @click="modal2Open">请选择省份地区</span>
+      <div style="position: relative;">
+        <span @click="modal2Open">{{ provinces ? provinces : '请选择省份地区' }}</span>
+        <div style="flex: 1"></div>
+        <i class="mint-cell-allow-right"></i>
       </div>
     </div>
 
@@ -118,11 +121,11 @@
       <label for="agree">我已阅读并同意</label>
       <div style="color: blue;">《用户注册协议》</div>
     </div>
-    <div @click="modalOpen()" style="font-size: 3.7vw">选择分类</div>
+
     <modal ref="modal">
       <div class="mainBusiness">
-        <div v-for="(item,key) in [1,2,3,4,5,6,7,8,9]">
-          <div @click="changeTypeSelected(key)" :class=" typeSelected === key ? 'typeSelected' : null">餐饮</div>
+        <div v-for="(item,key) in mainBusiness">
+          <div @click="changeTypeSelected(key)" :class=" typeSelected === key ? 'typeSelected' : null">{{ item }}</div>
         </div>
       </div>
       <div style="display: flex;justify-content: center">
@@ -137,7 +140,7 @@
         <mt-button @click="makeSure(2)" style="width: 40vw;height: 10vw;background: #1bbf8d;font-size: 3.2vw" type="primary">确&nbsp;认</mt-button>
       </div>
     </modal>
-    <input @change="upload($event)" type="file">
+    <!--<input @change="upload($event)" type="file">-->
   </div>
 </template>
 
@@ -161,6 +164,18 @@
         getNumBtnDis: false,
         sendTime: 60,
         getNumMsg: '获取验证码',
+        mainBusiness: [
+          '餐饮',
+          '零售',
+          '水果',
+          '超市',
+          '美发',
+          '美容',
+          '箱包',
+          '鞋',
+          '饰品',
+          '蔬菜'
+        ],
         stepTwoInputList: [
           {img: require('../assets/call.png'), name: '店铺名称',placeholder: '请输入您的店铺名称'},
           {img: require('../assets/call.png'), name: '店铺电话',placeholder: '请输入您的店铺电话号'},
@@ -214,10 +229,14 @@
       modal2Open(){
         this.$refs.modal2.$emit('modalOpen')
       },
-      //下一步
+      //提交
       nextPro(){
         // this.progressStatus = 2
         // this.$emit('ee',0)
+        Toast({
+          message: '操作成功',
+          iconClass: 'mintui mintui-success'
+        })
       },
       upload(e){
         let file = e.target.files[0];
@@ -296,11 +315,16 @@
             this.$refs.modal.$emit('modalClose')
             break;
           case 2:
-            console.log(this.$refs.picker.getValues())
+            // console.log(this.$refs.picker.getValues())
+            let selectAdress = this.$refs.picker.getValues()
+            // console.log(selectAdress)
             let str = ''
-            this.$refs.picker.getValues().map = ( (item,key) => {
+            selectAdress.map(item => {
+              // console.log(item.name)
               str += item.name
-            })
+            });
+            this.provinces = str
+            console.log(str)
             this.$refs.modal2.$emit('modalClose')
             // console.log()
             break;

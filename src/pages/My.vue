@@ -138,6 +138,24 @@
           ]
       }
     },
+    created(){
+      this.$axios.get('/api/agency/getInfo.lxkj',
+        {
+          headers: {
+            'Authorization': this.$store.state.token
+          }
+        }
+      )
+        .then(res => {
+          if ( res.data.code === '200' ){
+
+            console.log(res)
+          }
+          console.log(res)
+        }).catch(res=>{
+        console.log(res)
+      })
+    },
     methods:{
       fn(n){
         console.log(n)
