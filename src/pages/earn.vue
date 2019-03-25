@@ -1,11 +1,11 @@
 <template>
 	<div>
 		<div class="top-box">
-			<div class="top-box-item selected"  id="check1">今日</div>
-			<div class="top-box-item" id="check2" >昨日</div>
-			<div class="top-box-item"  id="check3">本月</div>
-			<div class="top-box-item" id="check4">上月</div>
-			<div class="top-box-item" id="check4">自定义</div>
+			<div  id="check1" @click="changeTimeV(1)" :class="'top-box-item ' + (changeTime == 1 ? 'selected' : '')">今日</div>
+			<div  id="check2" @click="changeTimeV(2)" :class="'top-box-item ' + (changeTime == 2 ? 'selected' : '')">昨日</div>
+			<div  id="check3" @click="changeTimeV(3)" :class="'top-box-item ' + (changeTime == 3 ? 'selected' : '')">本月</div>
+			<div  id="check4" @click="changeTimeV(4)" :class="'top-box-item ' + (changeTime == 4 ? 'selected' : '')">上月</div>
+			<div  id="check4" @click="changeTimeV(5)" :class="'top-box-item ' + (changeTime == 5 ? 'selected' : '')">自定义</div>
 		</div>
 			<div class="search-box">
 				<div class="search-box-left">
@@ -16,8 +16,8 @@
 				<button class="findButton" onclick="getfdTime();">查询</button>
 			</div>
 		<div class="switch-box">
-				<div class="switch-button-item selected">支付宝订单</div>
-				<div class="switch-button-item" >微信订单</div>
+      <div @click="changeModuleV(1)" :class="'switch-button-item ' + (changeModule == 1 ? 'selected' : '')">支付宝订单</div>
+      <div @click="changeModuleV(2)" :class="'switch-button-item ' + (changeModule == 2 ? 'selected' : '')">微信订单</div>
 		</div>
 			<div class="leijiDiv" style="">
 				<div class="item">收单累计(元) <span>0.00</span></div>
@@ -66,7 +66,28 @@
 	import '../untils/rem.js'
 
     export default {
-        name: "earn"
+        name: "earn",
+      data(){
+        return {
+          changeModule: 1, // 1 支付宝订单, 2 微信订单
+          changeTime:1,
+
+        }
+      },
+        methods:{
+          fn(n){
+            console.log(n)
+          },
+          goTo(path){
+            this.$router.push(path)
+          },
+          changeModuleV(i){
+            this.changeModule = i;
+          },
+          changeTimeV(i){
+            this.changeTime = i;
+          },
+        }
     }
 
 </script>
