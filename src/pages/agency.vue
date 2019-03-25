@@ -29,10 +29,13 @@
         </div>
         <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 0.5rem">
           <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
-          <label style="margin-left: 2vw">分成比例</label>
+          <label style="margin-left: 2vw">邮箱</label>
         </div>
         <div>
-          <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入分成比例" type="text" />
+          <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入邮箱" type="text" />
+        </div>
+        <div style="text-align: center;margin-top: 0.4rem;">
+          <mt-button @click="sub" type="primary" style="background: #1bbf8d;width: 90%;font-size: 4.2vw;height: 10vw;">提交</mt-button>
         </div>
       </div>
       <div v-if="changeModule === 2">
@@ -63,6 +66,26 @@
       }
     },
     methods: {
+
+      sub(){
+        let data = new FormData();
+        data.append('ag_name','zhangsan')
+        data.append('user_email','710124011@qq.com')
+        let config = {
+          headers: {
+            'Authorization': this.$store.state.token
+          }
+        }
+        this.$axios.post('/api/agency/addAgency.lxkj',
+          data,config
+        )
+          .then(res => {
+            console.log(res)
+          }).catch(res=>{
+          console.log(res)
+        })
+      },
+
       cc (){
         this.$refs.agencyBox.scrollTop = 0
         this.step = 2

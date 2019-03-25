@@ -129,7 +129,7 @@
       },
       loginReq(){
         let data = new FormData();
-        data.append('username',this.username);
+        data.append('ag_mobile',this.username);
         data.append('password',this.password);
         this.$axios.post('/api/login/getToken.lxkj',data)
           .then(res => {
@@ -148,7 +148,7 @@
       },
       verifyCodeReq(){
         let data = new FormData();
-        data.append('username',this.moblieNumber);
+        data.append('ag_mobile',this.moblieNumber);
         data.append('code',this.codeNumber);
         this.$axios.post('/api/login/verifyCode.lxkj',data)
           .then(res => {
