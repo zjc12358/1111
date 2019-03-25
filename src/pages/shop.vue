@@ -9,21 +9,21 @@
       <label style="margin-left: 2vw">姓名</label>
     </div>
     <div>
-      <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
+      <input v-model="ag_name" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
     </div>
     <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
       <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
       <label style="margin-left: 2vw">手机号码</label>
     </div>
     <div>
-      <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
+      <input v-model="ag_mobile" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
     </div>
     <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
       <img class="shop_img" src="../assets/call.png" style="width: 3.7vw;height: 3.7vw;">
       <label style="font-size: 0.3rem;margin-left: 2vw">验证码</label>
     </div>
     <div style="position: relative;">
-      <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;width: 50vw;" label="" placeholder="请输入验证码" type="text" />
+      <input v-model="codeNum" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;width: 50vw;" label="" placeholder="请输入验证码" type="text" />
       <mt-button @click="sendMsg(sendTime)" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
     </div>
     <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
@@ -31,7 +31,7 @@
       <label style="margin-left: 2vw">邮箱号</label>
     </div>
     <div>
-      <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
+      <input v-model="user_email" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入邮箱号" type="text" />
     </div>
     <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
       <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
@@ -59,6 +59,12 @@
       name: "shop",
       data(){
         return {
+          idcard_a: null,
+          idcard_b:null,
+          user_email: '',
+          ag_mobile: null,
+          ag_name: '',
+          codeNum: '',
           getNumBtnDis: false,
           sendTime: 60,
           getNumMsg: '获取验证码',
@@ -76,6 +82,7 @@
       methods:{
         //下一步
         nextPro(){
+
           this.progressStatus = 2
           this.$emit('ee',0)
         },
@@ -91,9 +98,11 @@
               switch (type) {
                 case 1:
                   this.front = newUrl;
+                  this.idcard_a = file
                   break;
                 case 2:
                   this.reverse = newUrl;
+                  this.idcard_b = file
                   break;
               }
             }

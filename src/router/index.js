@@ -19,6 +19,7 @@ import wxCode from "../pages/wxCode";
 import unbind from "../pages/unbind";
 import peopleSet from "../pages/peopleSet";
 import complete from "../pages/complete";
+import changeInformation from "../pages/changeInformation";
 
 Vue.use(Router)
 
@@ -147,6 +148,12 @@ export default new Router({
       path: '/complete',
       name: 'complete',
       component: complete
+    },
+    {
+      //changeInformation 修改信息
+      path: '/changeInformation',
+      name: 'changeInformation',
+      component: changeInformation
     }
   ]
 })
