@@ -1,18 +1,18 @@
 <template>
 	<div>
     <div class="top-box">
-      <div class="top-box-item selected" id="check1"> 全部</div>
-      <div class="top-box-item" id="check2">待确认</div>
-      <div class="top-box-item" id="check3">已结算</div>
-      <div class="top-box-item" id="check4">失效订单</div>
+      <div id="check1" @click="changeTimeV(1)" :class="'top-box-item ' + (changeTime == 1 ? 'selected' : '')"> 全部</div>
+      <div id="check2" @click="changeTimeV(2)" :class="'top-box-item ' + (changeTime == 2 ? 'selected' : '')">待确认</div>
+      <div id="check3" @click="changeTimeV(3)" :class="'top-box-item ' + (changeTime == 3 ? 'selected' : '')">已结算</div>
+      <div id="check4" @click="changeTimeV(4)" :class="'top-box-item ' + (changeTime == 4 ? 'selected' : '')">失效订单</div>
     </div>
     <div class="choice_text" @click="goTo('/earn')" >
       选择时间  <span>></span>
     </div>
 
     <div class="switch-box">
-      <div class="switch-button-item selected">支付宝订单</div>
-      <div class="switch-button-item">微信订单</div>
+      <div @click="changeModuleV(1)" :class="'switch-button-item ' + (changeModule == 1 ? 'selected' : '')">支付宝订单</div>
+      <div @click="changeModuleV(2)" :class="'switch-button-item ' + (changeModule == 2 ? 'selected' : '')">微信订单</div>
     </div>
     <div class="leijiDiv" style="">
       <div class="item">收单累计(元) <span>0.00</span></div>
@@ -62,6 +62,13 @@
 
     export default {
         name: "earnTime",
+      data(){
+        return {
+          changeModule: 1, // 1 支付宝订单, 2 微信订单
+          changeTime:1,
+
+        }
+      },
       methods:{
         fn(n){
           console.log(n)
@@ -71,7 +78,10 @@
         },
         changeModuleV(i){
           this.changeModule = i;
-        }
+        },
+        changeTimeV(i){
+          this.changeTime = i;
+        },
       }
     }
 </script>
