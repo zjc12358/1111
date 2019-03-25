@@ -67,12 +67,11 @@
   }
   .ewmsm{
     position: relative;
-    top: -0.3rem;
     width: 2.96rem;
     height: 0.54rem;
     left: 2.3rem;
 
     color: #333333;
-    font-size: 0.28rem;
+    font-size: 0.26rem;
   }
 </style>
