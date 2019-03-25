@@ -69,6 +69,7 @@
 
       sub(){
         let data = new FormData();
+        data.append('ag_mobile','13587011699')
         data.append('ag_name','zhangsan')
         data.append('user_email','710124011@qq.com')
         let config = {
