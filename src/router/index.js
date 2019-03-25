@@ -18,6 +18,7 @@ import MyTeam from "../pages/MyTeam";
 import wxCode from "../pages/wxCode";
 import unbind from "../pages/unbind";
 import peopleSet from "../pages/peopleSet";
+import complete from "../pages/complete";
 
 Vue.use(Router)
 
@@ -139,6 +140,13 @@ export default new Router({
       path: '/peopleSet',
       name: 'peopleSet',
       component: peopleSet
+    }
+    ,
+    {
+      //complete
+      path: '/complete',
+      name: 'complete',
+      component: complete
     }
   ]
 })
