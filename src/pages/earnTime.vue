@@ -6,7 +6,7 @@
       <div class="top-box-item" id="check3">已结算</div>
       <div class="top-box-item" id="check4">失效订单</div>
     </div>
-    <div class="choice_text" >
+    <div class="choice_text" @click="goTo('/earn')" >
       选择时间  <span>></span>
     </div>
 
@@ -61,7 +61,18 @@
 	import '../untils/rem.js'
 
     export default {
-        name: "earnTime"
+        name: "earnTime",
+      methods:{
+        fn(n){
+          console.log(n)
+        },
+        goTo(path){
+          this.$router.push(path)
+        },
+        changeModuleV(i){
+          this.changeModule = i;
+        }
+      }
     }
 </script>
 
