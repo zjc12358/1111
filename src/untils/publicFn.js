@@ -21,5 +21,46 @@ export default {
     Vue.prototype.linkTo = function (path) {
       this.$router.push(path)
     }
+
+    // 验证表单是否为空
+    Vue.prototype.isnull = function (val) {
+      var str = val.replace(/(^\s*)|(\s*$)/g, '');//去除空格;
+      if (str == '' || str == undefined || str == null) {
+        return true;
+        console.log('空')
+      } else {
+        return false;
+        console.log('非空');
+      }
+    }
+
+    /**
+     * 验证表单 --- 手机号  false不是  true是
+     * @param val
+     * @returns {boolean}
+     */
+    Vue.prototype.isMoblie = function (val) {
+      var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+      if (!myreg.test(val)) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    /**
+     * 验证表单 --- 邮箱  false不是
+     * @param val
+     * @returns {boolean}
+     */
+    Vue.prototype.isEmail = function (val) {
+      var myreg=/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+      if (!myreg.test(val)) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+
   }
 }

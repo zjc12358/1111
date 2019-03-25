@@ -6,6 +6,7 @@
       <mt-picker ref="picker" :slots="slots" value-key="name" @change="onValuesChange"></mt-picker>
       <div @click="getData">djafkdsalf</div>
     </div>
+    <userRegistrationAgreement></userRegistrationAgreement>
     <!--<p class="page-picker-desc">地址: {{ addressProvince }} {{ addressCity }}</p>-->
     <tabbar :selected="selected" :tabs='tabs'></tabbar>
   </div>
@@ -13,6 +14,7 @@
 
 <script>
     import tabbar from "../components/tabbar";
+    import userRegistrationAgreement from "./userRegistrationAgreement";
 
     const address = require('../../city');
 
@@ -20,7 +22,8 @@
       name: "Advertising",
 
       components: {
-        tabbar
+        tabbar,
+        userRegistrationAgreement
       },
 
       data(){

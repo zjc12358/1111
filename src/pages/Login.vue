@@ -110,14 +110,29 @@
         switch (this.loginWayControl) {
           case 1:
             console.log('qingqiu')
+            if(this.isnull(this.username)){
+              // 用户名为空
+              Toast('用户名为空');
+              return
+            }
+            if(this.isnull(this.password)){
+              // 密码为空
+              Toast('密码为空');
+              return
+            }
             this.loginReq()
             break;
           case 2:
-            // if (this.checkCode().status && this.checkMobile().status) {
-            //
-            // }else{
-            //   Toast('请输入正确的手机号验证码')
-            // }
+            if(this.isnull(this.moblieNumber)){
+              // 手机号为空
+              Toast('手机号为空');
+              return
+            }
+            if(this.isnull(this.codeNumber)){
+              // 验证码为空
+              Toast('验证码为空');
+              return
+            }
             this.verifyCodeReq();
             break;
         }
@@ -168,26 +183,7 @@
           console.log(res)
         })
       },
-      // 验证表单是否为空
-      isnull(val) {
-        var str = val.replace(/(^\s*)|(\s*$)/g, '');//去除空格;
-        if (str == '' || str == undefined || str == null) {
-          return true;
-          console.log('空')
-        } else {
-          return false;
-          console.log('非空');
-        }
-      },
-      // 验证表单是否为手机号
-      isMoblie(val){
-        var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
-        if (!myreg.test(val)) {
-          return false;
-        } else {
-          return true;
-        }
-      },
+
 
     },
     watch: {

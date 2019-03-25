@@ -14,17 +14,24 @@
       <div v-if="changeModule == 1" class="centerDiv">
         <div style="font-size: 0.3rem;display: flex;align-items: center">
           <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
+          <label style="margin-left: 2vw">代理商名称</label>
+        </div>
+        <div>
+          <input v-model="agentname" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入代理商名称" type="text" />
+        </div>
+        <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 0.5rem">
+          <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
           <label style="margin-left: 2vw">手机号码</label>
         </div>
         <div>
-          <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
+          <input v-model="agentMoblie" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
         </div>
         <div>
           <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
           <label style="font-size: 0.3rem;">验证码</label>
         </div>
         <div style="position: relative;">
-          <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;width: 50vw;" label="" placeholder="请输入验证码" type="text" />
+          <input v-model="agentCode" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;width: 50vw;" label="" placeholder="请输入验证码" type="text" />
           <mt-button @click="getNum(sendTime)" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
         </div>
         <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 0.5rem">
@@ -32,7 +39,7 @@
           <label style="margin-left: 2vw">邮箱</label>
         </div>
         <div>
-          <input class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入邮箱" type="text" />
+          <input v-model="agentEmail" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入邮箱" type="text" />
         </div>
         <div style="text-align: center;margin-top: 0.4rem;">
           <mt-button @click="sub" type="primary" style="background: #1bbf8d;width: 90%;font-size: 4.2vw;height: 10vw;">提交</mt-button>
@@ -50,6 +57,7 @@
   import '../untils/rem.js'
   import shop from "./shop";
   import StepTwo from "./StepTwo";
+  import {Toast} from "mint-ui";
   export default {
     name: "agency",
     components: {
@@ -58,6 +66,10 @@
     },
     data(){
       return {
+        agentname: '', // 代理商名称
+        agentMoblie: '', //代理商手机号
+        agentCode: '', //代理商手机验证码
+        agentEmail: '', // 代理商邮箱号
         getNumBtnDis: false,
         sendTime: 60,
         getNumMsg: '获取验证码',
@@ -68,10 +80,28 @@
     methods: {
 
       sub(){
+        if (this.isnull(this.agentname)){
+          Toast('名称为空')
+          return
+        }
+        if (this.isnull(this.agentMoblie)){
+          Toast('手机号为空')
+          return
+        }else if(!this.isMoblie(this.agentMoblie)){
+          Toast('手机号不正确')
+          return
+        }
+        if (this.isnull(this.agentEmail)){
+          Toast('邮箱为空')
+          return
+        }else if(!this.isEmail(this.agentEmail)){
+          Toast('邮箱格式错误')
+          return
+        }
         let data = new FormData();
-        data.append('ag_mobile','13587011699')
-        data.append('ag_name','zhangsan')
-        data.append('user_email','710124011@qq.com')
+        data.append('ag_mobile',this.agentMoblie)
+        data.append('ag_name',this.agentname)
+        data.append('user_email',this.agentEmail)
         let config = {
           headers: {
             'Authorization': this.$store.state.token
