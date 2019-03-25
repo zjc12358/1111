@@ -212,5 +212,9 @@
     display: block;
     margin-bottom: 1vw;
   }
+  /deep/ .mint-tabbar > .mint-tab-item.is-selected {
+    background-color: #eaeaea;
+    color: #171819;
+  }
 
 </style>
