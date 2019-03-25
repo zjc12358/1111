@@ -146,6 +146,7 @@
 
 <script>
   import modal from "../components/modal";
+  import {Toast} from "mint-ui";
   const address = require('../../city');
   export default {
     name: "stepTwo",
@@ -237,6 +238,7 @@
           message: '操作成功',
           iconClass: 'mintui mintui-success'
         })
+        this.$router.push('./complete')
       },
       upload(e){
         let file = e.target.files[0];
