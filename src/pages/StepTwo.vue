@@ -12,15 +12,28 @@
         </div>
       </div>
     </div>
-    <div v-for="item in stepTwoInputList" class="stepInputGroup">
+
+    <div class="stepInputGroup">
       <div>
-        <img style="width: 0.3rem;height: 0.3rem;margin-right: 0.1rem" :src="item.img" alt="">
-        <div style="letter-spacing: 1px">{{ item.name }}</div>
+        <img style="width: 0.3rem;height: 0.3rem;margin-right: 0.1rem" src="../assets/call.png" alt="">
+        <div style="letter-spacing: 1px">店铺名称</div>
         <span style="color: red;">*</span>
       </div>
       <div style="flex: 1"></div>
       <div>
-        <input type="text" :placeholder="item.placeholder">
+        <input v-model="shop_name" type="text" placeholder="请输入您的店铺名称">
+      </div>
+    </div>
+
+    <div class="stepInputGroup">
+      <div>
+        <img style="width: 0.3rem;height: 0.3rem;margin-right: 0.1rem" src="../assets/call.png" alt="">
+        <div style="letter-spacing: 1px">店铺电话</div>
+        <span style="color: red;">*</span>
+      </div>
+      <div style="flex: 1"></div>
+      <div>
+        <input v-model="phone" type="text" placeholder="请输入您的店铺电话">
       </div>
     </div>
 
@@ -62,7 +75,7 @@
       </div>
       <div style="flex: 1"></div>
       <div>
-        <input type="text" placeholder="请输入您的店铺详细地址">
+        <input v-model="addDetail" type="text" placeholder="请输入您的店铺详细地址">
       </div>
     </div>
 
@@ -113,14 +126,10 @@
         </div>
       </div>
     </div>
-    <div style="text-align: center;margin-top: 0.4rem;">
-      <mt-button @click="nextPro" type="primary" style="background: #1bbf8d;width: 90%;font-size: 4.2vw;height: 10vw;">提交</mt-button>
-    </div>
-    <div class="agreeGroup">
-      <input checked="checked" type="checkbox" id="agree">
-      <label for="agree">我已阅读并同意</label>
-      <div style="color: blue;">《用户注册协议》</div>
-    </div>
+    <!--<div style="text-align: center;margin-top: 0.4rem;">-->
+      <!--<mt-button @click="nextPro" type="primary" style="background: #1bbf8d;width: 90%;font-size: 4.2vw;height: 10vw;">提交</mt-button>-->
+    <!--</div>-->
+
 
     <modal ref="modal">
       <div class="mainBusiness">
@@ -155,13 +164,21 @@
     },
     data(){
       return {
+        addDetail: '', //详细地址
+        shop_name: '', //名称
+        phone: '', //手机
         provinces: '',
         typeSelected: null,
         shopHead: '',//店铺头像
+        shopHeadFile: '',
         license: '', //营业执照
+        licenseFile: '',
         agreement: '', //协议
+        agreementFile: '',
         basedOn: '', //场内照片
+        basedOnFile: '',
         basedOn2: '',
+        basedOn2File: '',
         getNumBtnDis: false,
         sendTime: 60,
         getNumMsg: '获取验证码',
@@ -238,6 +255,7 @@
         data.append('user_email','710124011@qq.com') //邮箱
         data.append('idcard_a','123132')  //身份证正面
         data.append('idcard_b','123132') //身份证反面
+
         data.append('shop_name','肯德基')  // 店铺名称
         data.append('phone','4397675')  // 店铺电话
         data.append('shop_type_name','美食') // 店铺主营业务
@@ -297,25 +315,32 @@
             // 图片base64化
             let newUrl = e.target.result;
 
-            console.log(newUrl)
+            console.log(file.name)
             switch (type) {
               case 1:
                 this.shopHead = newUrl;
+                this.shopHeadFile = file
                 break;
               case 2:
                 this.license = newUrl;
+                this.licenseFile = file;
                 break;
               case 3:
                 this.agreement = newUrl;
+                this.agreementFile = newUrl;
                 break;
               case 4:
                 this.basedOn = newUrl;
+                this.basedOnFile = file;
                 break;
               case 5:
                 this.basedOn2 = newUrl;
+                this.basedOn2File = file
                 break;
             }
           }
+        }else{
+          Toast('上传图片格式错误！')
         }
       },
 
@@ -378,7 +403,7 @@
   .stepInputGroup{
     display: flex;
     align-items: center;
-    font-size: 3.2vw;
+    font-size: 3.7vw;
     height: 18vw;
     border-bottom: 1px solid rgba(153, 153, 153, 0.3);
   }
@@ -400,6 +425,7 @@
     outline: 0;
     border: 0;
     width: 100%;
+    font-size: 3.6vw;
   }
   .shopHead{
     position: relative;
@@ -461,14 +487,6 @@
     position: absolute;
     width: 20vw;
     z-index: 1;
-  }
-  .agreeGroup{
-    font-size: 3.2vw;
-    display: flex;
-    align-items: center;
-    width: 75vw;
-    height: 15vw;
-    margin: 0 auto;
   }
   .mainBusiness{
     display: flex;

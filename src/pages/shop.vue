@@ -48,9 +48,9 @@
         </div>
       </div>
     </div>
-    <div style="text-align: center;margin-top: 0.4rem;">
-      <mt-button @click="nextPro" type="primary" style="background: #1bbf8d;width: 90%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
-    </div>
+    <!--<div style="text-align: center;margin-top: 0.4rem;">-->
+      <!--<mt-button @click="nextPro" type="primary" style="background: #1bbf8d;width: 90%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>-->
+    <!--</div>-->
   </div>
 </template>
 

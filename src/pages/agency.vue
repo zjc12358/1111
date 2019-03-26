@@ -28,7 +28,7 @@
         </div>
         <div>
           <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
-          <label style="font-size: 0.3rem;">验证码</label>
+          <label>验证码</label>
         </div>
         <div style="position: relative;">
           <input v-model="agentCode" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;width: 50vw;" label="" placeholder="请输入验证码" type="text" />
@@ -49,8 +49,13 @@
         <shop ref="shop" v-if="step===1" @ee="cc" />
         <StepTwo ref="stepTwo" v-if="step===2" />
         <div style="text-align: center">
-          <mt-button v-if="step === 1" @click="nextpro(1)" type="primary" style="background: #1bbf8d;margin: 0 auto;width: 90%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
-          <mt-button v-if="step === 2" @click="nextpro(2)" type="primary" style="background: #1bbf8d;margin: 0 auto;width: 90%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
+          <mt-button v-if="step === 1" @click="nextpro(1)" type="primary" style="background: #1bbf8d;margin: 0 auto;width: 80%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
+          <mt-button v-if="step === 2" @click="nextpro(2)" type="primary" style="background: #1bbf8d;margin: 0 auto;width: 80%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
+        </div>
+        <div v-if="step === 2" class="agreeGroup">
+          <input checked="checked" type="checkbox" id="agree">
+          <label for="agree">我已阅读并同意</label>
+          <div style="color: blue;">《用户注册协议》</div>
         </div>
       </div>
     </div>
@@ -79,10 +84,25 @@
         getNumMsg: '获取验证码',
         changeModule: 1, // 1 代理, 2 店家
         step: 1,
-        stepOneData: null
+        stepOneData: null,
+        stepTwoData: null,
       }
     },
     methods: {
+
+      imgUpload(file){
+        let data = new FormData()
+        data.append('file',file)
+        data.append('fileName',file.name.replace(/^.+\./,''))
+        let config = {
+          headers: {
+            'Authorization': this.$store.state.token
+          }
+        }
+        return this.$axios.post('/api/base/upload.lxkj',
+          data,config
+        )
+      },
 
       /**
        * 店铺提交操作
@@ -103,11 +123,37 @@
             this.stepOneData = data;
             break;
           case 2:
-
+            // 将俩个步骤的图片上传.
+            console.log(this.stepOneData)
+            this.$axios.all([this.imgUpload(this.stepOneData.idcard_a),this.imgUpload(this.stepOneData.idcard_b)])
+              .then(this.$axios.spread((acct,perms)=>{
+                console.log(acct)
+                console.log(perms)
+              }))
+              .catch(err=>{
+                Toast({
+                  message: '网络错误!'
+                });
+              })
+            let data2 = {
+              shop_photo: this.$refs.stepTwo.shopHeadFile,
+              shop_name: this.$refs.stepTwo.shop_name,
+              phone: this.$refs.stepTwo.phone,
+              shop_type_name: this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected],
+              shop_addr: this.$refs.stepTwo.provinces + this.$refs.stepTwo.addDetail,
+              license: this.$refs.stepTwo.licenseFile,
+              cooperation_agreement: this.$refs.stepTwo.agreementFile,
+              shop_scene_photo: this.$refs.stepTwo.basedOnFile,
+            }
+            console.log(data2)
+            this.stepTwoData = data2
             break;
         }
       },
 
+      /**
+       * 代理提交
+       */
       sub(){
         if (this.isnull(this.agentname)){
           Toast('名称为空')
@@ -193,5 +239,16 @@
     outline: none;
     height: 11vw;
     width: 100%;
+  }
+  .agreeGroup{
+    font-size: 3.2vw;
+    display: flex;
+    align-items: center;
+    width: 75vw;
+    height: 15vw;
+    margin: 0 auto;
+  }
+  label{
+    font-size: 3.7vw;
   }
 </style>
