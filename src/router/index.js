@@ -19,6 +19,7 @@ import wxCode from "../pages/wxCode";
 import unbind from "../pages/unbind";
 import peopleSet from "../pages/peopleSet";
 import complete from "../pages/complete";
+import record from "../pages/record";
 
 Vue.use(Router)
 
@@ -140,13 +141,18 @@ export default new Router({
       path: '/peopleSet',
       name: 'peopleSet',
       component: peopleSet
-    }
-    ,
+    } ,
     {
       //complete
       path: '/complete',
       name: 'complete',
       component: complete
+    },
+    {
+      //提现记录
+      path: '/record',
+      name: 'record',
+      component: record
     }
   ]
 })
