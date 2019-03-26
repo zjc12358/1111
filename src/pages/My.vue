@@ -276,7 +276,7 @@
     margin-top: 2vw;
   }
   #mui-content-part3{
-    top: 9vw;
+    top: 8vw;
   }
   .funBtn{
     width: 13.8vw;
@@ -319,7 +319,7 @@
     margin-right: 5vw;
   }
   #mui-content-part4{
-    top: 13vw;
+    top: 11vw;
     margin-bottom: 5vw;
     font-size: 2vw;
     display: flex;

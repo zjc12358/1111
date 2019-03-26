@@ -19,6 +19,7 @@ import wxCode from "../pages/wxCode";
 import unbind from "../pages/unbind";
 import peopleSet from "../pages/peopleSet";
 import complete from "../pages/complete";
+import record from "../pages/record";
 import changeInformation from "../pages/changeInformation";
 
 Vue.use(Router)
@@ -148,6 +149,12 @@ export default new Router({
       path: '/complete',
       name: 'complete',
       component: complete
+    },
+    {
+      //提现记录
+      path: '/record',
+      name: 'record',
+      component: record
     },
     {
       //changeInformation 修改信息

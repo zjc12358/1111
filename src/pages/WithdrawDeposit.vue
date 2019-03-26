@@ -5,19 +5,19 @@
       </div>
       <div class="remainder">
         <div>
-          <p class="yuetext">余额</p>
+          <p class="yuetext">可用余额</p>
           <p class="yue_num">8.00</p>
         </div>
         <div>
           <!--<button style="color: white; background-image: linear-gradient(-44deg, #4db1f7 0%, #4dcfff 100%), linear-gradient(#ffffff, #ffffff);" class="Totixian" onclick="tixian();">申请提现-->
           <!--</button>-->
-          <mt-button type="primary" class="applyBtn">申请提现</mt-button>
+         <!-- <mt-button type="primary" class="applyBtn">申请提现</mt-button>-->
         </div>
         <div class="content_top">
-          <div style="width: 50%; border-right: solid 1px #FFFFFF;">
+       <!--   <div style="width: 50%; border-right: solid 1px #FFFFFF;">
             <p class="tixian_title">可提现</p>
             <p class="tixian_num">2.0</p>
-          </div>
+          </div>-->
           <div style="width: 50%; border-right: solid 1px #FFFFFF;">
             <p class="comp_title">已结算</p>
             <p class="comp_num">0.00</p>
@@ -29,22 +29,18 @@
         </div>
       </div>
       <div class="remainder1">
-        <div class="fistCell">
+       <!-- <div class="fistCell">
           <mt-cell title="滞留资金: 0.0">
             <mt-button size="small" type="primary">取回滞留资金</mt-button>
           </mt-cell>
           <mt-cell title="什么是滞留资金？">
           </mt-cell>
-        </div>
+        </div>-->
         <div>
-          <mt-cell
-            title="已结算订单多久可提现？"
-            to="//github.com"
-            is-link
-            value="查看详情">
+          <mt-cell title="已结算订单多久可提现？"  to="//github.com" is-link value="查看详情" class="select-text">
             <img slot="icon" src="../assets/what.png" style="width: 20px;height: 20px;">
           </mt-cell>
-          <mt-cell
+         <!-- <mt-cell
             title="提现记录"
             to="//github.com"
             is-link
@@ -57,7 +53,7 @@
             is-link
             value="查看详情">
             <img slot="icon" src="../assets/earn.png" style="width: 20px;height: 20px;">
-          </mt-cell>
+          </mt-cell>-->
         </div>
         <div>
           <mt-cell
@@ -65,13 +61,14 @@
             <img slot="icon" src="../assets/zfb.png" style="width: 20px;height: 20px;">
           </mt-cell>
           <div class="page-part">
-            <mt-field placeholder="请输入支付宝账号"></mt-field>
-            <mt-field placeholder="请输入姓名"></mt-field>
+            <mt-field placeholder="请输入支付宝账号" ></mt-field>
+            <mt-field value="常山馆"></mt-field>
+            <mt-field placeholder="请输入金额"></mt-field>
           </div>
         </div>
       </div>
-      <div style="display: flex;align-items: center;margin-top: 4vw">
-        <mt-button type="primary" style="width: 94.6vw;margin: 0 auto">保存账号</mt-button>
+      <div style="text-align: center;margin-top: 0.8rem">
+        <mt-button  class="sureBtn" type="primary">确认提现</mt-button>
       </div>
     </div>
 </template>
@@ -100,6 +97,7 @@
     border-radius: 2vw;
   }
   .remainder{
+    text-align: center;
     height: 53.3vw;
     width: 94.6vw;
     margin: 0 auto;
@@ -110,7 +108,7 @@
     color: white;
   }
   .remainder>div:nth-child(1){
-    margin-left: 10vw;
+    /*margin-left: 10vw;*/
 
   }
   .remainder>div:nth-child(2){
@@ -165,7 +163,20 @@
   .remainder1>div .mint-cell{
     background: transparent;
   }
-  .mint-cell-text{
-    font-size: 3.2vw;
+  .mint-cell-text {
+    vertical-align: middle;
   }
+.sureBtn{
+  width: 4.2rem;
+  background-image: linear-gradient(-44deg,
+  #25d9a4 0%,
+  #21c990 100%),
+  linear-gradient(
+    #ffffff,
+    #ffffff);
+  border-radius: 0.4rem;
+  letter-spacing: 0.07rem;
+  color: #ffffff;
+}
+
 </style>
