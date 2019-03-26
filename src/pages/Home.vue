@@ -70,16 +70,16 @@
         takeMoney: 0, // 可提现收益
         funList: [
           { img: require('../assets/myteamImg.png'), title: '我的商户' },
-          { img: require('../assets/myteamImg.png'), title: '代理商' },
-          { img: require('../assets/myteamImg.png'), title: '订单' },
-          { img: require('../assets/myteamImg.png'), title: '提现记录' },
-          { img: require('../assets/myteamImg.png'), title: '收益明细' },
-          { img: require('../assets/myteamImg.png'), title: '修改密码' },
-          { img: require('../assets/myteamImg.png'), title: '收款信息' },
-          { img: require('../assets/myteamImg.png'), title: '故障信息' },
-          { img: require('../assets/myteamImg.png'), title: '开设下级' },
-          { img: require('../assets/myteamImg.png'), title: '设置' },
-          { img: require('../assets/myteamImg.png'), title: '设备认领' },
+          { img: require('../assets/agencyImg.png'), title: '代理商' },
+          { img: require('../assets/orderIng.png'), title: '订单' },
+          { img: require('../assets/tx_history.png'), title: '提现记录' },
+          { img: require('../assets/earn_Img.png'), title: '收益明细' },
+          { img: require('../assets/updatepsw1.png'), title: '修改密码' },
+          { img: require('../assets/skmsgImg.png'), title: '收款信息' },
+          { img: require('../assets/breakoutImg.png'), title: '故障信息' },
+          { img: require('../assets/nextPeopleImg.png'), title: '开设下级' },
+          { img: require('../assets/Msgset.png'), title: '设置' },
+          { img: require('../assets/getdevice.png'), title: '设备认领' },
         ]
       }
     },
@@ -209,6 +209,7 @@
   }
   .funItem>img{
     width: 6.6vw;
+    height: 6.6vw;
     display: block;
     margin-bottom: 1vw;
   }
