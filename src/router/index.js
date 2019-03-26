@@ -20,6 +20,7 @@ import unbind from "../pages/unbind";
 import peopleSet from "../pages/peopleSet";
 import complete from "../pages/complete";
 import record from "../pages/record";
+import changeInformation from "../pages/changeInformation";
 
 Vue.use(Router)
 
@@ -141,7 +142,8 @@ export default new Router({
       path: '/peopleSet',
       name: 'peopleSet',
       component: peopleSet
-    } ,
+    }
+    ,
     {
       //complete
       path: '/complete',
@@ -153,6 +155,12 @@ export default new Router({
       path: '/record',
       name: 'record',
       component: record
+    },
+    {
+      //changeInformation 修改信息
+      path: '/changeInformation',
+      name: 'changeInformation',
+      component: changeInformation
     }
   ]
 })

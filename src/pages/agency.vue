@@ -46,8 +46,12 @@
         </div>
       </div>
       <div v-if="changeModule === 2">
-        <shop v-if="step===1" @ee="cc" />
-        <StepTwo v-if="step===2" />
+        <shop ref="shop" v-if="step===1" @ee="cc" />
+        <StepTwo ref="stepTwo" v-if="step===2" />
+        <div style="text-align: center">
+          <mt-button v-if="step === 1" @click="nextpro(1)" type="primary" style="background: #1bbf8d;margin: 0 auto;width: 90%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
+          <mt-button v-if="step === 2" @click="nextpro(2)" type="primary" style="background: #1bbf8d;margin: 0 auto;width: 90%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
+        </div>
       </div>
     </div>
   </div>
@@ -75,9 +79,34 @@
         getNumMsg: '获取验证码',
         changeModule: 1, // 1 代理, 2 店家
         step: 1,
+        stepOneData: null
       }
     },
     methods: {
+
+      /**
+       * 店铺提交操作
+       * @param type  1:下一步  2: 提交
+       */
+      nextpro(type){
+        switch (type) {
+          case 1:
+            this.step = 2
+            let data = {
+              ag_name: this.$refs.shop.ag_name,
+              ag_mobile: this.$refs.shop.ag_mobile,
+              user_email: this.$refs.shop.user_email,
+              idcard_a: this.$refs.shop.idcard_a,
+              idcard_b: this.$refs.shop.idcard_b,
+            }
+            console.log(data)
+            this.stepOneData = data;
+            break;
+          case 2:
+
+            break;
+        }
+      },
 
       sub(){
         if (this.isnull(this.agentname)){

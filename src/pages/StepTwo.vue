@@ -232,25 +232,53 @@
       },
       //提交
       nextPro(){
-        // this.progressStatus = 2
-        // this.$emit('ee',0)
-        Toast({
-          message: '操作成功',
-          iconClass: 'mintui mintui-success'
+        let data = new FormData();
+        data.append('ag_mobile','13587011698') //手机号
+        data.append('ag_name','祝佳程') // 名称
+        data.append('user_email','710124011@qq.com') //邮箱
+        data.append('idcard_a','123132')  //身份证正面
+        data.append('idcard_b','123132') //身份证反面
+        data.append('shop_name','肯德基')  // 店铺名称
+        data.append('phone','4397675')  // 店铺电话
+        data.append('shop_type_name','美食') // 店铺主营业务
+
+        data.append('shop_addr','浙江衢州江山虎山城清河坊3幢8单元316室') // 店铺地址
+        data.append('license','123132') // 营业执照照片
+        data.append('cooperation_agreement','123132') // 合作协议
+        data.append('shop_scene_photo','123132')  //场内照片 用*号隔开
+        data.append('shop_photo','123132') // 店铺头像
+
+        let config = {
+          headers: {
+            'Authorization': this.$store.state.token
+          }
+        }
+        this.$axios.post('/api/agency/addAgencyShop.lxkj',
+          data,config
+        )
+          .then(res => {
+            console.log(res)
+          }).catch(res=>{
+          console.log(res)
         })
-        this.$router.push('./complete')
+
+        // Toast({
+        //   message: '操作成功',
+        //   iconClass: 'mintui mintui-success'
+        // })
+        // this.$router.push('./complete')
       },
       upload(e){
         let file = e.target.files[0];
         let data = new FormData();
-        data.append('base64Img',file)
+        data.append('file',file)
         data.append('fileName','png')
         let config = {
           headers: {
             'Authorization': this.$store.state.token
           }
         }
-        this.$axios.post('/api/index/uploadImage.lxkj',
+        this.$axios.post('/api/base/upload.lxkj',
           data,config
         )
           .then(res => {
