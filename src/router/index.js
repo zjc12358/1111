@@ -21,6 +21,7 @@ import peopleSet from "../pages/peopleSet";
 import complete from "../pages/complete";
 import record from "../pages/record";
 import changeInformation from "../pages/changeInformation";
+import contact from "../pages/contact";
 
 Vue.use(Router)
 
@@ -161,6 +162,13 @@ export default new Router({
       path: '/changeInformation',
       name: 'changeInformation',
       component: changeInformation
+    }
+    ,
+    {
+      //联系我们
+      path: '/contact',
+      name: 'contact',
+      component: contact
     }
   ]
 })
