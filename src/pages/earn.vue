@@ -19,10 +19,22 @@
       <div @click="changeModuleV(1)" :class="'switch-button-item ' + (changeModule == 1 ? 'selected' : '')">支付宝订单</div>
       <div @click="changeModuleV(2)" :class="'switch-button-item ' + (changeModule == 2 ? 'selected' : '')">微信订单</div>
 		</div>
-			<div class="leijiDiv" style="">
-				<div class="item">收单累计(元) <span>0.00</span></div>
-				<div class="line"></div>
-				<div class="item">激励金累计(元) <span>0.00</span></div>
+			<div class="leijiDiv">
+       <!-- <div class="item">
+          <div>收单累计(元) </div>
+        </div>-->
+        <div style="font-size: 0.24rem;margin-left: 0.3rem;margin-right: 0.3rem; display: flex;color: #999999;line-height: 0.8rem;border-bottom: 1px solid #d3d8d6">
+          <div>订单统计：</div>
+          <div style="margin-left: 0.1rem;">全部(100)</div>
+          <div style="margin-left: 0.65rem;">有效激励单(80)</div>
+          <div style="margin-left: 0.65rem;">激励单(20)</div>
+        </div>
+				<div class="item">
+          <div>收单累计(元) </div>
+          <div> <span >0.00</span></div>
+        </div>
+				<!--<div class="line"></div>
+				<div class="item"> <span>0.00</span></div>-->
 			</div>
 		<div class="plate-list">
 			<div class="device_photo">
