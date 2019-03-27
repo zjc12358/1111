@@ -38,7 +38,7 @@
       <label style="margin-left: 2vw">身份证号码</label>
     </div>
     <div>
-      <input v-model="user_email" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入身份证号码" type="text" />
+      <input v-model="idcartNum" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入身份证号码" type="text" />
     </div>
 
     <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
@@ -77,6 +77,9 @@
       name: "shop",
       data(){
         return {
+          id_card_date: '',
+          name: '',
+          idcartNum: '',
           idcard_a: null,
           idcard_b:null,
           user_email: '',
@@ -117,11 +120,14 @@
           this.$axios.post('/api/base/getIdCard.lxkj',
             data,config
           ).then(res =>{
-            // if(res.data.code==200){
-            //   if(type==1){
-            //
-            //   }
-            // }
+            if(res.data.code==200){
+              if(type==1){
+                this.name = res.data.data.name
+                this.idcartNum = res.data.data.idcartNum
+              }else{
+                this.id_card_date = res.data.data.id_card_date
+              }
+            }
             console.log(res)
           }).catch(err=>{
             console.log(err)
