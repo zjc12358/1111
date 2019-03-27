@@ -220,9 +220,7 @@
     margin-left: 2vw;
     font-size: 6vw;
   }
-  .order_title{
-    font-size: 2vw;
-  }
+
 
   .tixian{
     width: 21vw;
@@ -275,8 +273,8 @@
     top: 8vw;
   }
   .funBtn{
-    width: 13.8vw;
-    height: 14vw;
+  /*  width: 13.8vw;
+    height: 14vw;*/
   }
   .funBtn>p:nth-child(2){
     margin-top: 0.5vw;
@@ -374,12 +372,13 @@
   }
   .down_text{
     margin-top: 0.1rem;
+    font-size: 0.24rem;
   }
   .earn_title{
-    font-size: 2vw;
+    font-size: 0.24rem;
   }
   .order_title{
     color: #4f5965;
-    font-size: 0.16rem;
+    font-size: 0.24rem;
   }
 </style>

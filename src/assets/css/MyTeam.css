@@ -28,7 +28,7 @@
         position: absolute;
         right: 1.1rem;
         color: #666666;
-        font-size: 0.2rem;
+        font-size: 0.26rem;
         display: inline-block;
         letter-spacing: 0.05rem;
 			}
@@ -36,12 +36,12 @@
 			.update_shop {
         position: absolute;
         right: 0.6rem;
-        height: 0.32rem;
+       /* height: 0.32rem;*/
         text-align: center;
-        line-height: 0.32rem;
+       /* line-height: 0.32rem;*/
         color: #ffffff;
         margin-top: 0.02rem;
-        font-size: 0.2rem;
+        font-size: 0.26rem;
         background-color: #1bbf8e;
         border-radius: 0.05rem;
         letter-spacing: 0.05rem;
@@ -163,20 +163,21 @@ input.select-condition{
   font-size: 0.1rem;
 }
 .selectBtn{
+  width: 1.1rem;
   height: 0.45rem;
-  line-height: 0.18rem;
+  line-height: 0.2rem;
   background: #1bbf8e;
   color: #ffffff;
   border: 0;
-  font-size: 0.2rem;
+  font-size: 0.26rem;
   letter-spacing: 0.08rem;
 }
 .shop-dj {
-  font-size: 0.16rem;
+  font-size: 0.24rem;
   color: gray;
 }
 .shop_name {
-  font-size: 0.16rem;
+  font-size: 0.24rem;
   color: gray;
 }
 .shopUser,.contact-phone{
@@ -214,26 +215,18 @@ input.select-condition{
   height: 0.3rem;
   width: 5rem;
   border-radius: 0.1rem;
-  font-size: 0.1rem;
+  font-size: 0.24rem;
 }
-.selectBtn{
-  height: 0.45rem;
-  line-height: 0.18rem;
-  background: #1bbf8e;
-  color: #ffffff;
-  border: 0;
-  font-size: 0.2rem;
-  letter-spacing: 0.08rem;
-}
+
 .shop-dj {
-  font-size: 0.16rem;
+  font-size: 0.24rem;
   color: gray;
 }
 .shop_name {
-  font-size: 0.16rem;
+  font-size: 0.24rem;
   color: gray;
 }
 .shopUser,.contact-phone{
-  font-size: 0.2rem;
+  font-size: 0.24rem;
   color: #000;
 }
