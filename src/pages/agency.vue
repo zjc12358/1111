@@ -170,8 +170,9 @@
 
                   dataAll.append('shop_name',this.$refs.stepTwo.shop_name)  // 店铺名称
                   dataAll.append('phone',this.$refs.stepTwo.phone)  // 店铺电话
-                  dataAll.append('shop_type_name',this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected]) // 店铺主营业务
-                  dataAll.append('shop_addr',this.$refs.stepTwo.provinces + this.$refs.stepTwo.addDetail) // 店铺地址
+                  dataAll.append('shop_type_name',this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected].code + '##' +this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected].name) // 店铺主营业务
+                  dataAll.append('shop_addr',this.$refs.stepTwo.provinces + '##' + this.$refs.stepTwo.addDetail) // 店铺地址
+                  dataAll.append('store_address_code',this.$refs.stepTwo.addCode) // 盛世编码
                   dataAll.append('license',licenseFile.data.data) // 营业执照照片
                   dataAll.append('cooperation_agreement',agreementFile.data.data) // 合作协议
                   dataAll.append('shop_scene_photo',basedOnFile.data.data + '##' + basedOn2File.data.data)  //场内照片 用#号隔开
@@ -183,12 +184,13 @@
                     }
                   }
                   this.$axios.post('/api/agency/addAgencyShop.lxkj',
-                    data,config
+                    dataAll,config
                   )
                     .then(res => {
                       console.log(res)
                     }).catch(res=>{
                     console.log(res)
+                    Toast('提交失败请检查网络设置!')
                   })
                 }else{
                   Indicator.close();

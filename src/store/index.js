@@ -8,7 +8,7 @@ const store = new Vuex.Store({
     testMsg: '原始文本',
     isLogin: false,
     selectedTab: '',
-    token: null,
+    token: '',
     tabs:[
       {
         id:'MainPage',

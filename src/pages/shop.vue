@@ -6,10 +6,10 @@
     </div>
     <div style="font-size: 0.3rem;display: flex;align-items: center">
       <img class="shop_img" src="../assets/img/name.png" style="width: 0.3rem;height: 0.3rem;">
-      <label style="margin-left: 2vw">姓名</label>
+      <label style="margin-left: 2vw">店铺主姓名</label>
     </div>
     <div>
-      <input v-model="ag_name" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
+      <input v-model="ag_name" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入店铺主姓名" type="text" />
     </div>
     <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
       <img class="shop_img" src="../assets/img/moblie.png" style="width: 0.3rem;height: 0.3rem;">
@@ -28,22 +28,38 @@
     </div>
     <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
       <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
-      <label style="margin-left: 2vw">邮箱号</label>
+      <label style="margin-left: 2vw">电子邮箱</label>
     </div>
     <div>
-      <input v-model="user_email" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入邮箱号" type="text" />
+      <input v-model="user_email" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入电子邮箱" type="text" />
     </div>
+    <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
+      <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
+      <label style="margin-left: 2vw">身份证号码</label>
+    </div>
+    <div>
+      <input v-model="user_email" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入身份证号码" type="text" />
+    </div>
+
+    <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
+      <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
+      <label style="margin-left: 2vw">身份证有效期</label>
+    </div>
+    <div>
+      <input v-model="user_email" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入身份证有效期" type="text" />
+    </div>
+
     <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
       <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
       <label style="margin-left: 2vw">上传身份证正反面</label>
       <div style="flex: 1"></div>
       <div class="fileUploadBox">
         <div>
-          <input @change="imgUpload($event,1)" class="fileUpload" type="file">
+          <input @change="sfzUpload($event,1)" class="fileUpload" type="file">
           <img class="readImages" :src="front" alt="">
         </div>
         <div>
-          <input @change="imgUpload($event,2)" class="fileUpload" type="file">
+          <input @change="sfzUpload($event,2)" class="fileUpload" type="file">
           <img class="readImages" :src="reverse" alt="">
         </div>
       </div>
@@ -87,6 +103,59 @@
 
           this.progressStatus = 2
           this.$emit('ee',0)
+        },
+        fileReq(file,type){
+          console.log(file)
+          let data = new FormData()
+          data.append('file',file)
+          data.append('idCardSide',type==1?'front':'back')
+          let config = {
+            headers: {
+              'Authorization': this.$store.state.token
+            }
+          }
+          this.$axios.post('/api/base/getIdCard.lxkj',
+            data,config
+          ).then(res =>{
+            // if(res.data.code==200){
+            //   if(type==1){
+            //
+            //   }
+            // }
+            console.log(res)
+          }).catch(err=>{
+            console.log(err)
+            Toast('上传失败,请检查网络设置!')
+          })
+        },
+        sfzUpload(e,type){
+          let file = e.target.files[0]
+          console.log(file.size)
+          if(file.size>10485760){
+            Toast('图片过大！')
+            return
+          }
+          if(file.type.indexOf("image") == 0) {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (e) => {
+              // 图片base64化
+              let newUrl = e.target.result;
+              console.log(newUrl)
+              switch (type) {
+                case 1:
+                  this.front = newUrl;
+                  this.idcard_a = file
+                  this.fileReq(file,1)
+                  break;
+                case 2:
+                  this.reverse = newUrl;
+                  this.idcard_b = file
+                  this.fileReq(file,2)
+                  break;
+              }
+            }
+          }
         },
         imgUpload(e,type){
           let file = e.target.files[0]

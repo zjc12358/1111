@@ -1,20 +1,29 @@
 <template>
-  <div>
-    <!--Advertising-->
-    <el-tree
-      accordion
-      :props="props1"
-      :load="loadNode1"
-      lazy
-      show-checkbox>
-    </el-tree>
+  <div style="font-size: 3.7vw">
+    <!--Advertis写ing-->
+    <mt-datetime-picker
+      ref="picker"
+      type="time"
+      v-model="pickerValue">
+    </mt-datetime-picker>
+
+    <mt-datetime-picker
+      ref="picker2"
+      type="time"
+      v-model="pickerValue2">
+    </mt-datetime-picker>
+    <div @click="openPicker">点我</div>
+    <div @click="openPicker2">点我</div>
+    <div>{{ pickerValue }}</div>
+    <div>{{ pickerValue2 }}</div>
+    <div></div>
+
     <tabbar :selected="selected" :tabs='tabs'></tabbar>
   </div>
 </template>
 
 <script>
     import tabbar from "../components/tabbar";
-    import userRegistrationAgreement from "./userRegistrationAgreement";
 
     export default {
       name: "Advertising",
@@ -27,18 +36,8 @@
         return {
           selected: "GroupList",
           tabs: this.$store.state.tabs,
-          props1: [
-            {
-              label: 'name',
-              children: 'zones',
-              isLeaf: 'leaf'
-            },
-            {
-              label: 'name2',
-              children: 'zones2',
-              isLeaf: 'leaf2'
-            },
-          ],
+          pickerValue: '',
+          pickerValue2: ''
         }
       },
 
@@ -51,24 +50,11 @@
       },
 
       methods: {
-        loadNode1(node, resolve) {
-          console.log(node)
-          console.log(resolve)
-          if (node.level === 0) {
-            return resolve([{ name: 'region' }]);
-          }
-          if (node.level > 1) return resolve([]);
-
-          setTimeout(() => {
-            const data = [{
-              name: 'leaf',
-              leaf: true
-            }, {
-              name: 'zone'
-            }];
-
-            resolve(data);
-          }, 500);
+        openPicker() {
+          this.$refs.picker.open();
+        },
+        openPicker2() {
+          this.$refs.picker2.open();
         }
 
       }

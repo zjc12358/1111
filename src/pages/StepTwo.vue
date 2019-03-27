@@ -46,7 +46,7 @@
       <div style="flex: 1"></div>
       <div style="position: relative;">
         <span @click="modalOpen">
-          {{ typeSelected === null ? '请选择您的主营业务' : mainBusiness[typeSelected] }}
+          {{ typeSelected === null ? '请选择您的主营业务' : mainBusiness[typeSelected].name }}
         </span>
         <div style="flex: 1"></div>
         <i class="mint-cell-allow-right"></i>
@@ -134,7 +134,7 @@
     <modal ref="modal">
       <div class="mainBusiness">
         <div v-for="(item,key) in mainBusiness">
-          <div @click="changeTypeSelected(key)" :class=" typeSelected === key ? 'typeSelected' : null">{{ item }}</div>
+          <div @click="changeTypeSelected(key)" :class=" typeSelected === key ? 'typeSelected' : null">{{ item.name }}</div>
         </div>
       </div>
       <div style="display: flex;justify-content: center">
@@ -184,16 +184,26 @@
         sendTime: 60,
         getNumMsg: '获取验证码',
         mainBusiness: [
-          '餐饮',
-          '零售',
-          '水果',
-          '超市',
-          '美发',
-          '美容',
-          '箱包',
-          '鞋',
-          '饰品',
-          '蔬菜'
+          {
+            name: '餐饮',
+            code: 'C_C05_5814'
+          },
+          {
+            name: '线下零售',
+            code: 'C_C04_5411'
+          },
+          {
+            name: '居民生活服务',
+            code: 'S_S08_7299'
+          },
+          {
+            name: '休闲娱乐',
+            code: 'D_D01_7999'
+          },
+          {
+            name: '交通出行',
+            code: 'A_A01_4111'
+          },
         ],
         stepTwoInputList: [
           {img: require('../assets/call.png'), name: '店铺名称',placeholder: '请输入您的店铺名称'},
