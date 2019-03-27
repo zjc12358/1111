@@ -34,4 +34,7 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
   }
+  .mint-indicator-mask,.mint-indicator-wrapper{
+    z-index: 999;
+  }
 </style>

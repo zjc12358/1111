@@ -36,6 +36,10 @@ export default {
     methods:{
       uploadFile(e){
         let file = e.target.files[0]
+        if(file.size>10485760){
+          Toast('图片过大！')
+          return
+        }
         if(file.type.indexOf("image") == 0) {
           let reader = new FileReader();
           reader.readAsDataURL(file);

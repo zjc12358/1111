@@ -164,6 +164,7 @@
     },
     data(){
       return {
+        addCode: '',
         addDetail: '', //详细地址
         shop_name: '', //名称
         phone: '', //手机
@@ -204,7 +205,7 @@
           {
             flex: 1,
             values: address,
-            defaultIndex:10,
+            defaultIndex:0,
             className: 'slot1',
             textAlign: 'center'
           }, {
@@ -308,14 +309,16 @@
 
       imgUpload(e,type){
         let file = e.target.files[0];
+        if(file.size>10485760){
+          Toast('图片过大！')
+          return
+        }
         if(file.type.indexOf("image") == 0) {
           let reader = new FileReader();
           reader.readAsDataURL(file);
           reader.onload = (e) => {
             // 图片base64化
             let newUrl = e.target.result;
-
-            console.log(file.name)
             switch (type) {
               case 1:
                 this.shopHead = newUrl;
@@ -327,7 +330,7 @@
                 break;
               case 3:
                 this.agreement = newUrl;
-                this.agreementFile = newUrl;
+                this.agreementFile = file;
                 break;
               case 4:
                 this.basedOn = newUrl;
@@ -376,8 +379,17 @@
             let str = ''
             selectAdress.map(item => {
               // console.log(item.name)
+              // if (key > 1) {
+              //   // 省市区用 ’##‘ 隔开.
+              //   str = str + '##' + item.name
+              // }else{
+              //   // 省市区只有一级数据时.
+              //   str += item.name
+              // }
               str += item.name
+              this.addCode = item.code
             });
+            console.log(this.addCode)
             this.provinces = str
             console.log(str)
             this.$refs.modal2.$emit('modalClose')

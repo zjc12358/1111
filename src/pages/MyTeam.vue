@@ -83,7 +83,7 @@
 
 <script>
     export default {
-        name: "MyTeam",
+      name: "MyTeam",
       data () {
         return {
           selected: "MainPage",
@@ -96,6 +96,23 @@
           ]
         }
       },
+      created() {
+        this.$axios.get('/api/agency/getAgencyTeam.lxkj',
+          {
+            headers: {
+              'Authorization': this.$store.state.token
+            }
+          }
+        )
+          .then(res => {
+            if ( res.data.code === '200' ){
+
+              console.log(res)
+            }
+          }).catch(res=>{
+          console.log(res)
+        })
+      }
     }
 </script>
 

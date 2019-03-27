@@ -13,21 +13,21 @@
       </div>
       <div v-if="changeModule == 1" class="centerDiv">
         <div style="font-size: 0.3rem;display: flex;align-items: center">
-          <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
+          <img class="shop_img" src="../assets/img/name.png" style="width: 0.3rem;height: 0.3rem;">
           <label style="margin-left: 2vw">代理商名称</label>
         </div>
         <div>
           <input v-model="agentname" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入代理商名称" type="text" />
         </div>
         <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 0.5rem">
-          <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
+          <img class="shop_img" src="../assets/img/moblie.png" style="width: 0.3rem;height: 0.3rem;">
           <label style="margin-left: 2vw">手机号码</label>
         </div>
         <div>
           <input v-model="agentMoblie" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
         </div>
         <div>
-          <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
+          <img class="shop_img" src="../assets/img/code.png" style="width: 0.3rem;height: 0.3rem;">
           <label>验证码</label>
         </div>
         <div style="position: relative;">
@@ -35,22 +35,22 @@
           <mt-button @click="getNum(sendTime)" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
         </div>
         <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 0.5rem">
-          <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
+          <img class="shop_img" src="../assets/img/email.png" style="width: 0.3rem;height: 0.3rem;">
           <label style="margin-left: 2vw">邮箱</label>
         </div>
         <div>
           <input v-model="agentEmail" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入邮箱" type="text" />
         </div>
-        <div style="text-align: center;margin-top: 0.4rem;">
-          <mt-button @click="sub" type="primary" style="background: #1bbf8d;width: 90%;font-size: 4.2vw;height: 10vw;">提交</mt-button>
-        </div>
+      </div>
+      <div v-if="changeModule === 1" style="text-align: center;margin-top: 0.4rem;">
+        <mt-button @click="sub" type="primary" style="background: #1bbf8d;width: 80%;font-size: 4.2vw;height: 10vw;">提交</mt-button>
       </div>
       <div v-if="changeModule === 2">
         <shop ref="shop" v-if="step===1" @ee="cc" />
         <StepTwo ref="stepTwo" v-if="step===2" />
         <div style="text-align: center">
           <mt-button v-if="step === 1" @click="nextpro(1)" type="primary" style="background: #1bbf8d;margin: 0 auto;width: 80%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
-          <mt-button v-if="step === 2" @click="nextpro(2)" type="primary" style="background: #1bbf8d;margin: 0 auto;width: 80%;font-size: 4.2vw;height: 10vw;">下一步</mt-button>
+          <mt-button v-if="step === 2" @click="nextpro(2)" type="primary" style="background: #1bbf8d;margin: 0 auto;width: 80%;font-size: 4.2vw;height: 10vw;">提交</mt-button>
         </div>
         <div v-if="step === 2" class="agreeGroup">
           <input checked="checked" type="checkbox" id="agree">
@@ -66,7 +66,7 @@
   import '../untils/rem.js'
   import shop from "./shop";
   import StepTwo from "./StepTwo";
-  import {Toast} from "mint-ui";
+  import {Toast,Indicator} from "mint-ui";
   export default {
     name: "agency",
     components: {
@@ -91,6 +91,7 @@
     methods: {
 
       imgUpload(file){
+        console.log(file)
         let data = new FormData()
         data.append('file',file)
         data.append('fileName',file.name.replace(/^.+\./,''))
@@ -111,6 +112,21 @@
       nextpro(type){
         switch (type) {
           case 1:
+            if (!this.isnull(this.$refs.shop.ag_name)&&!this.isnull(this.$refs.shop.ag_mobile)&&!this.isnull(this.$refs.shop.user_email)&&this.$refs.shop.idcard_a&&this.$refs.shop.idcard_b){
+
+            }else{
+              Toast('必填项不得为空！')
+              return
+            }
+            if(this.isMoblie(this.$refs.shop.ag_mobile)==false){
+              Toast('请输入正确的手机号！')
+              return
+            }
+            if(this.isEmail(this.$refs.shop.user_email)==false){
+              Toast('邮箱格式错误！')
+              return
+            }
+
             this.step = 2
             let data = {
               ag_name: this.$refs.shop.ag_name,
@@ -123,30 +139,79 @@
             this.stepOneData = data;
             break;
           case 2:
+            if(!this.isnull(this.$refs.stepTwo.shop_name)&&this.$refs.stepTwo.shopHeadFile&&this.$refs.stepTwo.licenseFile&&this.$refs.stepTwo.agreementFile&&this.$refs.stepTwo.basedOnFile&&this.$refs.stepTwo.basedOn2File&&!this.isnull(this.$refs.stepTwo.phone)&&this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected]&&!this.isnull(this.$refs.stepTwo.provinces)&&!this.isnull(this.$refs.stepTwo.addDetail)){
+
+            }else{
+              Toast('必填项不得为空！')
+              return
+            }
             // 将俩个步骤的图片上传.
             console.log(this.stepOneData)
-            this.$axios.all([this.imgUpload(this.stepOneData.idcard_a),this.imgUpload(this.stepOneData.idcard_b)])
-              .then(this.$axios.spread((acct,perms)=>{
-                console.log(acct)
-                console.log(perms)
+            Indicator.open('加载中...');
+            this.$axios.all([
+              this.imgUpload(this.stepOneData.idcard_a),
+              this.imgUpload(this.stepOneData.idcard_b),
+              this.imgUpload(this.$refs.stepTwo.shopHeadFile),
+              this.imgUpload(this.$refs.stepTwo.licenseFile),
+              this.imgUpload(this.$refs.stepTwo.agreementFile),
+              this.imgUpload(this.$refs.stepTwo.basedOnFile),
+              this.imgUpload(this.$refs.stepTwo.basedOn2File),
+            ])
+              .then(this.$axios.spread((idcard_a,idcard_b,shopHeadFile,licenseFile,agreementFile,basedOnFile,basedOn2File)=>{
+                if(idcard_a.data.code == '200'&&idcard_b.data.code == '200'&&shopHeadFile.data.code=='200'&&licenseFile.data.code=='200'&&agreementFile.data.code=='200'&&basedOnFile.data.code=='200'&&basedOn2File.data.code=='200'){
+                  console.log('成功')
+                  //图片上传成功,将返回的图片链接写入
+                  let dataAll = new FormData();
+                  dataAll.append('ag_mobile',this.stepOneData.ag_mobile) //手机号
+                  dataAll.append('ag_name',this.stepOneData.ag_name) // 名称
+                  dataAll.append('user_email',this.stepOneData.user_email) //邮箱
+                  dataAll.append('idcard_a',idcard_a.data.data)  //身份证正面
+                  dataAll.append('idcard_b',idcard_b.data.data) //身份证反面
+
+                  dataAll.append('shop_name',this.$refs.stepTwo.shop_name)  // 店铺名称
+                  dataAll.append('phone',this.$refs.stepTwo.phone)  // 店铺电话
+                  dataAll.append('shop_type_name',this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected]) // 店铺主营业务
+                  dataAll.append('shop_addr',this.$refs.stepTwo.provinces + this.$refs.stepTwo.addDetail) // 店铺地址
+                  dataAll.append('license',licenseFile.data.data) // 营业执照照片
+                  dataAll.append('cooperation_agreement',agreementFile.data.data) // 合作协议
+                  dataAll.append('shop_scene_photo',basedOnFile.data.data + '##' + basedOn2File.data.data)  //场内照片 用#号隔开
+                  dataAll.append('shop_photo',shopHeadFile.data.data) // 店铺头像
+
+                  let config = {
+                    headers: {
+                      'Authorization': this.$store.state.token
+                    }
+                  }
+                  this.$axios.post('/api/agency/addAgencyShop.lxkj',
+                    data,config
+                  )
+                    .then(res => {
+                      console.log(res)
+                    }).catch(res=>{
+                    console.log(res)
+                  })
+                }else{
+                  Indicator.close();
+                  Toast('提交失败！请重新上传图片！')
+                }
               }))
               .catch(err=>{
-                Toast({
+                  Toast({
                   message: '网络错误!'
                 });
               })
-            let data2 = {
-              shop_photo: this.$refs.stepTwo.shopHeadFile,
-              shop_name: this.$refs.stepTwo.shop_name,
-              phone: this.$refs.stepTwo.phone,
-              shop_type_name: this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected],
-              shop_addr: this.$refs.stepTwo.provinces + this.$refs.stepTwo.addDetail,
-              license: this.$refs.stepTwo.licenseFile,
-              cooperation_agreement: this.$refs.stepTwo.agreementFile,
-              shop_scene_photo: this.$refs.stepTwo.basedOnFile,
-            }
-            console.log(data2)
-            this.stepTwoData = data2
+            // let data2 = {
+            //   shop_photo: this.$refs.stepTwo.shopHeadFile,
+            //   shop_name: this.$refs.stepTwo.shop_name,
+            //   phone: this.$refs.stepTwo.phone,
+            //   shop_type_name: this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected],
+            //   shop_addr: this.$refs.stepTwo.provinces + this.$refs.stepTwo.addDetail,
+            //   license: this.$refs.stepTwo.licenseFile,
+            //   cooperation_agreement: this.$refs.stepTwo.agreementFile,
+            //   shop_scene_photo: this.$refs.stepTwo.basedOnFile,
+            // }
+            // console.log(data2)
+            // this.stepTwoData = data2
             break;
         }
       },

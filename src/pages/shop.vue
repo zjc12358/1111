@@ -5,21 +5,21 @@
       <img v-if="progressStatus == 2" class="progress1" src="../assets/progress2.png" alt="">
     </div>
     <div style="font-size: 0.3rem;display: flex;align-items: center">
-      <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
+      <img class="shop_img" src="../assets/img/name.png" style="width: 0.3rem;height: 0.3rem;">
       <label style="margin-left: 2vw">姓名</label>
     </div>
     <div>
       <input v-model="ag_name" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
     </div>
     <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
-      <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
+      <img class="shop_img" src="../assets/img/moblie.png" style="width: 0.3rem;height: 0.3rem;">
       <label style="margin-left: 2vw">手机号码</label>
     </div>
     <div>
       <input v-model="ag_mobile" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入手机号" type="text" />
     </div>
     <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
-      <img class="shop_img" src="../assets/call.png" style="width: 3.7vw;height: 3.7vw;">
+      <img class="shop_img" src="../assets/img/code.png" style="width: 3.7vw;height: 3.7vw;">
       <label style="font-size: 0.3rem;margin-left: 2vw">验证码</label>
     </div>
     <div style="position: relative;">
@@ -55,6 +55,8 @@
 </template>
 
 <script>
+    import {Toast} from "mint-ui";
+
     export default {
       name: "shop",
       data(){
@@ -88,6 +90,11 @@
         },
         imgUpload(e,type){
           let file = e.target.files[0]
+          console.log(file.size)
+          if(file.size>10485760){
+            Toast('图片过大！')
+            return
+          }
           if(file.type.indexOf("image") == 0) {
             let reader = new FileReader();
             reader.readAsDataURL(file);
