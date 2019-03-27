@@ -35,7 +35,7 @@ const store = new Vuex.Store({
         id: 'UserCenter',
         src: [
           require("../assets/icon/people.png"),
-          require("../assets/icon/people_fill.png")
+          require("../assets/icon/people-fill.png")
         ]
       },
     ]

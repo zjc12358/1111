@@ -169,10 +169,6 @@
 
 <style scoped>
   @import '../assets/css/mui.min.css';
- /deep/ .mint-tabbar > .mint-tab-item.is-selected {
-    background-color: #eaeaea;
-    color: #171819;
-  }
   .my-container{
     background: #efeff4;
     height: 100vh;

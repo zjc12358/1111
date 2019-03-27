@@ -3,7 +3,7 @@
       <div style="height: 3vw;"></div>
       <div class="tissue-all" style="height: 45vw;color: #fff;">
         <div style="display: flex">
-          <div style="margin-left: 6vw;margin-top: 5vw">
+          <div style="margin-left: 8vw;margin-top: 5vw">
             <div style="font-size: 3.7vw">可提现收益</div>
             <div style="font-size: 6.6vw;margin-top: 2vw">{{ takeMoney }}</div>
           </div>
@@ -215,7 +215,6 @@
   }
   /deep/ .mint-tabbar > .mint-tab-item.is-selected {
     background-color: #eaeaea;
-    color: #171819;
   }
 
 </style>

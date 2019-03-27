@@ -37,4 +37,7 @@ export default {
   .mint-indicator-mask,.mint-indicator-wrapper{
     z-index: 999;
   }
+  .mint-tabbar > .mint-tab-item.is-selected{
+    color: #3fcf9c;
+  }
 </style>
