@@ -22,6 +22,7 @@ import complete from "../pages/complete";
 import record from "../pages/record";
 import changeInformation from "../pages/changeInformation";
 import contact from "../pages/contact";
+import breakDevice from "../pages/breakDevice";
 
 Vue.use(Router)
 
@@ -169,6 +170,13 @@ export default new Router({
       path: '/contact',
       name: 'contact',
       component: contact
+    }
+    ,
+    {
+      //故障设备
+      path: '/breakDevice',
+      name: 'breakDevice',
+      component: breakDevice
     }
   ]
 })
