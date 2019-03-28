@@ -55,6 +55,7 @@
 
 <script>
   import tabbar from '../components/tabbar'
+  import {Toast} from "mint-ui";
   export default {
     name: "Home",
     components: {
@@ -103,6 +104,7 @@
           console.log(res)
         }).catch(res=>{
         console.log(res)
+        Toast('请检查网络设置!')
       })
     },
     mounted() {
