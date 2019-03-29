@@ -2,7 +2,7 @@
   <div class="myDevice-container">
     <div class="equipmentList">
       <div class="equipmentItem" v-for="(item,key) in equipmentList" >
-        <label type="primary" class="lay" @click="getDevnum($event,key)" >补货</label>
+        <label type="primary" class="fillBtn" @click="getDevnum($event,key)" >补货</label>
         <div>
           <div>
             <img :src="item.point_img" alt="">
@@ -96,6 +96,7 @@
 </script>
 
 <style scoped>
+
   .myDevice-container{
     height: 100vh;
     background: #efeff4;
@@ -156,12 +157,12 @@
   .cargoQuantity>div{
     color: #1e9fff;
   }
-  .lay{
+  .fillBtn{
     width: 21.8vw;
     height: 7.2vw;
     font-size: 3.7vw;
     position: absolute;
-    top: 5vw;
+    top: 5.8vw;
     right: 2vw;
     border-radius: 2vw;
     color: #cc4f4f;
