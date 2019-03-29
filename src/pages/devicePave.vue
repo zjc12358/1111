@@ -10,10 +10,10 @@
 
 
       <div class="inputMg">
-         <input type="text" class="inputlxr" placeholder="联系人"  ref="inputlxr"   @click="changeModuleV(1)" :class="'inputlxr ' + (changeModule == 1 ? 'selected' : '')"/>
-         <input type="text" class="inputPhone" placeholder="联系电话" ref="moblieNumber" @click="changeModuleV(2)" :class="'inputPhone ' + (changeModule == 2 ? 'selected' : '')"/>
-         <input type="text" class="inputShopname" placeholder="店铺名称" disabled="disabled" />
-         <textarea type="text" class="inputAdress"  placeholder="铺设地址" disabled="disabled" ></textarea>
+         <input type="text" class="inputlxr"  placeholder="联系人"  ref="inputlxr"  v-model="inputlxr"  @click="changeModuleV(1)" :class="'inputlxr ' + (changeModule == 1 ? 'selected' : '')"/>
+         <input type="text" class="inputPhone" placeholder="联系电话" ref="moblieNumber" v-model="inputPhone" @click="changeModuleV(2)" :class="'inputPhone ' + (changeModule == 2 ? 'selected' : '')"/>
+         <input type="text" class="inputShopname" placeholder="店铺名称" disabled="disabled"  v-model="inputShopname"/>
+         <textarea type="text" class="inputAdress"  placeholder="铺设地址" disabled="disabled"  v-model="inputAdress"></textarea>
 
       </div>
 
@@ -31,6 +31,8 @@
     name: "devicePave",
     data() {
       return {
+        inputAdress: '',
+        inputShopname:'',
         moblieNumber: '',
         devicenum: "", // 设备编号
         type_name:"",
@@ -74,12 +76,6 @@
             this.shop_name = res.data.data.data.shop_name
             this.dev_addr = res.data.data.data.dev_addr
            // this.inputShopname=this.$refs.inputShopname.value;
-            $(".inputlxr").val(this.inputlxr)
-            $(".inputPhone").val(this.inputPhone)
-            $(".inputShopname").val(this.shop_name)
-            $(".inputAdress").val(this.dev_addr)
-
-
 
           }
         }).catch(res => {

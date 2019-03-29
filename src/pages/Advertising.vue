@@ -18,7 +18,7 @@
     <div>{{ pickerValue2 }}</div>
     <div></div>
 
-    <tabbar :selected="selected" :tabs='tabs'></tabbar>
+    <!--<tabbar :selected="selected" :tabs='tabs'></tabbar>-->
   </div>
 </template>
 

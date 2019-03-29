@@ -130,7 +130,10 @@
     color: #e41b3e;
   }
   .equipmentItem>div>div:nth-child(1)>img{
-    width: 26.6vw;
+    width: 22vw;
+    height: 22vw;
+    border-radius: 22vw;
+    margin-left: 0.2rem;
   }
   .address{
     width: 100%;
