@@ -42,8 +42,13 @@
         margin-top: 0.4rem;
 			}
       .pavetext2 {
+        font-size: 0.2rem;
         color: #999999;
-        font-size: 0.24rem;
+        text-overflow: ellipsis;
+        width: 4.8rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
 			.rightDiv {
 				position: absolute;

@@ -8,77 +8,28 @@
             <img src="../assets/img/paveImg.png" style="width: 1.6rem;" />
           </div>
           <div class="device_unbind">
-            <div class="pavetext">纽约客</div>
-            <div class="pavetext1">已绑定：3台</div>
-            <div class="pavetext2">江苏省南京市武义区东鹏北路226号</div>
+            <div class="pavetext" v-model="shop_name1">{{shop_name}}</div>
+            <div class="pavetext1">已绑定：{{count}}台</div>
+            <div class="pavetext2">{{dev_addr}}</div>
           </div>
         </div>
       </div>
 
 
-      <div id="goodsList" class="mui-tab-icon">
+      <div id="goodsList" class="mui-tab-icon" v-for="(item,key) in unbindList">
         <div class="tab_list">
-          <img src="../assets/img/33.png" class="checkImg" />
+          <img :src="item.point_img" class="checkImg" />
           <div style="text-align: center;">
             <img src="login/zjj.png" class="deviceImg" />
           </div>
           <div class="device_detail">
-            <label class="listgn_title">挂式纸巾机</label>
-            <label class="listgn_num">No.A021533659874216</label>
+            <label class="listgn_title">{{item.type_name}}</label>
+            <label class="listgn_num">{{item.dev_num}}</label>
           </div>
         </div>
 
-        <div class="tab_list">
-          <img src="../assets/img/33.png" class="checkImg" />
-          <div style="text-align: center;">
-            <img src="login/zjj.png" class="deviceImg" id="deviceImg" />
-
-          </div>
-          <div class="device_detail">
-            <label class="listgn_title">挂式纸巾机</label>
-            <label class="listgn_num">No.A021533659874216</label>
-          </div>
-        </div>
-
-        <div class="tab_list">
-          <img src="../assets/img/33.png" class="checkImg" />
-          <div style="text-align: center;">
-            <img src="login/zjj.png" class="deviceImg" id="deviceImg" />
-
-          </div>
-          <div class="device_detail">
-            <label class="listgn_title">挂式纸巾机</label>
-            <label class="listgn_num">No.A021533659874216</label>
-          </div>
-        </div>
-
-        <div class="tab_list">
-          <img src="../assets/img/33.png" class="checkImg" />
-          <div style="text-align: center;">
-            <img src="login/zjj.png" class="deviceImg" id="deviceImg" />
-
-          </div>
-          <div class="device_detail">
-            <label class="listgn_title">挂式纸巾机</label>
-            <label class="listgn_num">No.A021533659874216</label>
-          </div>
-        </div>
-
-        <div class="tab_list">
-          <img src="../assets/img/33.png" class="checkImg" />
-          <div style="text-align: center;">
-            <img src="login/zjj.png" class="deviceImg" id="deviceImg" />
-
-          </div>
-          <div class="device_detail">
-            <label class="listgn_title">挂式纸巾机</label>
-            <label class="listgn_num">No.A021533659874216</label>
-          </div>
-        </div>
 
       </div>
-
-
 
 
 
@@ -122,9 +73,50 @@
       return {
         selected: "MainPage",
         show: false,   // 是否显示模态框require('../assets/myteamImg.png')
+        unbindList: [],
+       shop_name:"",
+        dev_addr:"",
+        count:""
+
 
       }
     },
+    created() {
+      //  网络请求.
+      let config = {
+        headers: {
+          'Authorization': this.$store.state.token
+        }
+      }
+      this.shop_name=this.$route.query.shop_name;
+      this.dev_addr=this.$route.query.dev_addr;
+      this.count=this.$route.query.count;
+      /*  this.agency_id=this.$route.query.agency_id;*/
+
+
+      this.shop_name1= this.shop_name
+      // this.dev_addr=this.dev_addr;
+      // this.count=this.count;
+
+      let data = new FormData();
+      data.append("shop_name",this.shop_name1);
+      this.$axios.post('/api/device/getShopBindByAgentId.do', data, config)
+      /* this.$axios.post('/api/device/getNumberbyshopid.do ', data, config)*/
+        .then(res => {
+          console.log(res)
+          if (res.data.code === '200') {
+            this.unbindList = res.data.data
+          }
+        }).catch(res => {
+        console.log(res)
+      })
+
+
+    },
+    mounted() {
+
+    },
+
     methods: {
       closeModel: function () {
         $(".allModal").hide();

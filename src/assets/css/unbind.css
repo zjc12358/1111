@@ -3,7 +3,7 @@
   color: #cccccc;
   position: relative;
   top: -1.7rem;
-  left: 4.8rem;
+  left: 5.1rem;
 }
 .app-container{
   height: 100vh;
@@ -60,10 +60,10 @@
 
 .content_list {
   position: relative;
-  top: -2.7rem;
-  width: 6.6rem;
+  top: -2.9rem;
+  width: 92%;
   height: 2rem;
-  left: 0.42rem;
+  left: 4%;
   margin-bottom: 0.2rem;
   border-radius: 0.15rem;
   box-shadow: -0.02rem 0 0.15rem 0 rgba(0, 0, 0, 0.1);
@@ -79,5 +79,12 @@
   font-size: 0.32rem;color: #010101;
 }
 .deviceDiv,.deviceAdress{
-  font-size: 0.24rem;color: #999999;
+  font-size: 0.2rem;
+  color: #999999;
+  text-overflow: ellipsis;
+  width: 4.8rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
 }

@@ -1,27 +1,27 @@
 <template>
     <div>
       <div class="mui-tab-icon">
-        <div class="tab_list"  @click="claimDevice">
+        <div class="tab_list" >
           <img src="../assets/img/claimImg.png" class="tabImg" />
           <p class="listgn_title">设备认领</p>
         </div>
-        <div class="tab_list" @click="devicePave">
+        <div class="tab_list" @click="goToPage('/MyDevice')">
           <img src="../assets/img/paveImg.png" class="tabImg" />
           <p class="listgn_title">设备铺设</p>
         </div>
-        <div class="tab_list" @click="bindDevice">
+        <div class="tab_list" @click="goToPage('/bind')">
           <img src="../assets/img/bindImg.png" class="tabImg" />
           <p class="listgn_title">设备绑定</p>
         </div>
-        <div class="tab_list">
+        <div class="tab_list" @click="goToPage('/unbind')">
           <img src="../assets/img/unbindImg.png" class="tabImg" />
           <p class="listgn_title">设备解绑</p>
         </div>
-        <div class="tab_list">
+        <div class="tab_list" @click="goToPage('/fillGoods')">
           <img src="../assets/img/replenishment.png" class="tabImg" />
           <p class="listgn_title">设备补货</p>
         </div>
-        <div class="tab_list">
+        <div class="tab_list" @click="goToPage('/breakDevice')">
           <img src="../assets/img/breakdown.png" class="tabImg" />
           <span class="breakdown_num">199</span>
           <p class="listgn_title">设备故障</p>
@@ -40,27 +40,6 @@
 </template>
 
 <script>
-/*
-  import '../assets/js/jquery-3.3.1.min'
-    export default {
-        name: "deviceManager",
-
-      methods:{
-        claimDevice:function(){
-          this.$router.push('/claimDevice')
-        },
-        devicePave:function(){
-          this.$router.push('/devicePave')
-        },
-        bindDevice:function(){
-          this.$router.push('/bindDevice')
-        },
-
-      }
-    }
-*/
-
-
 
   import tabbar from "../components/tabbar";
 
@@ -95,6 +74,9 @@
       openPicker2() {
         this.$refs.picker2.open();
       }*/
+      goToPage (path) {
+        this.$router.push(path)
+      }
 
     }
 

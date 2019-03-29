@@ -93,7 +93,7 @@
 
           case 'GroupList':
 
-            this.$router.push('/advertising');
+            this.$router.push('/deviceManager');
 
             break;
 

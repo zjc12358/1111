@@ -7,15 +7,15 @@
       </div>
       <div class="yuan"></div>
 
-  <div class="content_list" v-for="item in unbindList">
+  <div class="content_list" v-for="(item,key) in unbindList" @click="unBindDevice($event,key)" >
         <img :src="item.point_img" class="shopPhoto" />
         <div class="rightDiv">
           <div class="shopName" >{{item.shop_name}}</div>
-          <div class="deviceDiv">{{item.type_name}}</div>
+          <div class="deviceDiv">{{item.count}}台</div>
 
           <div class="deviceAdress" >{{item.dev_addr}}</div>
         </div>
-       <div class="Behave">已绑定：<span>2</span>台</div>
+       <!--<div class="Behave">已绑定：<span>2</span>台</div>-->
       </div>
 
       </div>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+
   export default {
     name: "unbind",
     data() {
@@ -39,8 +40,8 @@
         }
       }
       let data = new FormData();
-      this.$axios.post('/api/device/selectBind.do', data, config)
-     // this.$axios.post('/api/device/selectall.do', data, config)
+      this.$axios.post('/api/device/getNumberbyshopid.do', data, config)
+     /* this.$axios.post('/api/device/getNumberbyshopid.do ', data, config)*/
         .then(res => {
           console.log(res)
          if (res.data.code === '200') {
@@ -59,6 +60,49 @@
       goToPage(path) {
         this.$router.push(path)
       },
+
+      unBindDevice:function(e,k) {
+        console.log(11)
+
+         let config = {
+       headers: {
+         'Authorization': this.$store.state.token
+       }
+     }
+        let data = new FormData();
+       // console.log(k)
+        //console.log(this.unbindList)
+        let shop_name=this.unbindList[k].shop_name;
+        let dev_addr=this.unbindList[k].dev_addr;
+        let count=this.unbindList[k].count;
+        console.log(this.unbindList[k].shop_name)
+
+       // this.$router.push('/bindDevice'+shop_name);
+        this.$router.push({
+          path: '/bindDevice',
+          query: {
+            shop_name: shop_name,
+            dev_addr:dev_addr,
+            count:count
+
+          }
+        })
+
+        //data.append("shop_name",shop_name)
+        //console.log(shop_name)
+      /*  this.$axios.post('/api/device/getShopBindByAgentId.do', data, config)
+          .then(res => {
+            console.log(res)
+            if (res.data.code === '200') {
+              //this.unbindList = res.data.data
+            this.$router.push('/bindDevice');
+            }
+          }).catch(res => {
+          console.log(res)
+        })*/
+
+
+      }
 
     }
   }

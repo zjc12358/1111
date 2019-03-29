@@ -25,6 +25,7 @@ import contact from "../pages/contact";
 import changePwd from "../pages/changePwd";
 import breakDevice from "../pages/breakDevice";
 import fillGoods from "../pages/fillGoods";
+import bind from "../pages/bind";
 
 Vue.use(Router)
 
@@ -251,6 +252,12 @@ export default new Router({
       path: '/fillGoods',
       name: 'fillGoods',
       component: fillGoods
+    },
+    {
+      //绑定设备列表
+      path: '/bind',
+      name: 'bind',
+      component: bind
     },
   ]
 })
