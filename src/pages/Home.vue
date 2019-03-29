@@ -29,7 +29,7 @@
       </div>
       <div class="myCard">
         <div class="myDevice">
-          <p class="select_top" @click="goToPage('/myDevice')">我的设备</p>
+          <p class="select_top" @click="goToPage('/MyDevice')">我的设备</p>
           <p class="device_select">我的设备查询</p>
         </div>
         <div class="nextmyDevice">

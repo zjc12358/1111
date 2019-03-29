@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="app-container">
       <div class="firstlogin_t">
         <p class="pavetext" style="color: black;">设备铺设</p>
         <p class="pavetext1">壁挂式纸巾机 A03365322168856</p>
@@ -16,29 +16,87 @@
       </div>
 
       <div style="text-align: center;margin-top:0.7rem;">
-        <button class="sureBt">确认</button>
+        <button class="sureBt" @click="surePave()">确认</button>
       </div>
     </div>
 </template>
 
 <script>
   import '../untils/rem.js'
-    export default {
-        name: "devicePave"
+
+  export default {
+    name: "devicePave",
+    data() {
+      return {
+        username: '',
+        moblieNumber: '',
+      }
+    },
+    created() {
+      //  网络请求.
+      let config = {
+        headers: {
+          'Authorization': this.$store.state.token
+        }
+      }
+      this.dev_num=this.$route.query.dev_num;
+      console.log(this.dev_num)
+  /*    let data = new FormData();
+     this.$axios.post('/api/device/insertDevice.do', data, config)
+        .then(res => {
+          console.log(res)
+          if (res.data.code === '200') {
+            this.equipmentList = res.data.data
+          }
+        }).catch(res => {
+        console.log(res)
+      })*/
+
+
+    },
+    mounted() {
+
+    },
+    methods: {
+       goToPage(path) {
+        this.$router.push(path)
+      },
+      getDevnum(e) {
+        //let dev_num = $("#dev_num").text();
+       // console.log(dev_num)
+
+      },
+      surePave (){
+        this.$axios.post('/api/device/insertDevice.do',{
+          //dev_num:this.dev_num,
+
+          },{
+            emulateJSON: true
+          }
+        ).then(function(res){
+          console.log("1111")
+          this.$root.dev_num=res.data.dev_num;
+          //this.$root.userid=res.data.userid;
+          //console.log(this.$root.userid)
+          //this.$router.push('/content') ;
+        });
+      }
     }
+  }
+
+
 </script>
 
 <style scoped>
-  html,
-  body {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
+  .app-container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+   /* background: url("../assets/login-bg.png");*/
+    background-size: 100vw 100vh;
     overflow: hidden;
-    overflow-y: auto;
   }
+
   .yuan {
     position: relative;
     top: -2.4rem;

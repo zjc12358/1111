@@ -23,6 +23,7 @@ import record from "../pages/record";
 import changeInformation from "../pages/changeInformation";
 import contact from "../pages/contact";
 import changePwd from "../pages/changePwd";
+import breakDevice from "../pages/breakDevice";
 
 Vue.use(Router)
 
@@ -176,6 +177,13 @@ export default new Router({
       path: '/changePwd',
       name: 'changePwd',
       component: changePwd
+    }
+    ,
+    {
+      //故障设备
+      path: '/breakDevice',
+      name: 'breakDevice',
+      component: breakDevice
     }
   ]
 })

@@ -8,13 +8,14 @@
       <div class="yuan"></div>
 
       <div class="content_list" v-for="item in unbindList">
-        <img :src="item.img" class="shopPhoto" />
+        <img :src="item.point_img" class="shopPhoto" />
         <div class="rightDiv">
-          <div class="deviceDiv">{{item.Type}}</div>
           <div class="shopName" >{{item.shopname}}</div>
+          <div class="deviceDiv">{{item.Type}}</div>
+
           <div class="deviceAdress" >{{item.deviceAdress}}</div>
         </div>
-        <div class="Behave">已绑定：2台</div>
+        <!--<div class="Behave">已绑定：2台</div>-->
       </div>
 
       </div>
@@ -22,16 +23,16 @@
 </template>
 
 <script>
+
     export default {
-        name: "unbind",
-      data () {
+      name: "unbind",
+      data(){
         return {
-          selected: "MainPage",
           // tabs: this.$store.state.tabs,
           unbindList: [
-            { img: require("../assets/myorder.png"),Type: '店铺',shopname: '天竹苑',deviceAdress:'安徽省合肥市上城区解放西路1156号' },
-            { img: require("../assets/myorder.png"),Type: '店铺',shopname: '天竹苑',deviceAdress:'安徽省合肥市上城区解放西路1156号' },
-            { img: require("../assets/myorder.png"),Type: '店铺',shopname: '天竹苑',deviceAdress:'安徽省合肥市上城区解放西路1156号' },
+            { img: require("../assets/myorder.png"),Type: '2台',shopname: '天竹苑',deviceAdress:'安徽省合肥市上城区解放西路1156号' },
+            { img: require("../assets/myorder.png"),Type: '2台',shopname: '天竹苑',deviceAdress:'安徽省合肥市上城区解放西路1156号' },
+            { img: require("../assets/myorder.png"),Type: '2台',shopname: '天竹苑',deviceAdress:'安徽省合肥市上城区解放西路1156号' },
             { img: require("../assets/myorder.png"),Type: '店铺',shopname: '天竹苑',deviceAdress:'安徽省合肥市上城区解放西路1156号' },
             { img: require("../assets/myorder.png"),Type: '店铺',shopname: '天竹苑',deviceAdress:'安徽省合肥市上城区解放西路1156号' },
             { img: require("../assets/myorder.png"),Type: '店铺',shopname: '天竹苑',deviceAdress:'安徽省合肥市上城区解放西路1156号' },
@@ -39,6 +40,32 @@
           ],
         }
       },
+ /*     created() {
+        let config = {
+          headers: {
+            'Authorization': this.$store.state.token
+          }
+        }
+        let data = new FormData();
+        this.$axios.post('/api/device/getFaultDevice.do',data,config)
+          .then(res => {
+            console.log(res)
+            if ( res.data.code === '200' ){
+              this.unbindList = res.data.data
+            }
+          }).catch(res=>{
+          console.log(res)
+        })
+      },*/
+      mounted() {
+
+      },
+      methods:{
+        goToPage (path) {
+          this.$router.push(path)
+        },
+
+      }
 
     }
 </script>
