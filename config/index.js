@@ -12,27 +12,17 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://192.168.10.109:8080',
-        //target: 'http://zhangwj.natapp4.cc',
+        target: 'http://iot.hzleshare.net/mobile/',
         changeOrigin: true,
         pathRewrite: {
-         // '^/api': 'http://zhangwj.natapp4.cc'
-          '^/api': 'http://192.168.10.109:8080'
+          '^/api': '/'
         }
-      },
-     /* '/api2': {
-        target: 'http://192.168.10.109',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': 'http://192.168.10.109'
-        }
-      },*/
+      }
 
     },
 
     // Various Dev Server settings
- //host: 'localhost', // can be overwritten by process.env.HOST
-    host: '192.168.10.104',
+    host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,

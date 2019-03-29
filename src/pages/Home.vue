@@ -43,56 +43,10 @@
         <div></div>
       </div>
       <div class="funBox">
-       <!-- <div class="funItem" v-for="item in funList">
+        <div class="funItem" v-for="item in funList" @click="linkTo(item.path)">
           <img :src="item.img" alt="">
-          <div v-if="">{{ item.title }}</div>
-        </div>-->
-        <div class="funItem">
-          <img src="../assets/myteamImg.png" alt="">
-          <div >我的商户</div>
+          <div>{{ item.title }}</div>
         </div>
-        <div class="funItem">
-          <img src="../assets/myteamImg.png" alt="">
-          <div >代理商</div>
-        </div>
-        <div class="funItem" @click="goToPage('/earn')">
-          <img src="../assets/orderIng.png" alt="">
-          <div >订单</div>
-        </div>
-        <div class="funItem" @click="goToPage('/record')">
-          <img src="../assets/orderIng.png" alt="">
-          <div >提现记录</div>
-        </div>
-        <div class="funItem" >
-          <img src="../assets/earn_Img.png" alt="">
-          <div >收益明细</div>
-        </div>
-        <div class="funItem"  @click="goToPage('/changeInformation')">
-          <img src="../assets/updatepsw1.png" alt="">
-          <div >修改密码</div>
-        </div>
-        <div class="funItem" >
-          <img src="../assets/skmsgImg.png" alt="">
-          <div >收款信息</div>
-        </div>
-        <div class="funItem" @click="goToPage('/breakDevice')">
-          <img src="../assets/breakoutImg.png" alt="">
-          <div >故障信息</div>
-        </div>
-        <div class="funItem" @click="goToPage('/agency')">
-          <img src="../assets/nextPeopleImg.png" alt="">
-          <div >开设下级</div>
-        </div>
-        <div class="funItem"  @click="goToPage('/peopleSet')">
-          <img src="../assets/Msgset.png" alt="">
-          <div >设置</div>
-        </div>
-        <div class="funItem">
-          <img src="../assets/getdevice.png" alt="">
-          <div >设备认领</div>
-        </div>
-
-
       </div>
       <div style="height: 55px;"></div>
       <tabbar :selected="selected" :tabs='tabs'></tabbar>
@@ -115,19 +69,19 @@
         balance: 0, // 余额
         monthlyIncome: 0, //月收益
         takeMoney: 0, // 可提现收益
-/*        funList: [
-          { img: require('../assets/myteamImg.png'), title: '我的商户' },
-          { img: require('../assets/agencyImg.png'), title: '代理商' },
-          { img: require('../assets/orderIng.png'), title: '订单' },
-          { img: require('../assets/tx_history.png'), title: '提现记录' },
-          { img: require('../assets/earn_Img.png'), title: '收益明细' },
-          { img: require('../assets/updatepsw1.png'), title: '修改密码' },
-          { img: require('../assets/skmsgImg.png'), title: '收款信息' },
-          { img: require('../assets/breakoutImg.png'), title: '故障信息' },
-          { img: require('../assets/nextPeopleImg.png'), title: '开设下级' },
-          { img: require('../assets/Msgset.png'), title: '设置' },
-          { img: require('../assets/getdevice.png'), title: '设备认领' },
-        ]*/
+        funList: [
+          { img: require('../assets/myteamImg.png'), title: '我的商户',path: '/record' },
+          { img: require('../assets/agencyImg.png'), title: '代理商',path: '/record' },
+          { img: require('../assets/orderIng.png'), title: '订单',path: '/earn' },
+          { img: require('../assets/tx_history.png'), title: '提现记录',path: '/record' },
+          { img: require('../assets/earn_Img.png'), title: '收益明细',path: '/record' },
+          { img: require('../assets/updatepsw1.png'), title: '修改密码',path: '/changePwd' },
+          { img: require('../assets/skmsgImg.png'), title: '收款信息',path: '/record' },
+          { img: require('../assets/breakoutImg.png'), title: '故障信息',path: '/record' },
+          { img: require('../assets/nextPeopleImg.png'), title: '开设下级',path: '/record' },
+          { img: require('../assets/Msgset.png'), title: '设置',path: '/peopleSet' },
+          { img: require('../assets/getdevice.png'), title: '设备认领',path: '/record' },
+        ]
       }
     },
     created() {

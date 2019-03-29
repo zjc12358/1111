@@ -6,7 +6,7 @@
             <img src="../assets/loginimg.png" class="userImg">
           </div>
           <div>
-            <p style="font-size: 5.3vw ;color: #FFFFFF;" class="username">super</p>
+            <p style="font-size: 5.3vw ;color: #FFFFFF;" class="username">{{ name }}</p>
             <p style="font-size: 3.7vw;	color: #ffffff;">
               <label class="message">资讯</label>
               <span class="message-text">您喜欢的，这里都有······</span>
@@ -17,15 +17,11 @@
       <div class="yu_money">
         <label class="yue-title">余&nbsp;额&nbsp;(元)</label>
         <div style="height: 6vw;width: 1px;background: white"></div>
-        <label class="yue-num">8.00</label>
+        <label class="yue-num">{{ money }}</label>
         <div style="flex: 1"></div>
         <div class="tixian">
           提现
         </div>
-
-        <!--<div style="flex: 1;height: 80%;border-right: 1px solid #d1a86b"></div>-->
-        <!--<a class="tixian" href="../phoneOrder/statistics.do"> 提现</a>-->
-        <!--<a class="tixian" href="javascript:void(0);"> 提现</a>-->
       </div>
       <div class="mui-content" id="mui-content-part2">
         <div class="mui-row">
@@ -71,26 +67,6 @@
           </div>
         </div>
       </div>
-      <!--<div class="addDiv">-->
-      <!--<a href="javascript:void(0);">-->
-      <!--<img style="width: 89.6vw;" src="../assets/adduser.png" class="adduser">-->
-      <!--<div>-->
-      <!--<span class="add_account" @click="fn(1)">开设账户</span>-->
-      <!--<div style="flex: 1;"></div>-->
-      <!--<img src="../assets/jiant1.png" class="jiantou">-->
-      <!--</div>-->
-      <!--</a>-->
-      <!--</div>-->
-      <!--    <div class="mui-content" id="mui-content-part4">
-            <div class="mui-row" id="mui-row-part4">
-              <li class="mui-table-view-cell2" v-for="item in myOperatingOptions">
-                <a class="mui-navigate-right" href="javascript:void(0)">
-                  <img :src="item.img" class="left_img">
-                  <span class="down_text">{{ item.title }}</span>
-                </a>
-              </li>
-            </div>
-          </div>-->
       <div class="mui-content" id="mui-content-part4" >
         <div v-for="item in myOperatingOptions">
           <img :src="item.img"  style="width: 0.5rem;height: 0.5rem;">
@@ -116,6 +92,8 @@
     },
     data(){
       return {
+        name: '用户',
+        money: '0',
         selected: "UserCenter",
         tabs: this.$store.state.tabs,
         earnings: [
@@ -148,7 +126,8 @@
       )
         .then(res => {
           if ( res.data.code === '200' ){
-
+            this.name = res.data.data.agency_name
+            this.money = res.data.data.money
             console.log(res)
           }
           console.log(res)

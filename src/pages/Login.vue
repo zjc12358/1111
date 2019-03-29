@@ -142,14 +142,15 @@
         //   iconClass: 'mintui mintui-success'
         // });
       },
+      //账号密码登录
       loginReq(){
+        Indicator.open(); // loading
         let data = new FormData();
         data.append('ag_mobile',this.username);
         data.append('password',this.password);
-       // this.$axios.post('/api/login/getToken.lxkj',data)
         this.$axios.post('/api/login/loginByToken.lxkj',data)
           .then(res => {
-            console.log(res)
+            Indicator.close();
             if (res.data.code === '200') {
               this.$store.commit('saveToken',res.data.data)
               Toast({
@@ -157,22 +158,41 @@
                 iconClass: 'mintui mintui-success'
               });
               this.$router.push('/')
+            }else{
+              Toast('账号密码错误!')
             }
           }).catch(res=>{
+            Indicator.close();
+            Toast('请检查网络设置！')
             console.log(res)
         })
       },
+      //验证码登录
       verifyCodeReq(){
+        Indicator.open(); // loading
         let data = new FormData();
         data.append('ag_mobile',this.moblieNumber);
         data.append('code',this.codeNumber);
-        this.$axios.post('/api/login/verifyCode.lxkj',data)
+        this.$axios.post('/api/login/loginByCode.lxkj',data)
           .then(res => {
-            console.log(res)
+            Indicator.close();
+            if (res.data.code === '200') {
+              this.$store.commit('saveToken',res.data.data)
+              Toast({
+                message: '登录成功',
+                iconClass: 'mintui mintui-success'
+              });
+              this.$router.push('/')
+            }else{
+              Toast('手机号验证码错误!')
+            }
           }).catch(res=>{
+          Indicator.close();
+          Toast('请检查网络设置！')
           console.log(res)
         })
       },
+      //获取验证码
       getSmsCodeReq(){
         // let data = new FormData();
         // data.append('phone',this.moblieNumber);

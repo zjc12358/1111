@@ -32,7 +32,7 @@
         </div>
         <div style="position: relative;">
           <input v-model="agentCode" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;width: 50vw;" label="" placeholder="请输入验证码" type="text" />
-          <mt-button @click="getNum(sendTime)" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
+          <mt-button @click="getCode(sendTime)" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
         </div>
         <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 0.5rem">
           <img class="shop_img" src="../assets/img/email.png" style="width: 0.3rem;height: 0.3rem;">
@@ -43,7 +43,7 @@
         </div>
       </div>
       <div v-if="changeModule === 1" style="text-align: center;margin-top: 0.4rem;">
-        <mt-button @click="sub" type="primary" style="background: #1bbf8d;width: 80%;font-size: 4.2vw;height: 10vw;">提交</mt-button>
+        <mt-button @click="verifyCodeReq" type="primary" style="background: #1bbf8d;width: 80%;font-size: 4.2vw;height: 10vw;">提交</mt-button>
       </div>
       <div v-if="changeModule === 2">
         <shop ref="shop" v-if="step===1" @ee="cc" />
@@ -79,7 +79,7 @@
         agentMoblie: '', //代理商手机号
         agentCode: '', //代理商手机验证码
         agentEmail: '', // 代理商邮箱号
-        getNumBtnDis: false,
+        getNumBtnDis: true,
         sendTime: 60,
         getNumMsg: '获取验证码',
         changeModule: 1, // 1 代理, 2 店家
@@ -112,10 +112,16 @@
       nextpro(type){
         switch (type) {
           case 1:
-            if (!this.isnull(this.$refs.shop.ag_name)&&!this.isnull(this.$refs.shop.ag_mobile)&&!this.isnull(this.$refs.shop.user_email)&&this.$refs.shop.idcard_a&&this.$refs.shop.idcard_b){
+            if (!this.isnull(this.$refs.shop.ag_name)&&!this.isnull(this.$refs.shop.ag_mobile)&&!this.isnull(this.$refs.shop.user_email)&&this.$refs.shop.name&&this.$refs.shop.id_card_date){
 
             }else{
               Toast('必填项不得为空！')
+              return
+            }
+            if(this.$refs.shop.name==this.$refs.shop.ag_name){
+
+            }else{
+              Toast('店铺主姓名与身份证信息不一致！')
               return
             }
             if(this.isMoblie(this.$refs.shop.ag_mobile)==false){
@@ -132,14 +138,17 @@
               ag_name: this.$refs.shop.ag_name,
               ag_mobile: this.$refs.shop.ag_mobile,
               user_email: this.$refs.shop.user_email,
+              name: this.$refs.shop.name,
+              id_card_num: this.$refs.shop.id_card_num,
+              id_card_date: this.$refs.shop.id_card_date,
               idcard_a: this.$refs.shop.idcard_a,
-              idcard_b: this.$refs.shop.idcard_b,
+              idcard_b: this.$refs.shop.idcard_b
             }
             console.log(data)
             this.stepOneData = data;
             break;
           case 2:
-            if(!this.isnull(this.$refs.stepTwo.shop_name)&&this.$refs.stepTwo.shopHeadFile&&this.$refs.stepTwo.licenseFile&&this.$refs.stepTwo.agreementFile&&this.$refs.stepTwo.basedOnFile&&this.$refs.stepTwo.basedOn2File&&!this.isnull(this.$refs.stepTwo.phone)&&this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected]&&!this.isnull(this.$refs.stepTwo.provinces)&&!this.isnull(this.$refs.stepTwo.addDetail)){
+            if(!this.isnull(this.$refs.stepTwo.shop_name)&&this.$refs.stepTwo.shopHead&&this.$refs.stepTwo.license&&this.$refs.stepTwo.agreement&&this.$refs.stepTwo.basedOn&&this.$refs.stepTwo.basedOn2&&!this.isnull(this.$refs.stepTwo.phone)&&this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected]&&!this.isnull(this.$refs.stepTwo.provinces)&&!this.isnull(this.$refs.stepTwo.addDetail)){
 
             }else{
               Toast('必填项不得为空！')
@@ -148,72 +157,46 @@
             // 将俩个步骤的图片上传.
             console.log(this.stepOneData)
             Indicator.open('加载中...');
-            this.$axios.all([
-              this.imgUpload(this.stepOneData.idcard_a),
-              this.imgUpload(this.stepOneData.idcard_b),
-              this.imgUpload(this.$refs.stepTwo.shopHeadFile),
-              this.imgUpload(this.$refs.stepTwo.licenseFile),
-              this.imgUpload(this.$refs.stepTwo.agreementFile),
-              this.imgUpload(this.$refs.stepTwo.basedOnFile),
-              this.imgUpload(this.$refs.stepTwo.basedOn2File),
-            ])
-              .then(this.$axios.spread((idcard_a,idcard_b,shopHeadFile,licenseFile,agreementFile,basedOnFile,basedOn2File)=>{
-                if(idcard_a.data.code == '200'&&idcard_b.data.code == '200'&&shopHeadFile.data.code=='200'&&licenseFile.data.code=='200'&&agreementFile.data.code=='200'&&basedOnFile.data.code=='200'&&basedOn2File.data.code=='200'){
-                  console.log('成功')
-                  //图片上传成功,将返回的图片链接写入
-                  let dataAll = new FormData();
-                  dataAll.append('ag_mobile',this.stepOneData.ag_mobile) //手机号
-                  dataAll.append('ag_name',this.stepOneData.ag_name) // 名称
-                  dataAll.append('user_email',this.stepOneData.user_email) //邮箱
-                  dataAll.append('idcard_a',idcard_a.data.data)  //身份证正面
-                  dataAll.append('idcard_b',idcard_b.data.data) //身份证反面
+            //图片上传成功,将返回的图片链接写入
+            let dataAll = new FormData();
+            dataAll.append('ag_mobile',this.stepOneData.ag_mobile) //手机号
+            dataAll.append('ag_name',this.stepOneData.ag_name) // 名称
+            dataAll.append('user_email',this.stepOneData.user_email) //邮箱
+            dataAll.append('name',this.stepOneData.name) // 身份证姓名
+            dataAll.append('id_card_num',this.stepOneData.id_card_num)
+            dataAll.append('id_card_date',this.stepOneData.id_card_date)
+            dataAll.append('idcard_a',this.stepOneData.idcard_a)  //身份证正面
+            dataAll.append('idcard_b',this.stepOneData.idcard_b) //身份证反面
 
-                  dataAll.append('shop_name',this.$refs.stepTwo.shop_name)  // 店铺名称
-                  dataAll.append('phone',this.$refs.stepTwo.phone)  // 店铺电话
-                  dataAll.append('shop_type_name',this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected].code + '##' +this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected].name) // 店铺主营业务
-                  dataAll.append('shop_addr',this.$refs.stepTwo.provinces + '##' + this.$refs.stepTwo.addDetail) // 店铺地址
-                  dataAll.append('store_address_code',this.$refs.stepTwo.addCode) // 盛世编码
-                  dataAll.append('license',licenseFile.data.data) // 营业执照照片
-                  dataAll.append('cooperation_agreement',agreementFile.data.data) // 合作协议
-                  dataAll.append('shop_scene_photo',basedOnFile.data.data + '##' + basedOn2File.data.data)  //场内照片 用#号隔开
-                  dataAll.append('shop_photo',shopHeadFile.data.data) // 店铺头像
+            dataAll.append('shop_name',this.$refs.stepTwo.shop_name)  // 店铺名称
+            dataAll.append('phone',this.$refs.stepTwo.phone)  // 店铺电话
+            dataAll.append('shop_type_name',this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected].code + '##' +this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected].name) // 店铺主营业务
+            dataAll.append('shop_addr',this.$refs.stepTwo.provinces + '##' + this.$refs.stepTwo.addDetail) // 店铺地址
+            dataAll.append('store_address_code',this.$refs.stepTwo.addCode) // 盛世编码
+            dataAll.append('license',this.$refs.stepTwo.license) // 营业执照照片
+            dataAll.append('cooperation_agreement',this.$refs.stepTwo.agreement) // 合作协议
+            dataAll.append('shop_scene_photo',this.$refs.stepTwo.basedOn + '##' + this.$refs.stepTwo.basedOn2)  //场内照片 用#号隔开
+            dataAll.append('shop_photo',this.$refs.stepTwo.shopHead) // 店铺头像
 
-                  let config = {
-                    headers: {
-                      'Authorization': this.$store.state.token
-                    }
-                  }
-                  this.$axios.post('/api/agency/addAgencyShop.lxkj',
-                    dataAll,config
-                  )
-                    .then(res => {
-                      console.log(res)
-                    }).catch(res=>{
-                    console.log(res)
-                    Toast('提交失败请检查网络设置!')
-                  })
-                }else{
-                  Indicator.close();
-                  Toast('提交失败！请重新上传图片！')
+            let config = {
+              headers: {
+                'Authorization': this.$store.state.token
+              }
+            }
+            this.$axios.post('/api/agency/addAgencyShop.lxkj',
+              dataAll,config
+            )
+              .then(res => {
+                Indicator.close();
+                if(res.data.code == '200'){
+                  this.$router.push('/complete')
                 }
-              }))
-              .catch(err=>{
-                  Toast({
-                  message: '网络错误!'
-                });
-              })
-            // let data2 = {
-            //   shop_photo: this.$refs.stepTwo.shopHeadFile,
-            //   shop_name: this.$refs.stepTwo.shop_name,
-            //   phone: this.$refs.stepTwo.phone,
-            //   shop_type_name: this.$refs.stepTwo.mainBusiness[this.$refs.stepTwo.typeSelected],
-            //   shop_addr: this.$refs.stepTwo.provinces + this.$refs.stepTwo.addDetail,
-            //   license: this.$refs.stepTwo.licenseFile,
-            //   cooperation_agreement: this.$refs.stepTwo.agreementFile,
-            //   shop_scene_photo: this.$refs.stepTwo.basedOnFile,
-            // }
-            // console.log(data2)
-            // this.stepTwoData = data2
+                console.log(res)
+              }).catch(res=>{
+              console.log(res)
+              Indicator.close();
+              Toast('提交失败请检查网络设置!')
+            })
             break;
         }
       },
@@ -240,6 +223,7 @@
           Toast('邮箱格式错误')
           return
         }
+        Indicator.open()
         let data = new FormData();
         data.append('ag_mobile',this.agentMoblie)
         data.append('ag_name',this.agentname)
@@ -253,8 +237,15 @@
           data,config
         )
           .then(res => {
-            console.log(res)
+            Indicator.close()
+            if(res.data.code==='200'){
+              Toast(res.data.msg)
+            }else{
+              Toast(res.data.msg)
+            }
           }).catch(res=>{
+          Indicator.close()
+          Toast('请检查网络设置')
           console.log(res)
         })
       },
@@ -263,7 +254,58 @@
         this.$refs.agencyBox.scrollTop = 0
         this.step = 2
       },
+      //获取验证码计时
+      getCode(i){
+        // this.$axios.get('/api/login/verifyPhone.lxkj',{params:{phone: this.agentMoblie}})
+        //   .then(res=>{
+        //     console.log(res);
+            // if (res.data.code=== '200'){
+              this.getSmsCodeReq()
+              this.getNum(i)
+            // }else{
+            //   Toast('手机号已存在')
+            // }
+        //   }).catch(err=>{
+        //
+        // })
+
+      },
+      //获取验证码
+      getSmsCodeReq(){
+        // let data = new FormData();
+        // data.append('phone',this.moblieNumber);
+        // let data = {phone: JSON.stringify(this.moblieNumber)}
+        this.$axios.get('/api/login/getSmsCode.lxkj?phone='+this.agentMoblie)
+          .then(res => {
+            console.log(res)
+          }).catch(res=>{
+          console.log(res)
+        })
+      },
+      verifyCodeReq(){
+        let data = new FormData();
+        data.append('ag_mobile',this.agentMoblie);
+        data.append('code',this.agentCode);
+        this.$axios.post('/api/login/verifyCode.lxkj',data)
+          .then(res => {
+            if (res.data.code === '200') {
+              this.sub()
+            }else{
+              Toast(res.data.msg)
+            }
+          }).catch(res=>{
+          Toast('请检查网络设置！')
+          console.log(res)
+        })
+      },
       getNum(i){
+        // if (this.moblieBlur() === false) return
+        if( this.isnull(this.agentMoblie) || !this.isMoblie(this.agentMoblie) ){
+          this.getNumBtnDis = true
+          this.sendTime = 60
+          this.getNumMsg = '获取验证码'
+          return
+        }
         if (i == 0) {
           this.getNumBtnDis = false
           this.sendTime = 60
@@ -279,6 +321,16 @@
       },
       changeModuleV(i){
         this.changeModule = i;
+      }
+    },
+    watch:{
+      agentMoblie: function(val,oldVal){
+        console.log('change')
+        if (this.isnull(val) || !this.isMoblie(val)) {
+          this.getNumBtnDis = true
+        }else{
+          this.getNumBtnDis = false
+        }
       }
     }
   }

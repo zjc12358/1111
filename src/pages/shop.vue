@@ -33,22 +33,21 @@
     <div>
       <input v-model="user_email" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入电子邮箱" type="text" />
     </div>
-    <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
-      <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
-      <label style="margin-left: 2vw">身份证号码</label>
-    </div>
-    <div>
-      <input v-model="idcartNum" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入身份证号码" type="text" />
-    </div>
+    <!--<div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">-->
+      <!--<img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">-->
+      <!--<label style="margin-left: 2vw">身份证号码</label>-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--<input v-model="idcartNum" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入身份证号码" type="text" />-->
+    <!--</div>-->
 
-    <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
-      <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
-      <label style="margin-left: 2vw">身份证有效期</label>
-    </div>
-    <div>
-      <input v-model="user_email" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入身份证有效期" type="text" />
-    </div>
-
+    <!--<div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">-->
+      <!--<img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">-->
+      <!--<label style="margin-left: 2vw">身份证有效期</label>-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--<input v-model="user_email" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;" label="" placeholder="请输入身份证有效期" type="text" />-->
+    <!--</div>-->
     <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
       <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
       <label style="margin-left: 2vw">上传身份证正反面</label>
@@ -56,11 +55,11 @@
       <div class="fileUploadBox">
         <div>
           <input @change="sfzUpload($event,1)" class="fileUpload" type="file">
-          <img class="readImages" :src="front" alt="">
+          <img class="readImages" :src="idcard_a" alt="">
         </div>
         <div>
           <input @change="sfzUpload($event,2)" class="fileUpload" type="file">
-          <img class="readImages" :src="reverse" alt="">
+          <img class="readImages" :src="idcard_b" alt="">
         </div>
       </div>
     </div>
@@ -71,7 +70,7 @@
 </template>
 
 <script>
-    import {Toast} from "mint-ui";
+    import {Toast,Indicator} from "mint-ui";
 
     export default {
       name: "shop",
@@ -79,7 +78,7 @@
         return {
           id_card_date: '',
           name: '',
-          idcartNum: '',
+          id_card_num: '',
           idcard_a: null,
           idcard_b:null,
           user_email: '',
@@ -108,6 +107,7 @@
           this.$emit('ee',0)
         },
         fileReq(file,type){
+          Indicator.open(); // loading
           console.log(file)
           let data = new FormData()
           data.append('file',file)
@@ -123,15 +123,17 @@
             if(res.data.code==200){
               if(type==1){
                 this.name = res.data.data.name
-                this.idcartNum = res.data.data.idcartNum
+                this.id_card_num = res.data.data.id_card_num
               }else{
                 this.id_card_date = res.data.data.id_card_date
               }
+              this.imgUpload(file,type)
             }
             console.log(res)
           }).catch(err=>{
+            Indicator.close();
             console.log(err)
-            Toast('上传失败,请检查网络设置!')
+            Toast('身份证读取失败请上传有效证件!')
           })
         },
         sfzUpload(e,type){
@@ -151,45 +153,47 @@
               switch (type) {
                 case 1:
                   this.front = newUrl;
-                  this.idcard_a = file
+                  // this.idcard_a = file
                   this.fileReq(file,1)
                   break;
                 case 2:
                   this.reverse = newUrl;
-                  this.idcard_b = file
+                  // this.idcard_b = file
                   this.fileReq(file,2)
                   break;
               }
             }
           }
         },
-        imgUpload(e,type){
-          let file = e.target.files[0]
-          console.log(file.size)
-          if(file.size>10485760){
-            Toast('图片过大！')
-            return
+        imgUpload(file,type){
+          let data = new FormData();
+          data.append('file',file)
+          data.append('fileName','png')
+          let config = {
+            headers: {
+              'Authorization': this.$store.state.token
+            }
           }
-          if(file.type.indexOf("image") == 0) {
-            let reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = (e) => {
-              // 图片base64化
-              let newUrl = e.target.result;
-              console.log(newUrl)
+          this.$axios.post('/api/base/upload.lxkj',
+            data,config
+          ).then(res => {
+            Indicator.close();
+            if(res.data.code=='200'){
               switch (type) {
                 case 1:
-                  this.front = newUrl;
-                  this.idcard_a = file
+                  this.idcard_a = res.data.data;
                   break;
                 case 2:
-                  this.reverse = newUrl;
-                  this.idcard_b = file
+                  this.idcard_b = res.data.data;
                   break;
               }
             }
-          }
+          }).catch(err=>{
+            Indicator.close();
+            Toast('身份证上传失败请检查网络设置!')
+          })
         }
+
       }
     }
 </script>
@@ -201,9 +205,14 @@
     position: absolute;
     width: 20vw;
     overflow: hidden;
+    z-index: 1;
   }
   .fileUploadBox>div{
     overflow: hidden;
     position: relative;
+  }
+  .fileUploadBox>div>input{
+    position: absolute;
+    z-index: 2;
   }
 </style>
