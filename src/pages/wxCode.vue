@@ -19,7 +19,11 @@ import  '../assets/js/jquery-3.3.1.min'
     methods: {
       sys_click: function () {
         this.qsa = 'qqq'
-
+        let config = {
+          headers: {
+            'Authorization': this.$store.state.token
+          }
+        }
         let data = new FormData();
         this.$axios.post('/api/device/receiveDevice.do',data,config)
        /* this.$axios({

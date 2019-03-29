@@ -146,7 +146,8 @@
         let data = new FormData();
         data.append('ag_mobile',this.username);
         data.append('password',this.password);
-        this.$axios.post('/api/login/getToken.lxkj',data)
+       // this.$axios.post('/api/login/getToken.lxkj',data)
+        this.$axios.post('/api/login/loginByToken.lxkj',data)
           .then(res => {
             console.log(res)
             if (res.data.code === '200') {

@@ -2,16 +2,18 @@
     <div class="app-container">
       <div class="firstlogin_t">
         <p class="pavetext" style="color: black;">设备铺设</p>
-        <p class="pavetext1">壁挂式纸巾机 A03365322168856</p>
+        <p class="pavetext1">
+          <span>{{type_name}}</span>
+          <span>{{devicenum}} </span></p>
       </div>
       <div class="yuan"></div>
 
 
       <div class="inputMg">
-        <input type="text" class="inputlxr" placeholder="联系人" />
-        <input type="text" class="inputPhone" placeholder="联系电话" />
-        <input type="text" class="inputShopname" placeholder="店铺名称" />
-        <textarea type="text" class="inputAdress"  placeholder="铺设地址"></textarea>
+         <input type="text" class="inputlxr" placeholder="联系人"  ref="inputlxr"   @click="changeModuleV(1)" :class="'inputlxr ' + (changeModule == 1 ? 'selected' : '')"/>
+         <input type="text" class="inputPhone" placeholder="联系电话" ref="moblieNumber" @click="changeModuleV(2)" :class="'inputPhone ' + (changeModule == 2 ? 'selected' : '')"/>
+         <input type="text" class="inputShopname" placeholder="店铺名称" disabled="disabled" />
+         <textarea type="text" class="inputAdress"  placeholder="铺设地址" disabled="disabled" ></textarea>
 
       </div>
 
@@ -23,13 +25,22 @@
 
 <script>
   import '../untils/rem.js'
+  import {Toast} from "mint-ui";
 
   export default {
     name: "devicePave",
     data() {
       return {
-        username: '',
         moblieNumber: '',
+        devicenum: "", // 设备编号
+        type_name:"",
+        inputlxr:"",
+        agency_id:"",
+        shop_name:"",
+        inputPhone:"",
+        dev_addr:"",
+        changeModule: 1,
+
       }
     },
     created() {
@@ -40,17 +51,40 @@
         }
       }
       this.dev_num=this.$route.query.dev_num;
+      this.type_name=this.$route.query.type_name;
+   /*  this.agency_id=this.$route.query.agency_id;*/
+
+      this.devicenum= this.dev_num
+      this.type_name=this.type_name;
+
       console.log(this.dev_num)
-  /*    let data = new FormData();
-     this.$axios.post('/api/device/insertDevice.do', data, config)
+      console.log(this.type_name)
+
+
+      let data = new FormData();
+       data.append('dev_num',this.devicenum);
+      this.$axios.post('/api/device/selectDevice.do', data, config)
         .then(res => {
           console.log(res)
           if (res.data.code === '200') {
-            this.equipmentList = res.data.data
+            console.log(res.data.data.data.shop_name)
+           // console.log(res.data.data.shop_name)
+            this.inputlxr=res.data.data.data.connect_name
+            this.inputPhone =res.data.data.data.connect_mobile
+            this.shop_name = res.data.data.data.shop_name
+            this.dev_addr = res.data.data.data.dev_addr
+           // this.inputShopname=this.$refs.inputShopname.value;
+            $(".inputlxr").val(this.inputlxr)
+            $(".inputPhone").val(this.inputPhone)
+            $(".inputShopname").val(this.shop_name)
+            $(".inputAdress").val(this.dev_addr)
+
+
+
           }
         }).catch(res => {
         console.log(res)
-      })*/
+      })
 
 
     },
@@ -61,26 +95,59 @@
        goToPage(path) {
         this.$router.push(path)
       },
-      getDevnum(e) {
-        //let dev_num = $("#dev_num").text();
-       // console.log(dev_num)
 
-      },
       surePave (){
-        this.$axios.post('/api/device/insertDevice.do',{
-          //dev_num:this.dev_num,
-
-          },{
-            emulateJSON: true
+        let config = {
+          headers: {
+            'Authorization': this.$store.state.token
           }
-        ).then(function(res){
+        }
+        this.connect_name=this.$refs.inputlxr.value
+        this.moblieNumber=this.$refs.moblieNumber.value
+       if(!this.connect_name){
+         Toast('联系人不能为空');
+         console.log('联系人不能为空')
+          return
+        }
+
+     /*   if(!this.moblieNumber){
+          Toast('手机号不能为空');
+          console.log('手机号不能为空')
+          return
+        }*/
+        if(this.isnull(this.moblieNumber) || !this.isMoblie(this.moblieNumber) ){
+          // 用户名为空
+          Toast('手机号不正确');
+          return
+        }
+       /* this.inputShopname=this.$refs.inputShopname.value*/
+        console.log(this.connect_name)
+        console.log(this.moblieNumber)
+        let data = new FormData();
+        this.devicenum= this.dev_num
+        data.append('dev_num',this.devicenum);
+        data.append('connect_name',this.connect_name);
+        data.append('connect_mobile',this.moblieNumber);
+       this.$axios.post('/api/device/insertDevice.do',data,config)
+
+        .then(function(res){
           console.log("1111")
-          this.$root.dev_num=res.data.dev_num;
-          //this.$root.userid=res.data.userid;
-          //console.log(this.$root.userid)
-          //this.$router.push('/content') ;
+       if (res.data.code === '200') {
+      // this.$store.commit('saveToken',res.data.data.data)
+            Toast({
+              message: '铺设成功',
+             iconClass: 'mintui mintui-success'
+            });
+        }
+
         });
-      }
+      } ,
+    changeModuleV(i){
+        this.changeModule = i;
+      },
+
+
+
     }
   }
 
@@ -121,7 +188,7 @@
 
   .inputMg {
     text-align: center;
-    margin-top: -1.8rem;
+    margin-top: -2.3rem;
   }
 
   .firstlogin_t {
@@ -144,83 +211,83 @@
     margin-top: 0.2rem;
   }
   input.inputlxr {
-    width: 6.1rem;
+    width: 5.6rem;
     padding-left: 1rem;
     background: url(../assets/img/lxrno.png) no-repeat;
     background-position: 0.3rem;
     background-size: 0.4rem;
-    height: 1rem;
+    height: 0.8rem;
     border-radius: 0.5rem;
     background-color: #f1f4f5;
     border: 0;
   }
 
-/*  input.inputlxr.selected {
+ input.inputlxr.selected {
     background: url(../assets/img/lxrno1.png) no-repeat;
     background-position: 0.3rem;
     background-size: 0.4rem;
     background-color: #f1f4f5;
-  }*/
+  }
 
   input.inputPhone {
-    width: 6.1rem;
+    width: 5.8rem;
     padding-left: 1rem;
     background: url(../assets/img/phoneno.png) no-repeat;
-    background-position: 0.3rem;
+    background-position: 0.4rem;
     background-size: 0.4rem;
-    height: 1rem;
+    height: 0.8rem;
     border-radius: 0.5rem;
     background-color: #f1f4f5;
     border: 0;
   }
 
-/*  input.inputPhone.selected {
+  input.inputPhone.selected {
     background: url(../assets/img/phoneno1.png) no-repeat;
-    background-position: 0.3rem;
+    background-position: 0.4rem;
     background-size: 0.4rem;
     background-color: #f1f4f5;
-  }*/
+  }
 
   input.inputShopname {
-    width: 6.1rem;
+    width: 5.6rem;
     padding-left: 1rem;
     background: url(../assets/img/shopname.png) no-repeat;
     background-position: 0.3rem;
     background-size: 0.4rem;
-    height: 1rem;
+    height: 0.8rem;
     border-radius: 0.5rem;
     background-color: #f1f4f5;
     border: 0;
   }
 
-/*  input.inputShopname.selected {
-    background: url(../assets/img/hopname1.png) no-repeat;
-    background-position: 0.3rem;
-    background-size: 0.4rem;
-    background-color: #f1f4f5;
-  }*/
-
-  input.inputShopname {
-    width: 6.1rem;
-    padding-left: 1rem;
-    background: url(../assets/img/shopname.png) no-repeat;
-    background-position: 0.3rem;
-    background-size: 0.4rem;
-    height: 1rem;
-    border-radius: 0.5rem;
-    background-color: #f1f4f5;
-    border: 0;
-  }
-
-/*  input.inputShopname.selected {
+ input.inputShopname.selected {
     background: url(../assets/img/shopname1.png) no-repeat;
     background-position: 0.3rem;
     background-size: 0.4rem;
     background-color: #f1f4f5;
-  }*/
+  }
+
+  input.inputShopname {
+    width: 5.6rem;
+    padding-left: 1rem;
+    background: url(../assets/img/shopname.png) no-repeat;
+    background-position: 0.3rem;
+    background-size: 0.4rem;
+    height: 0.8rem;
+    border-radius: 0.5rem;
+    background-color: #f1f4f5;
+    border: 0;
+  }
+
+  input.inputShopname.selected {
+    background: url(../assets/img/shopname1.png) no-repeat;
+    background-position: 0.3rem;
+    background-size: 0.4rem;
+    background-color: #f1f4f5;
+  }
 
   textarea.inputAdress {
-    width: 6.1rem;
+    width: 5.6rem;
     padding-left: 1rem;
     margin-top: 0.3rem;
     background: url(../assets/img/adress.png) no-repeat;

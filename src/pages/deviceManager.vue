@@ -34,10 +34,13 @@
           <div class="mui-icon mui-icon-closeempty" id="closePage"></div>
         </div>
       </footer>
+
+      <tabbar :selected="selected" :tabs='tabs'></tabbar>
     </div>
 </template>
 
 <script>
+/*
   import '../assets/js/jquery-3.3.1.min'
     export default {
         name: "deviceManager",
@@ -55,7 +58,47 @@
 
       }
     }
+*/
 
+
+
+  import tabbar from "../components/tabbar";
+
+  export default {
+    name: "deviceManager",
+
+    components: {
+      tabbar,
+    },
+
+    data(){
+      return {
+        selected: "GroupList",
+        tabs: this.$store.state.tabs,
+      /*  pickerValue: '',
+        pickerValue2: ''*/
+      }
+    },
+
+    created () {
+      console.log()
+    },
+
+    mounted() {
+
+    },
+
+    methods: {
+    /*  openPicker() {
+        this.$refs.picker.open();
+      },
+      openPicker2() {
+        this.$refs.picker2.open();
+      }*/
+
+    }
+
+  }
 </script>
 
 <style scoped>

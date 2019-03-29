@@ -2,7 +2,7 @@
     <div class="myDevice-container">
       <div class="equipmentList">
         <div class="equipmentItem" v-for="item in equipmentList" >
-          <label type="primary" class="lay" @click="getDevnum($event)" >设备铺设</label>
+        <!--  <label type="primary" class="lay" @click="getDevnum($event)" >设备铺设</label>-->
           <div>
             <div>
               <img :src="item.point_img" alt="">
@@ -11,9 +11,7 @@
               <div>编号:<span id="dev_num">{{ item.dev_num }}</span></div>
               <div>类型:<span id="type_name">{{ item.type_name }}</span></div>
               <div class="cargoQuantity">货量:<span style="flex: 1">{{ item.papernum }}/{{item.maxcount}}</span>
-               <!-- <div>
-                  信号:<span>{{ item.signal }}</span>
-                </div>-->
+
               </div>
               <div class="address">地址:<span>{{ item.dev_addr }}</span></div>
             </div>
@@ -28,7 +26,7 @@
 
 <script>
     export default {
-      name: "MyDevice",
+      name: "fillGoods",
       data() {
         return {
           // tabs: this.$store.state.tabs,
@@ -43,7 +41,7 @@
           }
         }
         let data = new FormData();
-        this.$axios.post('/api/device/selectall.do', data, config)
+        this.$axios.post('/api/device/selectRepAll.do', data, config)
           .then(res => {
             console.log(res)
             if (res.data.code === '200') {
