@@ -43,7 +43,7 @@
         <div></div>
       </div>
       <div class="funBox">
-        <div class="funItem" v-for="item in funList">
+        <div class="funItem" v-for="item in funList" @click="linkTo(item.path)">
           <img :src="item.img" alt="">
           <div>{{ item.title }}</div>
         </div>
@@ -70,17 +70,17 @@
         monthlyIncome: 0, //月收益
         takeMoney: 0, // 可提现收益
         funList: [
-          { img: require('../assets/myteamImg.png'), title: '我的商户' },
-          { img: require('../assets/agencyImg.png'), title: '代理商' },
-          { img: require('../assets/orderIng.png'), title: '订单' },
-          { img: require('../assets/tx_history.png'), title: '提现记录' },
-          { img: require('../assets/earn_Img.png'), title: '收益明细' },
-          { img: require('../assets/updatepsw1.png'), title: '修改密码' },
-          { img: require('../assets/skmsgImg.png'), title: '收款信息' },
-          { img: require('../assets/breakoutImg.png'), title: '故障信息' },
-          { img: require('../assets/nextPeopleImg.png'), title: '开设下级' },
-          { img: require('../assets/Msgset.png'), title: '设置' },
-          { img: require('../assets/getdevice.png'), title: '设备认领' },
+          { img: require('../assets/myteamImg.png'), title: '我的商户',path: '/record' },
+          { img: require('../assets/agencyImg.png'), title: '代理商',path: '/record' },
+          { img: require('../assets/orderIng.png'), title: '订单',path: '/earn' },
+          { img: require('../assets/tx_history.png'), title: '提现记录',path: '/record' },
+          { img: require('../assets/earn_Img.png'), title: '收益明细',path: '/record' },
+          { img: require('../assets/updatepsw1.png'), title: '修改密码',path: '/changePwd' },
+          { img: require('../assets/skmsgImg.png'), title: '收款信息',path: '/record' },
+          { img: require('../assets/breakoutImg.png'), title: '故障信息',path: '/record' },
+          { img: require('../assets/nextPeopleImg.png'), title: '开设下级',path: '/record' },
+          { img: require('../assets/Msgset.png'), title: '设置',path: '/peopleSet' },
+          { img: require('../assets/getdevice.png'), title: '设备认领',path: '/record' },
         ]
       }
     },

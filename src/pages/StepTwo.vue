@@ -155,7 +155,7 @@
 
 <script>
   import modal from "../components/modal";
-  import {Toast} from "mint-ui";
+  import {Toast,Indicator} from "mint-ui";
   const address = require('../../city');
   export default {
     name: "stepTwo",
@@ -297,8 +297,8 @@
         // })
         // this.$router.push('./complete')
       },
-      upload(e){
-        let file = e.target.files[0];
+      upload(file,type){
+        Indicator.open();
         let data = new FormData();
         data.append('file',file)
         data.append('fileName','png')
@@ -311,8 +311,32 @@
           data,config
         )
           .then(res => {
+            Indicator.close();
             console.log(res)
+            if(res.data.code=='200'){
+              switch (type) {
+                case 1:
+                  this.shopHead = res.data.data;
+                  break;
+                case 2:
+                  this.license = res.data.data;
+                  break;
+                case 3:
+                  this.agreement = res.data.data;
+                  break;
+                case 4:
+                  this.basedOn = res.data.data;
+                  break;
+                case 5:
+                  this.basedOn2 = res.data.data;
+                  break;
+              }
+            }else{
+              Toast('上传失败,请重新上传图片！')
+            }
           }).catch(res=>{
+          Indicator.close();
+          Toast('上传失败请重新上传！')
           console.log(res)
         })
       },
@@ -329,28 +353,7 @@
           reader.onload = (e) => {
             // 图片base64化
             let newUrl = e.target.result;
-            switch (type) {
-              case 1:
-                this.shopHead = newUrl;
-                this.shopHeadFile = file
-                break;
-              case 2:
-                this.license = newUrl;
-                this.licenseFile = file;
-                break;
-              case 3:
-                this.agreement = newUrl;
-                this.agreementFile = file;
-                break;
-              case 4:
-                this.basedOn = newUrl;
-                this.basedOnFile = file;
-                break;
-              case 5:
-                this.basedOn2 = newUrl;
-                this.basedOn2File = file
-                break;
-            }
+            this.upload(file,type)
           }
         }else{
           Toast('上传图片格式错误！')

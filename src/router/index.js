@@ -22,6 +22,7 @@ import complete from "../pages/complete";
 import record from "../pages/record";
 import changeInformation from "../pages/changeInformation";
 import contact from "../pages/contact";
+import changePwd from "../pages/changePwd";
 
 Vue.use(Router)
 
@@ -169,6 +170,12 @@ export default new Router({
       path: '/contact',
       name: 'contact',
       component: contact
+    },
+    // 修改密码
+    {
+      path: '/changePwd',
+      name: 'changePwd',
+      component: changePwd
     }
   ]
 })

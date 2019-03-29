@@ -5,7 +5,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vuex from 'vuex'
-import MINT from 'mint-ui'
+import MINT, {Toast,Indicator} from 'mint-ui'
 import 'mint-ui/lib/style.css';
 import store from './store/index'
 import axios from 'axios'
@@ -46,3 +46,27 @@ new Vue({
 //     next();
 //   }
 // })
+
+/* 响应拦截器 */
+
+axios.interceptors.response.use(function (response) {
+
+  if (response.data.msg === 'token失效') {
+
+    // Storage.localRemove('token') // 删除已经失效或过期的token（不删除也可以，因为登录后覆盖）
+    Indicator.close();
+    Toast('登录过期,请重新登录!')
+    router.replace({
+    path: '/login' // 到登录页重新获取token
+
+  })
+
+  }
+
+  return response
+
+}, function (error) {
+
+  return Promise.reject(error)
+})
+
