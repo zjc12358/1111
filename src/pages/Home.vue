@@ -77,10 +77,10 @@
           { img: require('../assets/earn_Img.png'), title: '收益明细',path: '/record' },
           { img: require('../assets/updatepsw1.png'), title: '修改密码',path: '/changePwd' },
           { img: require('../assets/skmsgImg.png'), title: '收款信息',path: '/record' },
-          { img: require('../assets/breakoutImg.png'), title: '故障信息',path: '/record' },
+          { img: require('../assets/breakoutImg.png'), title: '故障信息',path: '/breakDevice' },
           { img: require('../assets/nextPeopleImg.png'), title: '开设下级',path: '/agency' },
           { img: require('../assets/Msgset.png'), title: '设置',path: '/peopleSet' },
-          { img: require('../assets/getdevice.png'), title: '设备认领',path: '/record' },
+          { img: require('../assets/getdevice.png'), title: '设备认领' },
         ]
       }
     },

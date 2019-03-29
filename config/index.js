@@ -13,6 +13,7 @@ module.exports = {
     proxyTable: {
       '/api': {
         target: 'http://iot.hzleshare.net/mobile/',
+       // target: 'http://192.168.10.102:8080',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/'
@@ -23,6 +24,7 @@ module.exports = {
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
+    //host: '192.168.10.100', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
