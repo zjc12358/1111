@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://iot.hzleshare.net/mobile/',
+       target: 'http://iot.hzleshare.net/mobile/',
        // target: 'http://192.168.10.102:8080',
         changeOrigin: true,
         pathRewrite: {

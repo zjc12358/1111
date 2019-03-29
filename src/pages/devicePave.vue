@@ -134,10 +134,12 @@
           console.log("1111")
        if (res.data.code === '200') {
       // this.$store.commit('saveToken',res.data.data.data)
+
             Toast({
               message: '铺设成功',
              iconClass: 'mintui mintui-success'
             });
+
         }
 
         });

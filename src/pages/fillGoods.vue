@@ -1,83 +1,96 @@
 <template>
-    <div class="myDevice-container">
-      <div class="equipmentList">
-        <div class="equipmentItem" v-for="item in equipmentList" >
-        <!--  <label type="primary" class="lay" @click="getDevnum($event)" >设备铺设</label>-->
+  <div class="myDevice-container">
+    <div class="equipmentList">
+      <div class="equipmentItem" v-for="(item,key) in equipmentList" >
+        <label type="primary" class="lay" @click="getDevnum($event,key)" >补货</label>
+        <div>
           <div>
-            <div>
-              <img :src="item.point_img" alt="">
-            </div>
-            <div>
-              <div>编号:<span id="dev_num">{{ item.dev_num }}</span></div>
-              <div>类型:<span id="type_name">{{ item.type_name }}</span></div>
-              <div class="cargoQuantity">货量:<span style="flex: 1">{{ item.papernum }}/{{item.maxcount}}</span>
+            <img :src="item.point_img" alt="">
+          </div>
+          <div>
+            <div>编号:<span id="dev_num">{{ item.dev_num }}</span></div>
+            <div>类型:<span id="type_name">{{ item.type_name }}</span></div>
+            <div class="cargoQuantity">货量:<span style="flex: 1">{{ item.papernum }}/{{item.maxcount}}</span>
 
-              </div>
-              <div class="address">地址:<span>{{ item.dev_addr }}</span></div>
             </div>
+            <div class="address">地址:<span>{{ item.dev_addr }}</span></div>
           </div>
         </div>
       </div>
-    <!--  <div class="getTheEquipment">
-        <mt-button type="primary" class="getTheEquipmentBtn">扫描二维码领取设备</mt-button>
-      </div>-->
     </div>
+
+  </div>
 </template>
 
 <script>
-    export default {
-      name: "fillGoods",
-      data() {
-        return {
-          // tabs: this.$store.state.tabs,
-          equipmentList: []
+  import {Toast} from "mint-ui";
+  export default {
+    name: "MyDevice",
+    data() {
+      return {
+        // tabs: this.$store.state.tabs,
+        equipmentList: []
+      }
+    },
+    created() {
+      //  网络请求.
+      let config = {
+        headers: {
+          'Authorization': this.$store.state.token
         }
+      }
+      let data = new FormData();
+      this.$axios.post('/api/device/selectRepAll.do', data, config)
+        .then(res => {
+          console.log(res)
+          if (res.data.code === '200') {
+            this.equipmentList = res.data.data
+          }
+        }).catch(res => {
+        console.log(res)
+      })
+
+
+    },
+    mounted() {
+
+    },
+    methods: {
+      goToPage(path) {
+        this.$router.push(path)
       },
-      created() {
-        //  网络请求.
+      getDevnum:function(e,k) {
         let config = {
           headers: {
             'Authorization': this.$store.state.token
           }
         }
         let data = new FormData();
-        this.$axios.post('/api/device/selectRepAll.do', data, config)
-          .then(res => {
-            console.log(res)
-            if (res.data.code === '200') {
-              this.equipmentList = res.data.data
-            }
-          }).catch(res => {
-          console.log(res)
-        })
+        let dev_num=this.equipmentList[k].dev_num;
+        let maxcount=this.equipmentList[k].maxcount;
+        console.log(this.equipmentList[k].maxcount);
 
+        data.append('dev_num',dev_num);
+        data.append('num',maxcount);
+        // return;
+        /* console.log(e.target.innerHTML)*/
+        console.log(dev_num)
+        //this.$router.push('/devicePave'+dev_num);
+         this.$axios.post('/api/device/updateRep.do', data, config)
+                  .then(res => {
+                    console.log(res)
+                    if (res.data.code === '200') {
 
-      },
-      mounted() {
+                      Toast('补货成功');
+                      console.log('补货成功')
+                    }
+                  }).catch(res => {
+                  console.log(res)
+                })
 
-      },
-      methods: {
-        goToPage(path) {
-          this.$router.push(path)
-        },
-        getDevnum(e) {
-          let dev_num = $("#dev_num").text();
-          let type_name = $("#type_name").text();
-          /* console.log(e.target.innerHTML)*/
-          console.log(dev_num)
-          //this.$router.push('/devicePave'+dev_num);
-          this.$router.push({
-            path: '/devicePave',
-            query: {
-              dev_num: dev_num,
-              type_name: type_name,
-            //  agency_id:agency_id,
-            }
-          })
-
-        }
       }
     }
+  }
 
 
 </script>
