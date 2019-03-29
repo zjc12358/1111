@@ -16,7 +16,7 @@
         <div @click="changetopSelected2(2)" :class="'switch-button-item ' + (topSelected2 ==2 ? 'selected': null)">店铺</div>
       </div>
 
-      <div class="plate-list"  v-for="item in funList">
+      <div class="plate-list"  v-for="item in (topSelected2== 1 ? daili : shop)">
         <div>
           <div class="people_photo">
             <img class="head_img" :src="item.img">
@@ -25,8 +25,8 @@
             <div class="shop_list">
               <div class="shop-dj">{{item.shop}}</div>
               <div class="shop_name">{{item.shop_name}}</div>
-              <div class="shopUser">{{item.shopUser}}</div>
-              <div class="contact-phone">{{item.contact}}</div>
+              <div class="shopUser">{{item.ag_name}}</div>
+              <div class="contact-phone">{{item.ag_mobile}}</div>
             </div>
           </div>
           <div style="padding-top: 0.2rem;">
@@ -39,45 +39,6 @@
           </div>
         </div>
       </div>
-    <!--  <div class="plate-list">
-        <div>
-          <div class="people_photo">
-            <img class="head_img" src="img/1.jpg">
-          </div>
-          <div class="shop_detailall">
-            <div class="shop_list">
-              <div class="shop-dj">店铺</div>
-              <div class="shop_name">沙县小吃</div>
-              <div class="shopUser">叶子</div>
-              <div class="contact-phone">18845555555</div>
-            </div>
-
-          </div>
-          <div style="padding-top: 0.2rem;">
-            <span class="nopass">通过</span>
-            <span class="update_shop">修改</span>
-          </div>
-        </div>
-      </div>-->
-
- <!--     <div class="plate-list">
-        <div>
-          <div class="people_photo">
-            <img class="head_img" src="img/1.jpg">
-          </div>
-          <div class="shop_detailall">
-            <div class="shop_list">
-              <div class="shop-dj">店铺</div>
-              <div class="shop_name">沙县小吃</div>
-              <div class="shopUser">叶子</div>
-              <div class="contact-phone">18845555555</div>
-            </div>
-          </div>
-          <div style="padding-top: 0.2rem;">
-            <span class="nopass">审核中</span>
-          </div>
-        </div>
-      </div>-->
 
     </div>
 </template>
@@ -87,19 +48,19 @@
       name: "MyTeam",
       data () {
         return {
+          daili: [],
+          shop: [],
           topSelected: 1,
           topSelected2: 1,
           selected: "MainPage",
           tabs: this.$store.state.tabs,
           funList: [
-            { img: require('../assets/myteamImg.png'), shop: '代理' ,shop_name:'沙县小吃',shopUser:'叶子',contact:'18845555555',status:'2'},
-            { img: require('../assets/myteamImg.png'), shop: '店铺' ,shop_name:'沙县小吃',shopUser:'叶子',contact:'18845555555',status:'2'},
-            { img: require('../assets/myteamImg.png'), shop: '店铺' ,shop_name:'沙县小吃',shopUser:'叶子',contact:'18845555555',status:'3'},
-            { img: require('../assets/myteamImg.png'), shop: '店铺' ,shop_name:'沙县小吃',shopUser:'叶子',contact:'18845555555',status:'1'},
+
           ]
         }
       },
       created() {
+        if(this.$route.params.id) this.topSelected2=this.$route.params.id
         this.$axios.get('/api/agency/getAgencyTeam.lxkj',
           {
             headers: {
@@ -109,7 +70,19 @@
         )
           .then(res => {
             if ( res.data.code === '200' ){
-              this.funList = res.data.data
+              res.data.data.map(item => {
+                switch (item.ag_role) {
+                  case '2':
+                    // 代理
+                    this.daili.push(item)
+                    break;
+                  case '22':
+                    // 店铺
+                    this.shop.push(item)
+                    break;
+                }
+
+              })
               console.log(res)
             }
           }).catch(res=>{
@@ -147,6 +120,7 @@
     width: 100%!important;
   }
   .selectDiv{
+    background: white;
     align-items: center;
   }
 </style>

@@ -42,11 +42,11 @@
         <div class="mui-row">
           <div class="content_top">
             <div>
-              <div class="funBtn"  @click="goTo('/earnTime')">
+              <div class="funBtn"  @click="linkTo('/earnTime')">
                 <div><img src="../assets/myorder.png" class="orderImg"></div>
                 <div class="order_title">交易订单</div>
               </div>
-              <div class="funBtn"  @click="goTo('/earn')">
+              <div class="funBtn"  @click="linkTo('/changePwd')">
                 <div><img src="../assets/updatepsw.png" class="orderImg"></div>
                 <div class="order_title">修改密码</div>
               </div>
@@ -55,11 +55,11 @@
               <div @click="goTo('/agency')" class="openAccount">开设账户</div>
             </div>
             <div>
-              <div class="funBtn"  @click="goTo('/MyTeam')">
+              <div class="funBtn"  @click="linkTo('/MyTeam')">
                 <div><img src="../assets/team.png" class="orderImg"></div>
                 <div class="order_title">我的团队</div>
               </div>
-              <div class="funBtn"  @click="goTo('/earn')">
+              <div class="funBtn"  @click="linkTo('/earn')">
                 <div><img src="../assets/myorder.png" class="orderImg"></div>
                 <div class="order_title">收入报表</div>
               </div>
@@ -68,7 +68,7 @@
         </div>
       </div>
       <div class="mui-content" id="mui-content-part4" >
-        <div v-for="item in myOperatingOptions">
+        <div v-for="item in myOperatingOptions" @click="linkTo(item.linkTo)">
           <img :src="item.img"  style="width: 0.5rem;height: 0.5rem;">
           <div class="down_text">{{ item.title }}</div>
         </div>
@@ -109,9 +109,9 @@
           { img: require("../assets/updatepsw.png"),title: '修改密码' }
         ],
         myOperatingOptions: [
-            { img: require("../assets/zf_ewm.png"), title: '修改收款二维码' },
+            { img: require("../assets/zf_ewm.png"), title: '修改收款二维码',linkTo: '/changeInformation' },
             { img: require("../assets/problem.png"), title: '常见问题' },
-            { img: require("../assets/call.png"), title: '联系我们' },
+            { img: require("../assets/call.png"), title: '联系我们',linkTo: '/contact' },
             { img: require("../assets/uploadImg.png"), title: '素材下载' },
           ]
       }

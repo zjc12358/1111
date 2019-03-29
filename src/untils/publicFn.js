@@ -18,8 +18,18 @@ export default {
     Vue.prototype.sendMsg2 = function () {
       console.log('我是公共方法2')
     }
-    Vue.prototype.linkTo = function (path) {
-      this.$router.push(path)
+    Vue.prototype.linkTo = function (path,param) {
+      console.log(param)
+      if(param){
+        this.$router.push({
+          name: path.replace(/\//g,''),
+          params: {
+            id: param
+          }
+        })
+      }else{
+        this.$router.push(path)
+      }
     }
 
     // 验证表单是否为空
