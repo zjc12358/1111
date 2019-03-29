@@ -39,7 +39,7 @@
 
 <script>
   import '../untils/publicFn'
-  import {Toast} from "mint-ui";
+  import {Toast,Indicator} from "mint-ui";
   export default {
     name: "Login",
     data () {
