@@ -17,9 +17,9 @@
       </div>
       <div style="font-size: 3.7vw;text-align: center" v-if="(topSelected2== 1 ? daili : shop).length===0">暂无数据</div>
       <div class="plate-list"  v-for="item in (topSelected2== 1 ? daili : shop)">
-        <div>
+        <div style="overflow: hidden;display: flex">
           <div class="people_photo">
-            <img class="head_img" :src="item.img">
+            <img class="head_img" src="../assets/img/timg.jpg">
           </div>
           <div class="shop_detailall">
             <div class="shop_list">

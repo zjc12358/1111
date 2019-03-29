@@ -109,7 +109,7 @@
           { img: require("../assets/updatepsw.png"),title: '修改密码' }
         ],
         myOperatingOptions: [
-            { img: require("../assets/zf_ewm.png"), title: '修改收款二维码',linkTo: '/changeInformation' },
+            { img: require("../assets/zf_ewm.png"), title: '修改收款二维码',linkTo: '/changeEwm' },
             { img: require("../assets/problem.png"), title: '常见问题' },
             { img: require("../assets/call.png"), title: '联系我们',linkTo: '/contact' },
             { img: require("../assets/uploadImg.png"), title: '素材下载' },

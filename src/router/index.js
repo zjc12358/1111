@@ -26,6 +26,7 @@ import changePwd from "../pages/changePwd";
 import breakDevice from "../pages/breakDevice";
 import fillGoods from "../pages/fillGoods";
 import bind from "../pages/bind";
+import changeEwm from "../pages/changeEwm";
 
 Vue.use(Router)
 
@@ -258,6 +259,12 @@ export default new Router({
       path: '/bind',
       name: 'bind',
       component: bind
+    },
+    {
+      //修改收款二维码
+      path: '/changeEwm',
+      name: 'changeEwm',
+      component: changeEwm
     },
   ]
 })

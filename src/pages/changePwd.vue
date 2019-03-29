@@ -9,19 +9,15 @@
       <div class="changePwd-content">
         <div style="margin-top: 12.5vw" class="input_group">
           <div class="icon"><img src="../assets/icon/people.svg" alt=""></div>
-          <input v-model="username" placeholder="请输入用户名" type="text">
+          <input v-model="oldpassword" placeholder="请输入旧密码" type="password">
         </div>
         <div style="margin-top: 8vw" class="input_group">
           <div class="icon"><img src="../assets/icon/lock.svg" alt=""></div>
-          <input v-model="password" placeholder="请输入密码" type="password">
-        </div>
-        <div style="margin-top: 8vw" class="input_group">
-          <div class="icon"><img src="../assets/icon/people.svg" alt=""></div>
-          <input v-model="username" placeholder="请输入用户名" type="text">
+          <input v-model="password" placeholder="请输入新密码" type="password">
         </div>
         <div style="margin-top: 8vw" class="input_group">
           <div class="icon"><img src="../assets/icon/lock.svg" alt=""></div>
-          <input v-model="password" placeholder="请输入密码" type="password">
+          <input v-model="repassword" placeholder="请输确认新密码" type="password">
         </div>
         <div style="margin-top: 10vw">
           <mt-button @click="sub()" style="width:100%;height: 10vw; font-size: 4.2vw" type="primary">完成</mt-button>
@@ -31,14 +27,50 @@
 </template>
 
 <script>
+  import {Toast} from "mint-ui";
+
   export default {
     name: "changePwd",
     data(){
       return{
-        username: '',
-        password: ''
+        oldpassword: '',
+        password: '',
+        repassword: ''
       }
     },
+    methods:{
+      sub(){
+        if(!this.isnull(this.oldpassword)&&!this.isnull(this.password)&&!this.isnull(this.repassword)){
+
+        }else{
+          Toast('必填项不得为空!')
+        }
+        let data = new FormData();
+        data.append('oldPassword',this.oldpassword)
+        data.append('newPassword',this.repassword)
+        let config = {
+          headers: {
+            'Authorization': this.$store.state.token
+          }
+        }
+        this.$axios.post('/api/agency/editPassword.lxkj',data,config)
+          .then(res=>{
+            if(res.data.code=='200'){
+              Toast('修改密码成功!')
+            }else{
+              Toast(res.data.msg)
+            }
+            console.log(res)
+          }).catch(err=>{
+            Toast('请检查网络设置!')
+        })
+      }
+    },
+    watch:{
+      repassword: function(val,oldVal){
+
+      }
+    }
   }
 </script>
 
