@@ -25,6 +25,13 @@
       <!--广告-->
 
     <!--</mt-tab-item>-->
+    <mt-tab-item id="GroupList">
+
+    <img slot="icon" v-bind:src="message==this.atabs[2].id ? this.atabs[2].src[1] : this.atabs[2].src[0]">
+
+    设备
+
+    </mt-tab-item>
 
     <mt-tab-item id="UserCenter">
 

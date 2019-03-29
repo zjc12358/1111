@@ -24,6 +24,7 @@ import changeInformation from "../pages/changeInformation";
 import contact from "../pages/contact";
 import changePwd from "../pages/changePwd";
 import breakDevice from "../pages/breakDevice";
+import fillGoods from "../pages/fillGoods";
 
 Vue.use(Router)
 
@@ -244,6 +245,12 @@ export default new Router({
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
       },
       component: breakDevice
-    }
+    },
+    {
+      //补货
+      path: '/fillGoods',
+      name: 'fillGoods',
+      component: fillGoods
+    },
   ]
 })
