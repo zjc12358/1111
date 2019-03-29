@@ -24,7 +24,7 @@
     </div>
     <div style="position: relative;">
       <input v-model="codeNum" class="input_group" style="border-bottom: 1px solid rgba(153, 153, 153,0.5);font-size: 3.2vw;width: 50vw;" label="" placeholder="请输入验证码" type="text" />
-      <mt-button @click="sendMsg(sendTime)" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
+      <mt-button @click="getMsgCode(sendTime)" type="primary" class="getNum" :disabled="getNumBtnDis">{{ getNumMsg }}</mt-button>
     </div>
     <div style="font-size: 0.3rem;display: flex;align-items: center;margin-top: 6vw">
       <img class="shop_img" src="../assets/call.png" style="width: 0.3rem;height: 0.3rem;">
@@ -85,7 +85,7 @@
           ag_mobile: null,
           ag_name: '',
           codeNum: '',
-          getNumBtnDis: false,
+          getNumBtnDis: true,
           sendTime: 60,
           getNumMsg: '获取验证码',
           progressStatus: 1,
@@ -100,6 +100,21 @@
 
       },
       methods:{
+        getSmsCodeReq(){
+          // let data = new FormData();
+          // data.append('phone',this.moblieNumber);
+          // let data = {phone: JSON.stringify(this.moblieNumber)}
+          this.$axios.get('/api/login/getSmsCode.lxkj?phone='+this.ag_mobile)
+            .then(res => {
+              console.log(res)
+            }).catch(res=>{
+            console.log(res)
+          })
+        },
+        getMsgCode(){
+          this.getSmsCodeReq()
+          this.sendMsg(this.sendTime)
+        },
         //下一步
         nextPro(){
 
@@ -194,6 +209,16 @@
           })
         }
 
+      },
+      watch:{
+        ag_mobile: function(val,oldVal){
+          console.log('change')
+          if (this.isnull(val) || !this.isMoblie(val)) {
+            this.getNumBtnDis = true
+          }else{
+            this.getNumBtnDis = false
+          }
+        }
       }
     }
 </script>

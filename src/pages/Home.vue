@@ -48,7 +48,7 @@
           <div>{{ item.title }}</div>
         </div>
       </div>
-      <div style="height: 55px;"></div>
+      <div style="height: 65px;"></div>
       <tabbar :selected="selected" :tabs='tabs'></tabbar>
     </div>
 </template>

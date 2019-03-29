@@ -15,7 +15,7 @@
         <div @click="changetopSelected2(1)" :class="'switch-button-item ' + (topSelected2 ==1 ? 'selected': null)">代理商</div>
         <div @click="changetopSelected2(2)" :class="'switch-button-item ' + (topSelected2 ==2 ? 'selected': null)">店铺</div>
       </div>
-
+      <div style="font-size: 3.7vw;text-align: center" v-if="(topSelected2== 1 ? daili : shop).length===0">暂无数据</div>
       <div class="plate-list"  v-for="item in (topSelected2== 1 ? daili : shop)">
         <div>
           <div class="people_photo">

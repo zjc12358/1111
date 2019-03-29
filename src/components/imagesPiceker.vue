@@ -18,7 +18,7 @@
 * 图片选择器
 */
 
-import {Toast} from "mint-ui";
+import {Toast,Indicator} from "mint-ui";
 
 
 export default {
@@ -27,13 +27,62 @@ export default {
       return {
         imagesPicekerTitle: this.title,
         baseFile:null,
-        files: null
+        files: null,
+        bank_card_number: null,
+        bank_name: null
       }
     },
     props:{
-      title: {default: '标题'}
+      title: {default: '标题'},
+      request: {default: null}
     },
     methods:{
+      imgUpload(file){
+        let data = new FormData();
+        data.append('file',file)
+        data.append('fileName',file.name.replace(/^.+\./,''))
+        let config = {
+          headers: {
+            'Authorization': this.$store.state.token
+          }
+        }
+        this.$axios.post('/api/base/upload.lxkj',
+          data,config
+        ).then(res => {
+          // Indicator.close();
+          if(res.data.code=='200'){
+            this.files = res.data.data;
+            this.baseFile = res.data.data;
+          }else{
+            Toast('图片上传失败!')
+          }
+        }).catch(err=>{
+          Indicator.close();
+          Toast('图片上传失败请检查网络设置!')
+        })
+      },
+      getBankCard(file){
+        let data = new FormData();
+        data.append('file',file)
+        let config = {
+          headers: {
+            'Authorization': this.$store.state.token
+          }
+        }
+        this.$axios.post('/api/base/getBankCard.lxkj',data,config)
+          .then(res=>{
+            if(res.data.code=='200'){
+              this.bank_card_number = res.data.data.bank_card_number
+              this.bank_name = res.data.data.bank_name
+              this.imgUpload(file)
+            }else{
+              Toast(res.data.msg)
+            }
+          }).catch(err=>{
+          console.log(err)
+          Toast('请检查网络设置!')
+        })
+      },
       uploadFile(e){
         let file = e.target.files[0]
         if(file.size>10485760){
@@ -44,9 +93,12 @@ export default {
           let reader = new FileReader();
           reader.readAsDataURL(file);
           reader.onload = (e) => {
-            let newUrl = e.target.result;
-            this.baseFile = newUrl;
-            this.files = file;
+            if(this.request){
+              // 银行卡上传先验证
+              this.getBankCard(file)
+            }else{
+              this.imgUpload(file)
+            }
           }
         }else{
           Toast('图片格式错误!')

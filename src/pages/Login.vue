@@ -152,12 +152,16 @@
           .then(res => {
             Indicator.close();
             if (res.data.code === '200') {
-              this.$store.commit('saveToken',res.data.data)
+              this.$store.commit('saveToken',res.data.data.token)
               Toast({
                 message: '操作成功',
                 iconClass: 'mintui mintui-success'
               });
-              this.$router.push('/')
+              if(res.data.data.type == 'new'){
+                this.$router.push('/changeInformation')
+              }else{
+                this.$router.push('/')
+              }
             }else{
               Toast('账号密码错误!')
             }
@@ -177,12 +181,16 @@
           .then(res => {
             Indicator.close();
             if (res.data.code === '200') {
-              this.$store.commit('saveToken',res.data.data)
+              this.$store.commit('saveToken',res.data.data.token)
               Toast({
                 message: '登录成功',
                 iconClass: 'mintui mintui-success'
               });
-              this.$router.push('/')
+              if(res.data.data.type == 'new'){
+                this.$router.push('/changeInformation')
+              }else{
+                this.$router.push('/')
+              }
             }else{
               Toast('手机号验证码错误!')
             }
