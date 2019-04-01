@@ -62,7 +62,7 @@
     methods: {
       //判断手机号是否存在
       // checkMoblieReq(phone){
-      //   this.$axios.get('/api/login/verifyPhone.lxkj',{params:{phone: phone}})
+      //   this.$axios.get('//login/verifyPhone.lxkj',{params:{phone: phone}})
       //     .then((res)=>{
       //       console.log(res.data.code)
       //       if (res.data.code=== '200') {
@@ -148,7 +148,7 @@
         let data = new FormData();
         data.append('ag_mobile',this.username);
         data.append('password',this.password);
-        this.$axios.post('/api/login/loginByToken.lxkj',data)
+        this.$axios.post(process.env.API_HOST+'/login/loginByToken.lxkj',data)
           .then(res => {
             Indicator.close();
             if (res.data.code === '200') {
@@ -177,7 +177,7 @@
         let data = new FormData();
         data.append('ag_mobile',this.moblieNumber);
         data.append('code',this.codeNumber);
-        this.$axios.post('/api/login/loginByCode.lxkj',data)
+        this.$axios.post(process.env.API_HOST+'/login/loginByCode.lxkj',data)
           .then(res => {
             Indicator.close();
             if (res.data.code === '200') {
@@ -205,7 +205,7 @@
         // let data = new FormData();
         // data.append('phone',this.moblieNumber);
         // let data = {phone: JSON.stringify(this.moblieNumber)}
-        this.$axios.get('/api/login/getSmsCode.lxkj?phone='+this.moblieNumber)
+        this.$axios.get(process.env.API_HOST+'/login/getSmsCode.lxkj?phone='+this.moblieNumber)
           .then(res => {
             console.log(res)
           }).catch(res=>{

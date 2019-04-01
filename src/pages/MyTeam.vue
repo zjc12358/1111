@@ -61,7 +61,7 @@
       },
       created() {
         if(this.$route.params.id) this.topSelected2=this.$route.params.id
-        this.$axios.get('/api/agency/getAgencyTeam.lxkj',
+        this.$axios.get(process.env.API_HOST+'/agency/getAgencyTeam.lxkj',
           {
             headers: {
               'Authorization': this.$store.state.token

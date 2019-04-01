@@ -282,7 +282,7 @@
             'Authorization': this.$store.state.token
           }
         }
-        this.$axios.post('/api/agency/addAgencyShop.lxkj',
+        this.$axios.post(process.env.API_HOST+'/agency/addAgencyShop.lxkj',
           data,config
         )
           .then(res => {
@@ -307,7 +307,7 @@
             'Authorization': this.$store.state.token
           }
         }
-        this.$axios.post('/api/base/upload.lxkj',
+        this.$axios.post(process.env.API_HOST+'/base/upload.lxkj',
           data,config
         )
           .then(res => {

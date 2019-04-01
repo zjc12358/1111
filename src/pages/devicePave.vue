@@ -65,7 +65,7 @@
 
       let data = new FormData();
        data.append('dev_num',this.devicenum);
-      this.$axios.post('/api/device/selectDevice.do', data, config)
+      this.$axios.post(process.env.API_HOST+'/device/selectDevice.do', data, config)
         .then(res => {
           console.log(res)
           if (res.data.code === '200') {
@@ -124,7 +124,7 @@
         data.append('dev_num',this.devicenum);
         data.append('connect_name',this.connect_name);
         data.append('connect_mobile',this.moblieNumber);
-       this.$axios.post('/api/device/insertDevice.do',data,config)
+       this.$axios.post(process.env.API_HOST+'/device/insertDevice.do',data,config)
 
         .then(function(res){
           console.log("1111")

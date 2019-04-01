@@ -104,7 +104,7 @@
           // let data = new FormData();
           // data.append('phone',this.moblieNumber);
           // let data = {phone: JSON.stringify(this.moblieNumber)}
-          this.$axios.get('/api/login/getSmsCode.lxkj?phone='+this.ag_mobile)
+          this.$axios.get(process.env.API_HOST+'/login/getSmsCode.lxkj?phone='+this.ag_mobile)
             .then(res => {
               console.log(res)
             }).catch(res=>{
@@ -132,7 +132,7 @@
               'Authorization': this.$store.state.token
             }
           }
-          this.$axios.post('/api/base/getIdCard.lxkj',
+          this.$axios.post(process.env.API_HOST+'/base/getIdCard.lxkj',
             data,config
           ).then(res =>{
             if(res.data.code==200){
@@ -189,7 +189,7 @@
               'Authorization': this.$store.state.token
             }
           }
-          this.$axios.post('/api/base/upload.lxkj',
+          this.$axios.post(process.env.API_HOST+'/base/upload.lxkj',
             data,config
           ).then(res => {
             Indicator.close();

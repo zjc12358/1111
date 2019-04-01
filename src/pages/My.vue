@@ -117,7 +117,7 @@
       }
     },
     created(){
-      this.$axios.get('/api/agency/getInfo.lxkj',
+      this.$axios.get(process.env.API_HOST+'/agency/getInfo.lxkj',
         {
           headers: {
             'Authorization': this.$store.state.token

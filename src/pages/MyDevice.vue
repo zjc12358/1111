@@ -44,7 +44,7 @@
         }
       }
       let data = new FormData();
-      this.$axios.post('/api/device/selectall.do', data, config)
+      this.$axios.post(process.env.API_HOST+'/device/selectall.do', data, config)
         .then(res => {
           console.log(res)
           if (res.data.code === '200') {

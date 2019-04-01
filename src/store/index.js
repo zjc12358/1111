@@ -9,7 +9,7 @@ const store = new Vuex.Store({
     isLogin: false,
     selectedTab: '',
     token: '',
-    server_url: 'http://iot.hzleshare.net/mobile',
+    server_url: 'http://lovegll.natapp1.cc',
     tabs:[
       {
         id:'MainPage',

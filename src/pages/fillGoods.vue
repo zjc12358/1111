@@ -40,7 +40,7 @@
         }
       }
       let data = new FormData();
-      this.$axios.post('/api/device/selectRepAll.do', data, config)
+      this.$axios.post(process.env.API_HOST+'/device/selectRepAll.do', data, config)
         .then(res => {
           console.log(res)
           if (res.data.code === '200') {
@@ -76,7 +76,7 @@
         /* console.log(e.target.innerHTML)*/
         console.log(dev_num)
         //this.$router.push('/devicePave'+dev_num);
-         this.$axios.post('/api/device/updateRep.do', data, config)
+         this.$axios.post(process.env.API_HOST+'/device/updateRep.do', data, config)
                   .then(res => {
                     console.log(res)
                     if (res.data.code === '200') {

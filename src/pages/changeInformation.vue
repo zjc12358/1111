@@ -65,7 +65,7 @@
             'Authorization': this.$store.state.token
           }
         }
-        this.$axios.post('/api/agency/uploadAccountData.lxkj',data,config)
+        this.$axios.post(process.env.API_HOST+'/agency/uploadAccountData.lxkj',data,config)
           .then(res=>{
             console.log(res)
           }).catch(err=>{

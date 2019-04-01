@@ -86,7 +86,7 @@
     },
     created() {
       //  网络请求.
-      this.$axios.get('/api/index/initPage.lxkj',
+      this.$axios.get(process.env.API_HOST+'/index/initPage.lxkj',
         {
           headers: {
             'Authorization': this.$store.state.token

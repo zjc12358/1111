@@ -41,8 +41,8 @@
         }
       }
       let data = new FormData();
-      this.$axios.post('/api/device/getNumberbyshopid.do', data, config)
-     /* this.$axios.post('/api/device/getNumberbyshopid.do ', data, config)*/
+      this.$axios.post(process.env.API_HOST+'/device/getNumberbyshopid.do', data, config)
+     /* this.$axios.post('//device/getNumberbyshopid.do ', data, config)*/
         .then(res => {
           console.log(res)
          if (res.data.code === '200') {

@@ -53,7 +53,7 @@
             'Authorization': this.$store.state.token
           }
         }
-        this.$axios.post('/api/agency/editPassword.lxkj',data,config)
+        this.$axios.post(process.env.API_HOST+'/agency/editPassword.lxkj',data,config)
           .then(res=>{
             if(res.data.code=='200'){
               Toast('修改密码成功!')

@@ -100,7 +100,7 @@
             'Authorization': this.$store.state.token
           }
         }
-        return this.$axios.post('/api/base/upload.lxkj',
+        return this.$axios.post(process.env.API_HOST+'/base/upload.lxkj',
           data,config
         )
       },
@@ -183,7 +183,7 @@
                 'Authorization': this.$store.state.token
               }
             }
-            this.$axios.post('/api/agency/addAgencyShop.lxkj',
+            this.$axios.post(process.env.API_HOST+'/agency/addAgencyShop.lxkj',
               dataAll,config
             )
               .then(res => {
@@ -233,7 +233,7 @@
             'Authorization': this.$store.state.token
           }
         }
-        this.$axios.post('/api/agency/addAgency.lxkj',
+        this.$axios.post(process.env.API_HOST+'/agency/addAgency.lxkj',
           data,config
         )
           .then(res => {
@@ -256,7 +256,7 @@
       },
       //获取验证码计时
       getCode(i){
-        // this.$axios.get('/api/login/verifyPhone.lxkj',{params:{phone: this.agentMoblie}})
+        // this.$axios.get('//login/verifyPhone.lxkj',{params:{phone: this.agentMoblie}})
         //   .then(res=>{
         //     console.log(res);
             // if (res.data.code=== '200'){
@@ -275,7 +275,7 @@
         // let data = new FormData();
         // data.append('phone',this.moblieNumber);
         // let data = {phone: JSON.stringify(this.moblieNumber)}
-        this.$axios.get('/api/login/getSmsCode.lxkj?phone='+this.agentMoblie)
+        this.$axios.get(process.env.API_HOST+'/login/getSmsCode.lxkj?phone='+this.agentMoblie)
           .then(res => {
             console.log(res)
           }).catch(res=>{
@@ -286,7 +286,7 @@
         let data = new FormData();
         data.append('ag_mobile',this.agentMoblie);
         data.append('code',this.agentCode);
-        this.$axios.post('/api/login/verifyCode.lxkj',data)
+        this.$axios.post(process.env.API_HOST+'/login/verifyCode.lxkj',data)
           .then(res => {
             if (res.data.code === '200') {
               this.sub()

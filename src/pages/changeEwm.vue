@@ -45,7 +45,7 @@
               'Authorization': this.$store.state.token
             }
           }
-          this.$axios.post('/api/agency/editQRCode.lxkj',data,config)
+          this.$axios.post(process.env.API_HOST+'/agency/editQRCode.lxkj',data,config)
             .then(res=>{
               console.log(res)
               if(res.data.code=='200'){

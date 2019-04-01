@@ -16,7 +16,7 @@
       }
     },
     created() {
-      this.$axios.get('/api/data').then(res => {
+      this.$axios.get(process.env.API_HOST+'/data').then(res => {
         this.data = res.data.data;
         console.log(res.data.data)
       })

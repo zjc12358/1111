@@ -7,7 +7,7 @@
 //   }]
 // })
 //
-// Mock.mock('/api/data',(req,res) => {
+// Mock.mock('//data',(req,res) => {
 //   return {
 //     data: data
 //   }

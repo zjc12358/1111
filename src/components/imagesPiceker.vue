@@ -46,7 +46,7 @@ export default {
             'Authorization': this.$store.state.token
           }
         }
-        this.$axios.post('/api/base/upload.lxkj',
+        this.$axios.post(process.env.API_HOST+'/base/upload.lxkj',
           data,config
         ).then(res => {
           // Indicator.close();
@@ -69,7 +69,7 @@ export default {
             'Authorization': this.$store.state.token
           }
         }
-        this.$axios.post('/api/base/getBankCard.lxkj',data,config)
+        this.$axios.post(process.env.API_HOST+'/base/getBankCard.lxkj',data,config)
           .then(res=>{
             if(res.data.code=='200'){
               this.bank_card_number = res.data.data.bank_card_number

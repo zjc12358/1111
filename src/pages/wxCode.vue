@@ -26,10 +26,10 @@
           <!--}-->
         <!--}-->
         <!--let data = new FormData();-->
-        <!--this.$axios.post('/api/device/receiveDevice.do',data,config)-->
+        <!--this.$axios.post('//device/receiveDevice.do',data,config)-->
        <!--/* this.$axios({-->
           <!--method: 'post',-->
-          <!--url: '/api/device/receiveDevice.do ',//自己填写请求地址-->
+          <!--url: '//device/receiveDevice.do ',//自己填写请求地址-->
 
         <!--})*/-->
        <!--.then((res) => {-->
@@ -40,7 +40,7 @@
             <!--timestamp: res.timestamp, // 必填，生成签名的时间戳-->
             <!--nonceStr: res.nonceStr, // 必填，生成签名的随机串-->
             <!--signature: res.signature,// 必填，签名，见附录1-->
-            <!--jsApiList: ['scanQRCode', 'checkJsApi'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2-->
+            <!--jsList: ['scanQRCode', 'checkJs'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2-->
           <!--});-->
         <!--})-->
 
@@ -51,8 +51,8 @@
 
         <!--// 成功时-->
         <!--wx.ready(function () {-->
-          <!--wx.checkJsApi({-->
-            <!--jsApiList: ['scanQRCode'],-->
+          <!--wx.checkJs({-->
+            <!--jsList: ['scanQRCode'],-->
             <!--success: function (res) {-->
 
             <!--}-->
